@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>資料請求・ご相談 | Hachi Life（ハチライフ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ivory:#FBF6EA; --paper:#FFFDF8; --cream:#F3EAD3; --line:#E3D5B8;
+  --ink:#2A2118; --mut:#7A6A52; --dark:#241A0D; --dark2:#171006;
+  --gold:#B98A2F; --honey:#E9A13B; --honey2:#F2C14E;
+  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --disp:"Cormorant Garamond",serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);line-height:1.9;font-size:15px;
+  padding:0 max(16px,env(safe-area-inset-left)) 60px max(16px,env(safe-area-inset-right))}
+.wrap{max-width:640px;margin:0 auto}
+header{padding:26px 0 0;display:flex;align-items:center;justify-content:space-between}
+header a{color:var(--mut);text-decoration:none;font-size:12.5px;font-weight:700}
+.brand{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:.5px}
+.brand small{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:3px;color:var(--mut)}
+.hero{text-align:center;padding:44px 0 8px}
+.en{font-family:var(--disp);font-size:13px;letter-spacing:5px;color:var(--gold)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,5.6vw,32px);margin:14px 0 0;letter-spacing:.04em}
+.lead{color:var(--mut);font-size:13.5px;margin-top:14px}
+.lead b{color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px 26px;margin-top:30px;box-shadow:0 10px 30px rgba(42,33,24,.06)}
+label{display:block;font-weight:700;font-size:13.5px;margin:22px 0 8px}
+label:first-of-type{margin-top:0}
+label .req{color:var(--honey);font-size:10.5px;border:1px solid var(--honey);border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:2px}
+label .opt{color:var(--mut);font-size:10.5px;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:2px}
+input[type=text],input[type=email],input[type=tel],select{
+  width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;
+  font-family:var(--sans);font-size:15px;color:var(--ink)}
+input:focus,select:focus{outline:none;border-color:var(--honey)}
+.radios{display:flex;flex-wrap:wrap;gap:10px}
+.radios label{margin:0;font-weight:500;font-size:13.5px;display:inline-flex;align-items:center;gap:7px;
+  border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;background:#fff;cursor:pointer}
+.radios input{accent-color:var(--gold)}
+.radios label:has(input:checked){border-color:var(--gold);background:#FCF4E3;font-weight:700}
+button{width:100%;margin-top:30px;padding:18px;border:none;border-radius:999px;cursor:pointer;
+  background:linear-gradient(135deg,var(--honey2),var(--honey));color:var(--dark2);
+  font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:1px;box-shadow:0 10px 24px rgba(233,161,59,.35)}
+button:disabled{opacity:.55;cursor:default}
+.note{font-size:11.5px;color:var(--mut);margin-top:16px;text-align:center}
+.done{display:none;text-align:center;padding:48px 10px}
+.done .mark{width:72px;height:72px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,var(--honey2),var(--honey));
+  display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--dark2)}
+.done h2{font-family:var(--serif);font-size:22px;margin:22px 0 0}
+.done p{color:var(--mut);font-size:13.5px;margin-top:12px}
+.tel{text-align:center;margin-top:34px;color:var(--mut);font-size:12.5px}
+.tel b{display:block;font-family:var(--disp);font-size:26px;letter-spacing:1px;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Hachi Life<small>NAGOYA ・ HOUSEKEEPING</small></div>
+    <a href="index.html">← LPに戻る</a>
+  </header>
+
+  <div class="hero">
+    <div class="en">REQUEST &amp; CONSULTATION</div>
+    <h1>資料請求・ご相談</h1>
+    <p class="lead">ご入力は<b>1分</b>で完了します。<b>1営業日以内</b>に資料をお送りします。<br>ご案内できるのは年間3世帯のみ・先行予約の順です。</p>
+  </div>
+
+  <form class="card" id="f">
+    <label>お名前<span class="req">必須</span></label>
+    <input type="text" name="name" required placeholder="例）山田 花子">
+
+    <label>メールアドレス<span class="req">必須</span></label>
+    <input type="email" name="email" required placeholder="例）hanako@example.com">
+
+    <label>お電話番号<span class="opt">任意</span></label>
+    <input type="tel" name="tel" placeholder="例）090-1234-5678">
+
+    <label>お住まいのエリア<span class="req">必須</span></label>
+    <select name="area" required>
+      <option value="">選択してください</option>
+      <option>千種区</option><option>東区</option><option>昭和区</option>
+      <option>名東区</option><option>瑞穂区</option>
+      <option>その他名古屋市内</option><option>名古屋市外</option>
+    </select>
+
+    <label>ご興味のあるプラン<span class="req">必須</span></label>
+    <div class="radios">
+      <label><input type="radio" name="plan" value="プライベート専属" required>プライベート専属</label>
+      <label><input type="radio" name="plan" value="定期ハーフ">定期ハーフ</label>
+      <label><input type="radio" name="plan" value="すぐ始めたい（在日スタッフ）">すぐ始めたい</label>
+      <label><input type="radio" name="plan" value="未定">まだ決めていない</label>
+    </div>
+
+    <label>ご希望<span class="req">必須</span></label>
+    <div class="radios">
+      <label><input type="radio" name="wish" value="資料がほしい" required>資料がほしい</label>
+      <label><input type="radio" name="wish" value="WEB相談したい">WEB相談したい</label>
+      <label><input type="radio" name="wish" value="自宅での相談を希望">自宅での相談を希望</label>
+    </div>
+
+    <label>Hachi Lifeを知ったきっかけ<span class="opt">任意</span></label>
+    <div class="radios">
+      <label><input type="radio" name="source" value="Instagram">Instagram</label>
+      <label><input type="radio" name="source" value="検索">検索</label>
+      <label><input type="radio" name="source" value="紹介">紹介</label>
+      <label><input type="radio" name="source" value="その他">その他</label>
+    </div>
+
+    <button type="submit" id="btn">送信する →</button>
+    <p class="note">いただいた情報は資料送付とご連絡のみに使用します。</p>
+  </form>
+
+  <div class="done card" id="done">
+    <div class="mark">✓</div>
+    <h2>ありがとうございます</h2>
+    <p>ご請求を受け付けました。<br>1営業日以内に、担当者より資料をお送りします。<br>確認メールをお送りしましたのでご確認ください。</p>
+  </div>
+
+  <div class="tel">お急ぎの方はお電話で<b>0565-42-5002</b>受付時間 平日 9:00–18:00 ｜ 運営：サンエスサービス株式会社</div>
+</div>
+
+<script>
+const GAS_URL = "GAS_URL_HERE"; // ← デプロイ後に差し替え
+const f = document.getElementById('f');
+f.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('btn');
+  btn.disabled = true; btn.textContent = '送信中…';
+  try {
+    await fetch(GAS_URL, { method: 'POST', mode: 'no-cors', body: new FormData(f) });
+    f.style.display = 'none';
+    document.getElementById('done').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    btn.disabled = false; btn.textContent = '送信する →';
+    alert('送信に失敗しました。お手数ですがお電話（0565-42-5002）でご連絡ください。');
+  }
+});
+</script>
+</body>
+</html>
