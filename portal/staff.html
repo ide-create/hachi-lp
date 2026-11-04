@@ -209,15 +209,15 @@ button{font-family:inherit}
 .sender{font-size:10px;color:var(--mut2);margin:0 0 3px 44px}
 .chatbar{position:fixed;left:0;right:0;bottom:var(--navh);z-index:19;
   background:linear-gradient(180deg,rgba(251,250,247,0),rgba(251,250,247,.96) 38%);padding:18px 16px 10px}
-.chatbar .in2{max-width:430px;margin:0 auto;display:flex;gap:9px}
-.chatbar .inwrap{flex:1;display:flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;box-shadow:0 2px 10px rgba(33,27,18,.07)}
-.chatbar input{flex:1;padding:13px 19px;border:none;border-radius:999px;font-size:16px;background:transparent;color:var(--ink);outline:none;font-family:inherit}
+.chatbar .in2{max-width:430px;margin:0 auto}
+.chatbar .inwrap{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:999px;box-shadow:0 2px 10px rgba(33,27,18,.07)}
+.chatbar input{width:100%;padding:14px 62px 14px 19px;border:none;border-radius:999px;font-size:16px;background:transparent;color:var(--ink);outline:none;font-family:inherit}
 .chatbar input::placeholder{color:var(--mut2)}
-.chatbar button{border:none;border-radius:50%;width:48px;height:48px;flex:none;
+.chatbar button{position:absolute;right:5px;top:50%;transform:translateY(-50%);border:none;border-radius:50%;width:42px;height:42px;
   background:linear-gradient(180deg,var(--honey2),var(--honey));cursor:pointer;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 16px rgba(233,161,59,.4),inset 0 1px 0 rgba(255,255,255,.5)}
-.chatbar button:active{transform:scale(.94)}
-.chatbar button svg{width:19px;height:19px;fill:#3A2706}
+  box-shadow:0 4px 12px rgba(233,161,59,.4),inset 0 1px 0 rgba(255,255,255,.5)}
+.chatbar button:active{transform:translateY(-50%) scale(.92)}
+.chatbar button svg{width:18px;height:18px;fill:#3A2706}
 
 /* ===== tab bar ===== */
 .nav{position:fixed;bottom:0;left:0;right:0;z-index:20;height:var(--navh);
@@ -355,8 +355,10 @@ button{font-family:inherit}
 </div>
 
 <div class="chatbar hide" id="chatbar"><div class="in2">
-  <div class="inwrap"><input id="msgIn" placeholder="Message in English is OK!"></div>
-  <button id="sendBtn"><svg viewBox="0 0 24 24"><path d="M3.4 20.4 21.8 12 3.4 3.6 3.4 10.2 16 12 3.4 13.8z"/></svg></button>
+  <div class="inwrap">
+    <input id="msgIn" placeholder="Message in English is OK!">
+    <button id="sendBtn"><svg viewBox="0 0 24 24"><path d="M3.4 20.4 21.8 12 3.4 3.6 3.4 10.2 16 12 3.4 13.8z"/></svg></button>
+  </div>
 </div></div>
 
 <div class="nav"><div class="in3">
