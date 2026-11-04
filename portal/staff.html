@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#F7F2E6">
+<meta name="theme-color" content="#FBFAF7">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -18,22 +18,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F7F2E6;--paper:#FFFDF8;--cream:#F2EAD6;
-  --line:#EAE0C8;--line2:#DCCfA9;
-  --ink:#2A2118;--mut:#7A6A52;--mut2:#A79878;
+  --bg:#FBFAF7;--paper:#FFFFFF;--cream:#F1EFE8;
+  --line:#EDEAE1;--line2:#D8D2C0;
+  --ink:#211B12;--mut:#766B57;--mut2:#A69D89;
   --gold:#B98A2F;--honey:#E9A13B;--honey2:#F2C14E;
   --grn:#3E9D63;--red:#D95B3E;
   --disp:"Cormorant Garamond",Georgia,serif;
-  --shadow:0 1px 2px rgba(42,33,24,.05),0 10px 30px rgba(42,33,24,.07);
+  --shadow:0 1px 2px rgba(33,27,18,.04),0 12px 32px rgba(33,27,18,.07);
 }
 *{box-sizing:border-box;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 html,body{overscroll-behavior-y:none}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
   font-size:14px;line-height:1.7;
-  padding-bottom:calc(96px + env(safe-area-inset-bottom));
-  background-image:radial-gradient(90% 40% at 50% -6%, rgba(242,193,78,.18) 0%, rgba(242,193,78,0) 70%);
-  background-repeat:no-repeat}
+  padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+/* 上部の金のオーロラ＋極薄ハニカム */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:420px;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(420px 230px at 12% -60px, rgba(242,193,78,.28), transparent 70%),
+    radial-gradient(520px 260px at 92% -80px, rgba(233,161,59,.2), transparent 70%),
+    radial-gradient(300px 170px at 55% -40px, rgba(255,226,150,.25), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97'%3E%3Cg fill='none' stroke='%23B98A2F' stroke-opacity='.09' stroke-width='1.1'%3E%3Cpolygon points='28,2 54,17 54,49 28,64 2,49 2,17'/%3E%3Cpolygon points='28,66 54,81 54,113 28,128 2,113 2,81'/%3E%3Cpolygon points='0,50 -26,65 -26,97 0,112'/%3E%3Cpolygon points='56,50 82,65 82,97 56,112'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 45%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 45%,transparent 100%)}
 .hide{display:none!important}
 .wrap{max-width:430px;margin:0 auto;padding:0 18px}
 button{font-family:inherit}
@@ -58,8 +65,8 @@ button{font-family:inherit}
 
 /* ===== header ===== */
 .topbar{position:sticky;top:0;z-index:20;
-  background:rgba(247,242,230,.82);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);
-  border-bottom:1px solid rgba(220,207,169,.4)}
+  background:rgba(251,250,247,.75);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);
+  border-bottom:1px solid rgba(216,210,192,.35)}
 .topbar .in{max-width:430px;margin:0 auto;padding:calc(12px + env(safe-area-inset-top)) 18px 10px;
   display:flex;align-items:center;gap:10px}
 .topbar img{width:34px;height:34px;filter:drop-shadow(0 2px 4px rgba(42,33,24,.18))}
@@ -76,7 +83,7 @@ button{font-family:inherit}
 .visit{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
 .visit .fam{font-weight:900;font-size:18px}
 .visit .loc{font-size:11.5px;color:var(--mut)}
-.timechip{background:#FFF7E2;border:1px solid #F2DCA4;color:#8A6410;
+.timechip{background:#FFF8E6;border:1px solid #F1E0AE;color:#8A6410;
   font-size:11.5px;font-weight:900;padding:8px 13px;border-radius:12px;white-space:nowrap;text-align:center}
 .steps{display:flex;gap:5px;margin-top:16px}
 .stp{flex:1;text-align:center;font-size:9.5px;font-weight:700;color:var(--mut2);padding-top:8px}
@@ -111,14 +118,14 @@ button{font-family:inherit}
 .elapsed .st2{font-size:11px;font-weight:900;color:#B5A585}
 
 /* ===== tasks ===== */
-.task .row{display:flex;align-items:center;gap:12px;padding:11px 0;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer;user-select:none;border-bottom:1px solid #F4EDDC}
+.task .row{display:flex;align-items:center;gap:12px;padding:11px 0;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer;user-select:none;border-bottom:1px solid #F3F1EA}
 .task .row:last-of-type{border-bottom:none}
 .ck{width:24px;height:24px;border-radius:9px;border:1.5px solid var(--line2);flex:none;display:flex;align-items:center;justify-content:center;background:var(--paper);transition:all .15s}
 .ck svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
 .row.on .ck{background:linear-gradient(180deg,var(--honey2),var(--honey));border-color:var(--honey);box-shadow:0 3px 8px rgba(233,161,59,.35)}
 .row.on .ck svg{opacity:1;stroke:#3A2706}
 .row.on{color:var(--mut2);text-decoration:line-through}
-.photo{display:flex;align-items:center;gap:10px;margin-top:12px;background:#FFF7E2;border:1.5px dashed #E8CD8C;border-radius:14px;padding:13px 14px;font-weight:700;font-size:12.5px;color:#8A6410;cursor:pointer}
+.photo{display:flex;align-items:center;gap:10px;margin-top:12px;background:#FFF8E6;border:1.5px dashed #E8CD8C;border-radius:14px;padding:13px 14px;font-weight:700;font-size:12.5px;color:#8A6410;cursor:pointer}
 .photo.on{border-style:solid;background:#EDF7EF;border-color:#B2D9BE;color:var(--grn)}
 .photo img{width:44px;height:44px;object-fit:cover;border-radius:10px}
 .donebox{margin-top:14px;background:#EDF7EF;border:1px solid #CBE5D3;border-radius:22px;padding:20px;text-align:center}
@@ -139,12 +146,12 @@ button{font-family:inherit}
 .mrow.them .bub{background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:4px 18px 18px 18px;box-shadow:0 2px 8px rgba(42,33,24,.06)}
 .mrow.me .bub{background:linear-gradient(180deg,var(--honey2),var(--honey));color:#2A1D07;font-weight:500;border-radius:18px 4px 18px 18px;box-shadow:0 4px 12px rgba(233,161,59,.3)}
 .bub .tr2{display:block;margin-top:7px;padding-top:7px;font-size:12px;line-height:1.55}
-.mrow.them .bub .tr2{border-top:1px solid #F0E8D2;color:var(--mut)}
+.mrow.them .bub .tr2{border-top:1px solid #EFEDE5;color:var(--mut)}
 .mrow.me .bub .tr2{border-top:1px solid rgba(58,39,6,.18);color:#6E5213}
 .tm{font-size:9.5px;color:var(--mut2);flex:none;padding-bottom:2px}
 .sender{font-size:10px;color:var(--mut2);margin:0 0 3px 44px}
 .chatbar{position:fixed;left:0;right:0;bottom:calc(74px + env(safe-area-inset-bottom));z-index:19;
-  background:linear-gradient(180deg,rgba(247,242,230,0),rgba(247,242,230,.95) 35%);padding:16px 16px 10px;display:flex;gap:9px}
+  background:linear-gradient(180deg,rgba(251,250,247,0),rgba(251,250,247,.95) 35%);padding:16px 16px 10px;display:flex;gap:9px}
 .chatbar .inwrap{flex:1;display:flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;box-shadow:0 2px 10px rgba(42,33,24,.08)}
 .chatbar input{flex:1;padding:13px 19px;border:none;border-radius:999px;font-size:16px;background:transparent;color:var(--ink);outline:none;font-family:inherit}
 .chatbar input::placeholder{color:var(--mut2)}
@@ -157,8 +164,8 @@ button{font-family:inherit}
 
 /* ===== tabs ===== */
 .nav{position:fixed;bottom:0;left:0;right:0;z-index:20;
-  background:rgba(255,253,248,.88);-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
-  border-top:1px solid rgba(220,207,169,.45);display:flex;padding:9px 6px calc(16px + env(safe-area-inset-bottom))}
+  background:rgba(255,255,255,.85);-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
+  border-top:1px solid rgba(216,210,192,.4);display:flex;padding:9px 6px calc(16px + env(safe-area-inset-bottom))}
 .nav button{flex:1;text-align:center;font-size:9.5px;font-weight:900;color:var(--mut2);letter-spacing:1.2px;border:none;background:none;cursor:pointer;position:relative}
 .nav .ic{display:block;margin:0 auto 3px;width:24px;height:24px;stroke:var(--mut2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:all .15s}
 .nav button.on{color:var(--gold)}
