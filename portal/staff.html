@@ -735,7 +735,7 @@ $('sendBtn').onclick=async()=>{
     await db.collection('messages').add({uid:me.uid,from:'staff',fromName:meDoc.name||'',text:t,textTr:tr||null,at:TS()});
   }catch(e){toast(L('tSendErr'));console.error(e)}
 };
-$('msgIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('sendBtn').click()});
+// Enterは文字確定のみ（送信は右の送信ボタン）。PCの物理キーボードでも誤送信防止のため送信しない。
 
 /* ---------- tabs ---------- */
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{

@@ -102,6 +102,8 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
 .msg.me small{color:#7A5408}
 .msg.them{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-radius:4px 15px 15px 15px;box-shadow:0 2px 6px rgba(42,33,24,.05)}
 .msg .tr2{display:block;margin-top:7px;padding-top:7px;font-size:11.5px;line-height:1.55}
+.mdel{border:none;background:none;color:var(--red);cursor:pointer;font-weight:900;font-size:9.5px;padding:0;opacity:.55}
+.mdel:hover{opacity:1}
 .msg.them .tr2{border-top:1px solid #EFEDE5;color:var(--mut)}
 .msg.me .tr2{border-top:1px solid rgba(58,39,6,.18);color:#6E5213}
 .sendrow{display:flex;gap:8px;padding:11px;border-top:1px solid var(--line)}
@@ -189,7 +191,7 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
         <select id="vsStaff"></select>
         <input type="date" id="vsDay">
-        <input type="text" id="vsTime" placeholder="10:00–13:00" style="width:130px">
+        <select id="vsT1"></select><span style="color:var(--mut2)">〜</span><select id="vsT2"></select>
         <input type="text" id="vsNote" placeholder="メモ（任意）" style="flex:1;min-width:160px">
         <button class="save" id="vsAdd">追加</button>
       </div>
@@ -353,12 +355,15 @@ function openThread(uid){
   curThread=uid;renderThreads();
   if(unsubChat)unsubChat();
   unsubChat=db.collection('messages').where('uid','==',uid).onSnapshot(s=>{
-    const msgs=s.docs.map(d=>d.data()).sort((a,b)=>(a.at?.toMillis?.()||9e15)-(b.at?.toMillis?.()||9e15));
+    const msgs=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.at?.toMillis?.()||9e15)-(b.at?.toMillis?.()||9e15));
     $('aChatBox').innerHTML=msgs.map(m=>{
       const mine=m.from==='hq';
       const tr2=m.textTr?`<span class="tr2">${esc(m.textTr)}</span>`:(mine?'':`<a class="tr2" style="text-decoration:none" target="_blank" href="https://translate.google.com/?sl=auto&tl=ja&text=${encodeURIComponent(m.text)}&op=translate">日本語訳 ↗</a>`);
-      return `<div class="msg ${mine?'me':'them'}">${esc(m.text)}${tr2}<small>${mine?'本部':esc(m.fromName||'スタッフ')} ・ ${hm(m.at)}</small></div>`;
+      return `<div class="msg ${mine?'me':'them'}">${esc(m.text)}${tr2}<small>${mine?'本部':esc(m.fromName||'スタッフ')} ・ ${hm(m.at)} <button class="mdel" data-id="${m.id}" title="削除">削除</button></small></div>`;
     }).join('');
+    document.querySelectorAll('.mdel').forEach(b=>b.onclick=()=>{
+      if(confirm('このメッセージを削除しますか？'))db.collection('messages').doc(b.dataset.id).delete().then(()=>toast('削除しました')).catch(e=>{toast('削除失敗');console.error(e)});
+    });
     $('aChatBox').scrollTop=1e9;
   });
 }
@@ -370,7 +375,7 @@ $('aSendBtn').onclick=async()=>{
     await db.collection('messages').add({uid:curThread,from:'hq',fromName:'Hachi Life Office',text:t,textTr:tr||null,at:TS()});
   }catch(e){toast('送信失敗');console.error(e)}
 };
-$('aMsgIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('aSendBtn').click()});
+$('aMsgIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing&&e.keyCode!==229)$('aSendBtn').click()});
 
 /* ---------- plan: visits + leaves ---------- */
 function renderPlan(){
@@ -402,12 +407,19 @@ function renderPlan(){
   $('lvDone').innerHTML=done.map(l=>`<div style="padding:7px 0;border-bottom:1px solid #F3F1EA;font-size:12.5px">
     <b>${esc(l.name||'')}</b> ・ ${fmtD(l.from)}${l.to&&l.to!==l.from?' 〜 '+fmtD(l.to):''} ・ ${l.status==='approved'?'<span style="color:var(--grn);font-weight:900">承認</span>':'<span style="color:var(--red);font-weight:900">却下</span>'}</div>`).join('')||'<p class="note">まだありません</p>';
 }
+// 時間プルダウン（7:00〜20:00・30分刻み）
+(function(){
+  let opts='';
+  for(let h=7;h<=20;h++)for(const m of ['00','30']){if(h===20&&m==='30')continue;opts+=`<option>${h}:${m}</option>`}
+  $('vsT1').innerHTML=opts;$('vsT2').innerHTML=opts;
+  $('vsT1').value='10:00';$('vsT2').value='13:00';
+})();
 $('vsAdd').onclick=async()=>{
   const uid=$('vsStaff').value,day=$('vsDay').value;
   if(!uid||!day){toast('スタッフと日付を選んでください');return}
   try{
-    await db.collection('visits').add({uid,name:(staffMap[uid]||{}).name||'',day,time:$('vsTime').value.trim(),note:$('vsNote').value.trim(),at:TS()});
-    $('vsDay').value='';$('vsTime').value='';$('vsNote').value='';
+    await db.collection('visits').add({uid,name:(staffMap[uid]||{}).name||'',day,time:$('vsT1').value+'–'+$('vsT2').value,note:$('vsNote').value.trim(),at:TS()});
+    $('vsDay').value='';$('vsNote').value='';
     toast('予定を追加しました');
   }catch(e){toast('追加失敗');console.error(e)}
 };
