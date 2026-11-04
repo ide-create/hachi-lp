@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FBFAF7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Hachi Life">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<title>Hachi Life お客様ページ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBFAF7;--paper:#FFFFFF;--cream:#F1EFE8;
+  --line:#EDEAE1;--line2:#D8D2C0;
+  --ink:#211B12;--mut:#766B57;--mut2:#A69D89;
+  --gold:#B98A2F;--golddeep:#8A6410;--honey:#E9A13B;--honey2:#F2C14E;
+  --grn:#3E9D63;--red:#D95B3E;
+  --disp:"Cormorant Garamond",Georgia,serif;
+  --shadow:0 1px 2px rgba(33,27,18,.04),0 12px 32px rgba(33,27,18,.07);
+  --navh:calc(60px + env(safe-area-inset-bottom));
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+html,body{overscroll-behavior-y:none}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+  font-size:14px;line-height:1.7;
+  padding-bottom:calc(var(--navh) + 28px)}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:420px;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(420px 230px at 12% -60px, rgba(242,193,78,.26), transparent 70%),
+    radial-gradient(520px 260px at 92% -80px, rgba(233,161,59,.18), transparent 70%),
+    radial-gradient(300px 170px at 55% -40px, rgba(255,226,150,.22), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97'%3E%3Cg fill='none' stroke='%23B98A2F' stroke-opacity='.09' stroke-width='1.1'%3E%3Cpolygon points='28,2 54,17 54,49 28,64 2,49 2,17'/%3E%3Cpolygon points='28,66 54,81 54,113 28,128 2,113 2,81'/%3E%3Cpolygon points='0,50 -26,65 -26,97 0,112'/%3E%3Cpolygon points='56,50 82,65 82,97 56,112'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 45%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 45%,transparent 100%)}
+.hide{display:none!important}
+.wrap{max-width:430px;margin:0 auto;padding:0 20px}
+button{font-family:inherit}
+
+/* login */
+#login{max-width:360px;margin:0 auto;padding:calc(70px + env(safe-area-inset-top)) 26px 60px;text-align:center}
+#login .appicon{width:92px;height:92px;border-radius:24px;margin:0 auto 20px;display:block;
+  box-shadow:0 18px 40px rgba(33,27,18,.22),0 2px 6px rgba(33,27,18,.12)}
+#login h1{font-family:var(--disp);font-weight:600;font-size:34px;letter-spacing:1.5px;margin:0;color:var(--ink)}
+#login .sub{color:var(--gold);font-size:10.5px;letter-spacing:4px;font-weight:900;margin:4px 0 34px}
+#login input{width:100%;padding:16px 18px;border:1px solid var(--line);border-radius:15px;font-size:16px;
+  margin-bottom:12px;background:var(--paper);color:var(--ink);outline:none;font-family:inherit}
+#login input::placeholder{color:var(--mut2)}
+#login input:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(233,161,59,.15)}
+#login button{width:100%;padding:17px;border:none;border-radius:16px;margin-top:8px;
+  background:linear-gradient(180deg,var(--honey2),var(--honey));
+  color:#3A2706;font-size:15px;font-weight:900;letter-spacing:1px;cursor:pointer;
+  box-shadow:0 10px 24px rgba(233,161,59,.35),inset 0 1px 0 rgba(255,255,255,.5)}
+#login button:active{transform:scale(.98)}
+#loginErr{color:var(--red);font-size:12.5px;min-height:20px;margin-top:12px}
+
+/* header */
+.topbar{position:sticky;top:0;z-index:20;
+  background:rgba(251,250,247,.75);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);
+  border-bottom:1px solid rgba(216,210,192,.35)}
+.topbar .in{max-width:430px;margin:0 auto;padding:calc(10px + env(safe-area-inset-top)) 20px 9px;
+  display:flex;align-items:center;gap:9px}
+.topbar img{width:30px;height:30px;filter:drop-shadow(0 2px 4px rgba(33,27,18,.15))}
+.topbar .brand{font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:.3px;color:var(--ink)}
+.topbar .sp{flex:1}
+.topbar .dt{font-size:10.5px;font-weight:900;color:var(--mut2);letter-spacing:.8px}
+.hi{font-size:25px;font-weight:900;letter-spacing:-.3px;margin:20px 0 0}
+.hisub{font-size:12px;color:var(--mut);margin-top:2px}
+
+/* cards */
+.card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:19px 20px;margin-top:16px;box-shadow:var(--shadow)}
+.lb{font-size:10.5px;font-weight:900;letter-spacing:1.8px;color:var(--gold)}
+.nextv{display:flex;align-items:center;gap:9px;margin-top:16px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:13px 17px;font-size:13px;font-weight:700;color:var(--mut);box-shadow:var(--shadow)}
+.nextv b{color:var(--ink)}
+/* report card */
+.rephead{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
+.rephead .rd{font-weight:900;font-size:16px}
+.rephead .rt{font-family:var(--disp);font-size:21px;font-weight:600;color:var(--golddeep)}
+.rtask{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:13.5px;border-bottom:1px solid #F3F1EA;color:#473C2B}
+.rtask:last-of-type{border-bottom:none}
+.rtask .rck{width:21px;height:21px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--honey2),var(--honey))}
+.rtask .rck svg{width:11px;height:11px;stroke:#3A2706;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.rtask.off .rck{background:var(--cream)}
+.rtask.off{color:var(--mut2)}
+.rphoto{width:100%;border-radius:14px;margin-top:12px}
+.rmeta{font-size:11px;color:var(--mut2);margin-top:10px;font-weight:700}
+.empty{text-align:center;color:var(--mut2);font-size:12.5px;padding:34px 0}
+/* stats */
+.strow{display:flex;gap:12px;margin-top:14px}
+.stat{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:15px 17px;box-shadow:var(--shadow)}
+.stat .sv{font-family:var(--disp);font-size:31px;font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums}
+.stat .sv small{font-size:17px}
+.stat .sl{font-size:10.5px;font-weight:700;color:var(--mut2)}
+/* history */
+.hth{font-size:25px;font-weight:900;letter-spacing:-.3px;margin:20px 0 2px}
+.hsub{font-size:11.5px;color:var(--mut2);font-weight:700}
+
+/* chat */
+.chathead{display:flex;align-items:center;gap:11px;padding:16px 2px 12px}
+.chathead .avw{width:42px;height:42px;border-radius:50%;background:linear-gradient(180deg,var(--honey2),var(--honey));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(233,161,59,.3)}
+.chathead .avw img{width:32px;height:32px}
+.chathead .n{font-weight:900;font-size:15px}
+.chathead .s{font-size:10.5px;color:var(--mut)}
+#chatBox{display:flex;flex-direction:column;padding:4px 0 86px}
+.mrow{display:flex;align-items:flex-end;gap:7px;margin-top:10px}
+.mrow.me{justify-content:flex-end}
+.mrow .avy{width:30px;height:30px;border-radius:50%;flex:none;background:linear-gradient(180deg,var(--honey2),var(--honey));padding:4px;box-sizing:border-box;align-self:flex-start}
+.bub{max-width:74%;padding:10px 14px;font-size:13.5px;line-height:1.6;word-break:break-word}
+.mrow.them .bub{background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:4px 18px 18px 18px;box-shadow:0 2px 8px rgba(33,27,18,.05)}
+.mrow.me .bub{background:linear-gradient(180deg,var(--honey2),var(--honey));color:#2A1D07;font-weight:500;border-radius:18px 4px 18px 18px;box-shadow:0 4px 12px rgba(233,161,59,.3)}
+.tm{font-size:9.5px;color:var(--mut2);flex:none;padding-bottom:2px}
+.sender{font-size:10px;color:var(--mut2);margin:0 0 3px 44px}
+.chatbar{position:fixed;left:0;right:0;bottom:var(--navh);z-index:19;
+  background:linear-gradient(180deg,rgba(251,250,247,0),rgba(251,250,247,.96) 38%);padding:18px 16px 10px}
+.chatbar .in2{max-width:430px;margin:0 auto}
+.chatbar .inwrap{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:999px;box-shadow:0 2px 10px rgba(33,27,18,.07)}
+.chatbar input{width:100%;padding:14px 62px 14px 19px;border:none;border-radius:999px;font-size:16px;background:transparent;color:var(--ink);outline:none;font-family:inherit}
+.chatbar input::placeholder{color:var(--mut2)}
+.chatbar button{position:absolute;right:5px;top:50%;transform:translateY(-50%);border:none;border-radius:50%;width:42px;height:42px;
+  background:linear-gradient(180deg,var(--honey2),var(--honey));cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(233,161,59,.4),inset 0 1px 0 rgba(255,255,255,.5)}
+.chatbar button:active{transform:translateY(-50%) scale(.92)}
+.chatbar button svg{width:18px;height:18px;fill:#3A2706}
+
+/* tab bar */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:20;height:var(--navh);
+  background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(22px) saturate(1.6);backdrop-filter:blur(22px) saturate(1.6);
+  border-top:1px solid rgba(216,210,192,.4)}
+.nav .in3{max-width:430px;margin:0 auto;height:60px;display:flex}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  font-size:10px;font-weight:900;color:var(--mut2);border:none;background:none;cursor:pointer;padding:0;line-height:1}
+.nav .icw{position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center}
+.nav .ic{width:24px;height:24px;stroke:var(--mut2);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:stroke .15s}
+.nav button.on{color:var(--golddeep)}
+.nav button.on .ic{stroke:var(--golddeep);fill:rgba(242,193,78,.18)}
+.badge{position:absolute;top:-4px;right:-9px;min-width:16px;background:var(--red);color:#fff;border-radius:99px;font-size:9px;font-weight:900;padding:1.5px 4.5px;line-height:1.3;box-shadow:0 2px 6px rgba(217,91,62,.4)}
+.toast{position:fixed;top:calc(18px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);
+  background:var(--ink);color:var(--honey2);font-weight:900;font-size:13px;padding:13px 24px;border-radius:999px;
+  box-shadow:0 14px 34px rgba(33,27,18,.35);z-index:99;transition:opacity .3s;white-space:nowrap}
+.out{margin-top:20px;margin-bottom:8px;text-align:center}
+.out button{background:none;border:none;color:var(--mut2);font-size:11.5px;text-decoration:underline;cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <img class="appicon" src="icons/icon-192.png" alt="">
+  <h1>Hachi Life</h1>
+  <p class="sub">お客様ページ</p>
+  <input type="email" id="email" placeholder="メールアドレス" autocomplete="username">
+  <input type="password" id="pass" placeholder="パスワード" autocomplete="current-password">
+  <button id="loginBtn">ログイン</button>
+  <p id="loginErr"></p>
+</div>
+
+<!-- APP -->
+<div id="app" class="hide">
+<div class="topbar"><div class="in">
+  <img src="icons/mark-160.png" alt="">
+  <div class="brand">Hachi Life</div>
+  <div class="sp"></div>
+  <div class="dt" id="dt"></div>
+</div></div>
+
+<div class="wrap">
+  <!-- HOME -->
+  <div id="vHome">
+    <div class="hi" id="hi">ようこそ</div>
+    <div class="hisub" id="hisub"></div>
+
+    <div class="nextv hide" id="nextV"></div>
+
+    <div class="card" id="latestCard">
+      <div class="lb">最新の清掃レポート</div>
+      <div id="latestBox"><div class="empty">まだレポートがありません。<br>初回の清掃後にこちらに届きます 🐝</div></div>
+    </div>
+
+    <div class="strow">
+      <div class="stat"><div class="sv" id="stMonth">0<small>回</small></div><div class="sl">今月の清掃</div></div>
+      <div class="stat"><div class="sv" id="stAll">0<small>回</small></div><div class="sl">これまでの清掃</div></div>
+    </div>
+
+    <div class="out"><button id="logout">ログアウト</button></div>
+  </div>
+
+  <!-- REPORTS -->
+  <div id="vRep" class="hide">
+    <div class="hth">清掃レポート</div>
+    <div class="hsub" id="repSub"></div>
+    <div id="repList"></div>
+  </div>
+
+  <!-- CHAT -->
+  <div id="vChat" class="hide">
+    <div class="chathead">
+      <div class="avw"><img src="icons/mark-160.png" alt=""></div>
+      <div><div class="n">ハチライフ事務局</div><div class="s">ご要望・ご変更など、お気軽にどうぞ</div></div>
+    </div>
+    <div id="chatBox"></div>
+  </div>
+</div>
+
+<div class="chatbar hide" id="chatbar"><div class="in2">
+  <div class="inwrap">
+    <input id="msgIn" placeholder="メッセージを入力...">
+    <button id="sendBtn"><svg viewBox="0 0 24 24"><path d="M3.4 20.4 21.8 12 3.4 3.6 3.4 10.2 16 12 3.4 13.8z"/></svg></button>
+  </div>
+</div></div>
+
+<div class="nav"><div class="in3">
+  <button class="on" data-v="Home">
+    <span class="icw"><svg class="ic" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg></span>
+    ホーム</button>
+  <button data-v="Rep">
+    <span class="icw"><svg class="ic" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 16h7"/></svg></span>
+    レポート</button>
+  <button data-v="Chat">
+    <span class="icw"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5c0 4.14-4.03 7.5-9 7.5-1.03 0-2.02-.14-2.94-.41L4 20l1.28-3.42C3.86 15.3 3 13.49 3 11.5 3 7.36 7.03 4 12 4s9 3.36 9 7.5Z"/></svg><span class="badge hide" id="unread">0</span></span>
+    ご連絡</button>
+</div></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script>
+let me=null, meDoc=null, myReports=[], myVisits=[], lastMsgs=null, lastChatSeen=0;
+const $=id=>document.getElementById(id);
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>{e.style.opacity=0;setTimeout(()=>e.remove(),400)},1800)}
+function esc(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function fmtDay(ds){
+  const p=(ds||'').split('-');if(p.length<3)return ds;
+  const d=new Date(+p[0],+p[1]-1,+p[2]);
+  return (+p[1])+'/'+(+p[2])+'（'+'日月火水木金土'[d.getDay()]+'）';
+}
+
+/* login */
+$('loginBtn').onclick=async()=>{
+  $('loginErr').textContent='';
+  try{await auth.signInWithEmailAndPassword($('email').value.trim(),$('pass').value)}
+  catch(e){$('loginErr').textContent='ログインに失敗しました'}
+};
+$('pass').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing&&e.keyCode!==229)$('loginBtn').click()});
+auth.onAuthStateChanged(async u=>{
+  if(!u){$('login').classList.remove('hide');$('app').classList.add('hide');return}
+  me=u;
+  const snap=await db.collection('clients').doc(u.uid).get();
+  if(!snap.exists){$('loginErr').textContent='お客様アカウントが見つかりません。事務局へご連絡ください。';auth.signOut();return}
+  meDoc=snap.data();
+  $('login').classList.add('hide');$('app').classList.remove('hide');
+  boot();
+});
+$('logout').onclick=()=>auth.signOut();
+
+/* boot */
+function boot(){
+  const n=new Date();
+  $('dt').textContent=(n.getMonth()+1)+'/'+n.getDate()+'（'+'日月火水木金土'[n.getDay()]+'）';
+  $('hi').textContent=(meDoc.name||'お客')+'様';
+  $('hisub').textContent='いつもご利用ありがとうございます 🐝';
+  db.collection('reports').where('clientUid','==',me.uid)
+    .onSnapshot(s=>{myReports=s.docs.map(d=>d.data());renderHome();renderReports()},e=>console.error(e));
+  db.collection('visits').where('clientUid','==',me.uid)
+    .onSnapshot(s=>{myVisits=s.docs.map(d=>d.data());renderNext()},e=>console.error(e));
+  db.collection('messages').where('uid','==',me.uid)
+    .onSnapshot(s=>{renderChat(s.docs.map(d=>d.data()))},e=>console.error(e));
+}
+
+/* next visit */
+function renderNext(){
+  const up=myVisits.filter(v=>(v.day||'')>=todayStr()).sort((a,b)=>(a.day||'').localeCompare(b.day||''));
+  if(up.length){
+    $('nextV').innerHTML='📅 <span>次回の訪問:</span> <b>'+fmtDay(up[0].day)+(up[0].time?' ・ '+esc(up[0].time):'')+'</b>';
+    $('nextV').classList.remove('hide');
+  }else $('nextV').classList.add('hide');
+}
+
+/* reports */
+function reportCard(r,withDate){
+  const tasks=(r.tasks||[]).map((t,i)=>{
+    const on=r.tasksDone&&r.tasksDone[i];
+    return `<div class="rtask ${on?'':'off'}"><span class="rck"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg></span>${esc(t)}</div>`;
+  }).join('');
+  return `${withDate?`<div class="rephead"><span class="rd">${fmtDay(r.day)}</span><span class="rt">${minToH(r.workedMin||0)}</span></div>`:''}
+    <div style="margin-top:6px">${tasks||'<div class="empty" style="padding:14px 0">タスク記録なし</div>'}</div>
+    ${r.photo?`<img class="rphoto" src="${r.photo}" alt="施錠確認写真">`:''}
+    <div class="rmeta">担当: ${esc(r.name||'')} ・ 作業時間 ${minToH(r.workedMin||0)}${r.photo?' ・ 🔒 施錠確認済み':''}</div>`;
+}
+function renderHome(){
+  const list=myReports.slice().sort((a,b)=>(b.day||'').localeCompare(a.day||''));
+  const mon=todayStr().slice(0,7);
+  $('stMonth').innerHTML=list.filter(r=>(r.day||'').startsWith(mon)).length+'<small>回</small>';
+  $('stAll').innerHTML=list.length+'<small>回</small>';
+  if(list.length){$('latestBox').innerHTML=reportCard(list[0],true)}
+}
+function renderReports(){
+  const list=myReports.slice().sort((a,b)=>(b.day||'').localeCompare(a.day||''));
+  $('repSub').textContent=list.length?list.length+' 件':'';
+  $('repList').innerHTML=list.map(r=>`<div class="card">${reportCard(r,true)}</div>`).join('')
+    ||'<div class="empty">まだレポートがありません。</div>';
+}
+
+/* chat */
+function renderChat(msgs){
+  lastMsgs=msgs;
+  msgs.sort((a,b)=>(a.at?.toMillis?.()||9e15)-(b.at?.toMillis?.()||9e15));
+  $('chatBox').innerHTML=msgs.map(m=>{
+    const mine=m.from==='client';
+    const t=(m.at&&m.at.toDate)?m.at.toDate().toTimeString().slice(0,5):'';
+    if(mine)return `<div class="mrow me"><span class="tm">${t}</span><div class="bub">${esc(m.text)}</div></div>`;
+    return `<div><div class="sender">ハチライフ事務局</div>
+      <div class="mrow them"><img class="avy" src="icons/mark-160.png" alt=""><div class="bub">${esc(m.text)}</div><span class="tm">${t}</span></div></div>`;
+  }).join('');
+  window.scrollTo(0,document.body.scrollHeight);
+  const hq=msgs.filter(m=>m.from==='hq').length;
+  const v=$('vChat').classList.contains('hide');
+  if(v&&hq>lastChatSeen&&lastChatSeen>0){$('unread').textContent=hq-lastChatSeen;$('unread').classList.remove('hide')}
+  if(!v)lastChatSeen=hq;
+  if(lastChatSeen===0)lastChatSeen=hq;
+}
+$('sendBtn').onclick=async()=>{
+  const t=$('msgIn').value.trim();if(!t)return;
+  $('msgIn').value='';
+  try{await db.collection('messages').add({uid:me.uid,from:'client',fromName:meDoc.name||'',text:t,textTr:null,at:TS()})}
+  catch(e){toast('送信に失敗しました');console.error(e)}
+};
+// Enterは文字確定のみ（送信はボタン）
+// キーボード表示中は入力バーをキーボード直上へ
+if(window.visualViewport){
+  const vv=window.visualViewport;
+  const adj=()=>{
+    const kb=Math.max(0,window.innerHeight-vv.height-vv.offsetTop);
+    const cb=$('chatbar'),nav=document.querySelector('.nav');
+    if(kb>60){cb.style.bottom=kb+'px';nav.style.transform='translateY(110%)';
+      if(!$('vChat').classList.contains('hide'))window.scrollTo(0,document.body.scrollHeight);}
+    else{cb.style.bottom='';nav.style.transform=''}
+  };
+  vv.addEventListener('resize',adj);vv.addEventListener('scroll',adj);
+}
+
+/* tabs */
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  const v=b.dataset.v;
+  $('vHome').classList.toggle('hide',v!=='Home');
+  $('vRep').classList.toggle('hide',v!=='Rep');
+  $('vChat').classList.toggle('hide',v!=='Chat');
+  $('chatbar').classList.toggle('hide',v!=='Chat');
+  if(v==='Chat'){$('unread').classList.add('hide');lastChatSeen=0;window.scrollTo(0,document.body.scrollHeight);}
+  else{window.scrollTo(0,0)}
+});
+</script>
+</body>
+</html>

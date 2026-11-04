@@ -17,7 +17,8 @@ service cloud.firestore {
     }
     match /reports/{id} {
       allow create, update: if signedIn() && request.resource.data.uid == request.auth.uid;
-      allow read: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid
+        || resource.data.clientUid == request.auth.uid || isAdmin());
       allow delete: if isAdmin();
     }
     match /messages/{id} {
@@ -31,8 +32,13 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
     match /visits/{id} {
-      allow read: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid
+        || resource.data.clientUid == request.auth.uid || isAdmin());
       allow create, update, delete: if isAdmin();
+    }
+    match /clients/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
     }
     match /leaves/{id} {
       allow create: if signedIn() && request.resource.data.uid == request.auth.uid

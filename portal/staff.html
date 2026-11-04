@@ -580,7 +580,7 @@ $('submitBtn').onclick=async()=>{
   const tasksObj={};tasksState.forEach((x,i)=>tasksObj[i]=x.done);
   try{
     await db.collection('reports').doc(todayStr()+'_'+me.uid).set({
-      uid:me.uid,name:meDoc.name||'',day:todayStr(),client:meDoc.clientName||'',
+      uid:me.uid,name:meDoc.name||'',day:todayStr(),client:meDoc.clientName||'',clientUid:meDoc.clientUid||null,
       tasks:(meDoc.tasks||[]),tasksDone:tasksObj,photo:photoData||null,
       workedMin:c.workedMin,breakMin:c.breakMin,submittedAt:TS()
     });

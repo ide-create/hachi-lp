@@ -224,6 +224,14 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
       <div style="display:flex;gap:8px"><input type="text" id="newUid" placeholder="UID" style="flex:1"><button class="save" id="newBtn">作成</button></div>
     </div>
     <div id="staffList"></div>
+
+    <h2 style="margin-top:28px">顧客アカウント</h2>
+    <p class="note" style="margin-bottom:12px">お客様用: ①Authenticationで「ユーザーを追加」（例: saito@hachilife.client）②UIDをコピー ③下に貼って作成 ④世帯名と担当スタッフを設定して保存。お客様アプリ: /portal/client.html</p>
+    <div class="sed">
+      <label>顧客アカウントの新規作成（AuthenticationのUIDを貼る）</label>
+      <div style="display:flex;gap:8px"><input type="text" id="ncUid" placeholder="UID" style="flex:1"><button class="save" id="ncBtn">作成</button></div>
+    </div>
+    <div id="clientList"></div>
   </div>
 </div>
 </div>
@@ -234,7 +242,7 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
 <script src="config.js"></script>
 <script>
 const $=id=>document.getElementById(id);
-let staffMap={}, punchToday=[], punchWeek=[], reportsToday={}, curThread=null, unsubChat=null, allVisits=[], allLeaves=[], allNotices=[];
+let staffMap={}, clientsMap={}, punchToday=[], punchWeek=[], reportsToday={}, curThread=null, unsubChat=null, allVisits=[], allLeaves=[], allNotices=[];
 function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>{e.style.opacity=0;setTimeout(()=>e.remove(),400)},1800)}
 function esc(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
@@ -278,6 +286,7 @@ function boot(){
   db.collection('visits').onSnapshot(s=>{allVisits=s.docs.map(d=>({id:d.id,...d.data()}));renderPlan()},e=>console.error(e));
   db.collection('leaves').onSnapshot(s=>{allLeaves=s.docs.map(d=>({id:d.id,...d.data()}));renderPlan()},e=>console.error(e));
   db.collection('notices').onSnapshot(s=>{allNotices=s.docs.map(d=>({id:d.id,...d.data()}));renderNtc()},e=>console.error(e));
+  db.collection('clients').onSnapshot(s=>{clientsMap={};s.docs.forEach(d=>clientsMap[d.id]={id:d.id,...d.data()});renderThreads();renderClients()},e=>console.error(e));
 }
 function fmtD(ds){
   const p=(ds||'').split('-');if(p.length<3)return ds||'—';
@@ -347,7 +356,11 @@ function loadReports(){
 /* ---------- chat ---------- */
 function renderThreads(){
   const staffs=Object.values(staffMap).filter(s=>s.role!=='admin');
-  $('threads').innerHTML=staffs.map(s=>`<div class="th-item ${curThread===s.id?'on':''}" data-id="${s.id}">${esc(s.name||s.id)}</div>`).join('')||'<div class="th-item">スタッフなし</div>';
+  const clients=Object.values(clientsMap).filter(c=>c.active!==false);
+  let html=staffs.map(s=>`<div class="th-item ${curThread===s.id?'on':''}" data-id="${s.id}">🐝 ${esc(s.name||s.id)}</div>`).join('');
+  if(clients.length)html+='<div style="padding:8px 15px 4px;font-size:9.5px;font-weight:900;letter-spacing:2px;color:var(--gold)">お客様</div>'
+    +clients.map(c=>`<div class="th-item ${curThread===c.id?'on':''}" data-id="${c.id}">🏠 ${esc(c.name||c.id)}様</div>`).join('');
+  $('threads').innerHTML=html||'<div class="th-item">スタッフなし</div>';
   document.querySelectorAll('.th-item[data-id]').forEach(e=>e.onclick=()=>openThread(e.dataset.id));
   if(!curThread&&staffs[0])openThread(staffs[0].id);
 }
@@ -359,7 +372,7 @@ function openThread(uid){
     $('aChatBox').innerHTML=msgs.map(m=>{
       const mine=m.from==='hq';
       const tr2=m.textTr?`<span class="tr2">${esc(m.textTr)}</span>`:(mine?'':`<a class="tr2" style="text-decoration:none" target="_blank" href="https://translate.google.com/?sl=auto&tl=ja&text=${encodeURIComponent(m.text)}&op=translate">日本語訳 ↗</a>`);
-      return `<div class="msg ${mine?'me':'them'}">${esc(m.text)}${tr2}<small>${mine?'本部':esc(m.fromName||'スタッフ')} ・ ${hm(m.at)} <button class="mdel" data-id="${m.id}" title="削除">削除</button></small></div>`;
+      return `<div class="msg ${mine?'me':'them'}">${esc(m.text)}${tr2}<small>${mine?'本部':esc(m.fromName||(m.from==='client'?'お客様':'スタッフ'))} ・ ${hm(m.at)} <button class="mdel" data-id="${m.id}" title="削除">削除</button></small></div>`;
     }).join('');
     document.querySelectorAll('.mdel').forEach(b=>b.onclick=()=>{
       if(confirm('このメッセージを削除しますか？'))db.collection('messages').doc(b.dataset.id).delete().then(()=>toast('削除しました')).catch(e=>{toast('削除失敗');console.error(e)});
@@ -418,7 +431,7 @@ $('vsAdd').onclick=async()=>{
   const uid=$('vsStaff').value,day=$('vsDay').value;
   if(!uid||!day){toast('スタッフと日付を選んでください');return}
   try{
-    await db.collection('visits').add({uid,name:(staffMap[uid]||{}).name||'',day,time:$('vsT1').value+'–'+$('vsT2').value,note:$('vsNote').value.trim(),at:TS()});
+    await db.collection('visits').add({uid,name:(staffMap[uid]||{}).name||'',clientUid:(staffMap[uid]||{}).clientUid||null,day,time:$('vsT1').value+'–'+$('vsT2').value,note:$('vsNote').value.trim(),at:TS()});
     $('vsDay').value='';$('vsNote').value='';
     toast('予定を追加しました');
   }catch(e){toast('追加失敗');console.error(e)}
@@ -486,6 +499,44 @@ $('newBtn').onclick=async()=>{
   try{
     await db.collection('staff').doc(uid).set({name:'New Staff',role:'staff',active:true,tasks:[]},{merge:true});
     $('newUid').value='';toast('作成しました。下で編集してください');
+  }catch(e){toast('作成失敗');console.error(e)}
+};
+
+/* ---------- clients mgmt ---------- */
+function renderClients(){
+  const staffs=Object.values(staffMap).filter(s=>s.role!=='admin');
+  const list=Object.values(clientsMap);
+  $('clientList').innerHTML=list.map(c=>`
+   <div class="sed" data-cid="${c.id}">
+     <div class="row2">
+       <div><label>世帯名（「様」なし・例: 斎藤）</label><input type="text" class="c-name" value="${esc(c.name||'')}"></div>
+       <div><label>担当スタッフ</label><select class="c-staff">${staffs.map(s=>`<option value="${s.id}" ${c.staffUid===s.id?'selected':''}>${esc(s.name||s.id)}</option>`).join('')}</select></div>
+     </div>
+     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+       <label style="display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" class="c-active" ${c.active!==false?'checked':''}>有効</label>
+       <button class="save">保存</button>
+       <span class="note">UID: ${c.id}</span>
+     </div>
+   </div>`).join('')||'<p class="note">顧客アカウントはまだありません</p>';
+  document.querySelectorAll('.sed[data-cid] .save').forEach(b=>b.onclick=async()=>{
+    const e=b.closest('.sed');const cid=e.dataset.cid;
+    const staffUid=e.querySelector('.c-staff').value;
+    try{
+      await db.collection('clients').doc(cid).set({
+        name:e.querySelector('.c-name').value.trim(),
+        staffUid:staffUid||null,
+        active:e.querySelector('.c-active').checked
+      },{merge:true});
+      if(staffUid)await db.collection('staff').doc(staffUid).set({clientUid:cid},{merge:true}); // スタッフ側にも紐付け
+      toast('保存しました');
+    }catch(err){toast('保存失敗');console.error(err)}
+  });
+}
+$('ncBtn').onclick=async()=>{
+  const uid=$('ncUid').value.trim();if(!uid)return;
+  try{
+    await db.collection('clients').doc(uid).set({name:'',staffUid:null,active:true},{merge:true});
+    $('ncUid').value='';toast('作成しました。下で世帯名と担当を設定してください');
   }catch(e){toast('作成失敗');console.error(e)}
 };
 
