@@ -34,6 +34,18 @@ function hm(ts) {
 }
 function minToH(min) { return (min / 60).toFixed(1) + 'h'; }
 
+// 自動翻訳（日本語⇄英語）。失敗したらnull
+async function autoTranslate(text) {
+  const hasJa = /[぀-ヿ一-鿿]/.test(text);
+  const tl = hasJa ? 'en' : 'ja';
+  try {
+    const r = await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=' + tl + '&dt=t&q=' + encodeURIComponent(text));
+    const j = await r.json();
+    const out = (j[0] || []).map(x => x[0]).join('');
+    return out && out.trim() !== text.trim() ? out : null;
+  } catch (e) { return null; }
+}
+
 // 打刻配列から 勤務分数・休憩分数・状態 を計算
 function calcDay(punches) {
   let workedMs = 0, breakMs = 0, state = 'none';
