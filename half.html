@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hachi Life｜名古屋の定期ハウスキーピング — 英語のある暮らしを、月49,500円から</title>
+<meta name="description" content="フィリピン人スタッフによる担当固定の定期家事代行。週1〜3回・1回4時間。名古屋東部エリア。2027年1月スタート、先行受付中。">
+<link rel="icon" type="image/png" href="portal/icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Shippori+Mincho:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#FBF6EA;--paper:#FFFDF8;--cream:#F3EAD3;--line:#E3D5B8;
+  --ink:#2A2118;--mut:#7A6A52;--dark2:#171006;
+  --gold:#B98A2F;--honey:#E9A13B;--honey2:#F2C14E;
+  --serif:"Shippori Mincho",serif;--sans:"Zen Kaku Gothic New",sans-serif;--disp:"Cormorant Garamond",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ivory);color:var(--ink);font-size:15px;line-height:1.95;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+.eyeb{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.34em;color:var(--gold);font-weight:700}
+.eyeb::before{content:"";width:34px;height:1.5px;background:var(--gold)}
+h2{font-family:var(--serif);font-size:clamp(24px,4.6vw,34px);font-weight:700;line-height:1.75;margin:10px 0 14px;letter-spacing:.04em}
+.lead{color:var(--mut);font-size:14px;max-width:38em}
+section{padding:72px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--honey2),var(--honey) 60%,var(--gold));color:#2A1D07;font-weight:900;font-size:15px;border-radius:999px;padding:16px 34px;box-shadow:0 12px 28px rgba(233,161,59,.35);transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;border:1.5px solid var(--gold);color:var(--gold);box-shadow:none}
+
+/* header */
+.top{position:sticky;top:0;z-index:50;background:rgba(251,246,234,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(227,213,184,.6)}
+.top .in{max-width:1040px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;gap:10px}
+.top img{width:34px;height:34px}
+.top .bn{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:.5px;white-space:nowrap}
+.top .bs{font-size:10px;color:var(--mut);font-weight:700;letter-spacing:1px;margin-left:2px}
+@media(max-width:600px){.top .bs{display:none}}
+.top .sp{flex:1}
+.top .cta{background:var(--dark2);color:var(--honey2);font-weight:900;font-size:13px;border-radius:999px;padding:11px 20px;white-space:nowrap}
+
+/* hero */
+.hero{position:relative;color:var(--ivory);overflow:hidden;background:var(--dark2)}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,16,6,.2),rgba(23,16,6,.78) 75%)}
+.hero .in{position:relative;z-index:2;max-width:1040px;margin:0 auto;padding:110px 22px 90px}
+.hero .tag{display:inline-block;background:var(--honey2);color:#2A1D07;font-weight:900;font-size:12.5px;border-radius:999px;padding:6px 16px;letter-spacing:1px}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,6.6vw,52px);font-weight:700;line-height:1.7;margin:22px 0 14px;letter-spacing:.04em}
+.hero h1 em{font-style:normal;color:var(--honey2)}
+.hero p{color:#E6DCC4;font-size:14.5px;max-width:34em}
+.hero .badges{display:flex;flex-wrap:wrap;gap:9px;margin:24px 0 30px}
+.hero .bd{border:1px solid rgba(242,193,78,.55);color:var(--honey2);font-size:12px;font-weight:700;border-radius:999px;padding:6px 14px;background:rgba(23,16,6,.35)}
+.hero .price{font-family:var(--disp);font-size:clamp(34px,7vw,54px);color:var(--honey2);font-weight:600;line-height:1.2}
+.hero .price small{font-family:var(--sans);font-size:14px;color:#E6DCC4;font-weight:700}
+
+/* plans */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:30px}
+.pl{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:28px 26px;position:relative;box-shadow:0 10px 30px rgba(42,33,24,.06)}
+.pl.hot{border:1.5px solid var(--gold);box-shadow:0 18px 44px rgba(185,138,47,.18)}
+.pl .tag{position:absolute;top:-13px;left:24px;background:linear-gradient(135deg,var(--honey2),var(--honey));color:#2A1D07;font-size:11px;font-weight:900;border-radius:99px;padding:4px 14px;letter-spacing:1px}
+.pl h3{font-family:var(--serif);font-size:19px;font-weight:700}
+.pl .fq{font-size:12px;color:var(--mut);font-weight:700;margin-top:2px}
+.pl .yen{font-family:var(--disp);font-size:40px;color:var(--gold);font-weight:600;margin:12px 0 2px;line-height:1.15}
+.pl .yen small{font-family:var(--sans);font-size:12.5px;color:var(--mut);font-weight:700}
+.pl ul{list-style:none;margin-top:16px;border-top:1px solid var(--cream);padding-top:14px}
+.pl li{font-size:13px;color:#4d4433;padding:4.5px 0 4.5px 24px;position:relative}
+.pl li::before{content:"✓";position:absolute;left:2px;color:var(--gold);font-weight:900}
+.note0{margin-top:16px;font-size:12px;color:var(--mut)}
+
+/* schedule */
+.sch{display:grid;grid-template-columns:repeat(24,1fr);gap:3px;margin-top:26px}
+.sg{padding:13px 10px;font-size:11.5px;line-height:1.6;border-radius:9px;color:#2A1D07;min-width:0}
+.sg b{display:block;font-size:12.5px;font-weight:900}
+.sg small{display:block;font-size:10px;opacity:.72}
+.sg.d{background:var(--dark2);color:#F1E6C8}
+.sg.g1{background:linear-gradient(135deg,var(--honey2),var(--honey))}
+.sg.g2{background:#F2C14E}
+.sg.g3{background:linear-gradient(135deg,var(--honey),#D99A0B)}
+.stime{display:grid;grid-template-columns:repeat(24,1fr);font-family:var(--disp);font-size:11.5px;color:var(--mut);font-weight:600;margin-top:6px}
+.stime span:nth-child(1){grid-column:1/3}.stime span:nth-child(2){grid-column:7/9}.stime span:nth-child(3){grid-column:13/15}.stime span:nth-child(4){grid-column:19/21}.stime span:nth-child(5){grid-column:23/25;text-align:right}
+@media(max-width:640px){.sch{grid-template-columns:1fr;gap:6px}.sg{display:flex;align-items:baseline;gap:10px}.sg small{margin-left:auto}.stime{display:none}}
+
+/* video cards */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:30px}
+.vc{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(42,33,24,.07)}
+.vc video{width:100%;aspect-ratio:3/4;object-fit:cover}
+.vc .b{padding:14px 18px}
+.vc b{font-size:14.5px}
+.vc p{font-size:12px;color:var(--mut);margin-top:3px;line-height:1.8}
+
+/* english */
+.eng{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:34px;align-items:center;margin-top:30px}
+@media(max-width:760px){.eng{grid-template-columns:1fr}}
+.eng video{border-radius:22px;width:100%;box-shadow:0 20px 48px rgba(42,33,24,.18)}
+.bub{border-radius:16px;padding:13px 18px;font-size:14px;margin-bottom:10px;line-height:1.75;max-width:92%}
+.bub small{display:block;color:var(--mut);font-size:11.5px}
+.bub.s{background:var(--paper);border:1px solid var(--line)}
+.bub.k{background:linear-gradient(135deg,#FBEFD2,var(--cream));margin-left:8%}
+
+/* trust */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:30px}
+.tc{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px;border-top:3px solid var(--honey)}
+.tc .ic{font-size:26px}
+.tc b{display:block;font-family:var(--serif);font-size:16.5px;margin:10px 0 6px}
+.tc p{font-size:12.5px;color:var(--mut);line-height:1.9}
+
+/* flow */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:30px}
+.fс{}
+.fc{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:24px}
+.fc .n{font-family:var(--disp);font-size:30px;color:var(--honey);font-weight:600;line-height:1}
+.fc b{display:block;font-size:15.5px;margin:10px 0 5px}
+.fc p{font-size:12.5px;color:var(--mut);line-height:1.85}
+
+/* zoku (dark teaser) */
+.zoku{background:var(--dark2);color:var(--ivory)}
+.zoku .eyeb{color:var(--honey2)}
+.zoku .eyeb::before{background:var(--honey2)}
+.zoku h2{color:var(--ivory)}
+.zoku .lead{color:#C9BA98}
+.zoku .box{display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between;border:1px solid rgba(242,193,78,.4);border-radius:22px;padding:30px 32px;margin-top:28px;background:rgba(242,193,78,.05)}
+.zoku .yen{font-family:var(--disp);font-size:42px;color:var(--honey2);font-weight:600;line-height:1.2}
+.zoku .yen small{font-family:var(--sans);font-size:13px;color:#C9BA98;font-weight:700}
+.zoku p.z{font-size:13px;color:#C9BA98;max-width:30em}
+
+/* cta / footer */
+.cta2{background:linear-gradient(180deg,var(--ivory),#F6EEDA);text-align:center}
+.cta2 .tel{font-family:var(--disp);font-size:clamp(28px,6vw,40px);color:var(--ink);letter-spacing:1px;margin-top:18px}
+.cta2 .tsub{font-size:12px;color:var(--mut)}
+footer{background:var(--dark2);color:#9B8A68;font-size:12px;padding:34px 0;text-align:center;line-height:2}
+footer b{color:#C9BA98}
+.center{text-align:center}
+.mt30{margin-top:30px}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="in">
+  <img src="portal/icons/mark-160.png" alt="">
+  <span class="bn">Hachi Life</span><span class="bs">名古屋の定期ハウスキーピング</span>
+  <span class="sp"></span>
+  <a class="cta" href="request.html">資料請求・ご相談</a>
+</div></header>
+
+<!-- HERO -->
+<div class="hero">
+  <video src="film-sink.mp4" autoplay muted loop playsinline></video>
+  <div class="in">
+    <span class="tag">2027年1月スタート ・ 先行受付中</span>
+    <h1>英語のある暮らしを、<br><em>年明けから</em>はじめる。</h1>
+    <p>世界中の家庭で選ばれてきたフィリピン人ハウスキーパーが、毎週同じ曜日、同じ顔で。名古屋東部エリアの定期ハウスキーピングです。</p>
+    <div class="badges">
+      <span class="bd">担当固定</span><span class="bd">1回4時間</span><span class="bd">英語が日常に</span><span class="bd">入会金0円</span>
+    </div>
+    <div class="price">¥49,500<small>／月（税込・週1回プラン）から</small></div>
+    <div style="margin-top:30px;display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn" href="request.html">先行受付に申し込む →</a>
+    </div>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section id="plans"><div class="wrap">
+  <div class="eyeb">PLANS &amp; PRICE</div>
+  <h2>月額だけ。入会金も、追加費用もなし。</h2>
+  <p class="lead">毎週決まった曜日・時間に、同じスタッフがお伺いする定期プラン。料金は月額のみ、すべて税込です。</p>
+  <div class="plans">
+    <div class="pl">
+      <h3>週1プラン</h3><div class="fq">毎週1回 ・ 4時間</div>
+      <div class="yen">49,500<small>円/月（税込）</small></div>
+      <ul><li>水回り＋お部屋の基本リセット</li><li>洗濯・たたみ・収納まで</li><li>ゴミ出し準備</li></ul>
+    </div>
+    <div class="pl hot">
+      <span class="tag">いちばん人気</span>
+      <h3>週2プラン</h3><div class="fq">毎週2回 ・ 各4時間</div>
+      <div class="yen">99,000<small>円/月（税込）</small></div>
+      <ul><li>家事の主担当をお任せ</li><li>買い物・作り置きの下ごしらえ</li><li>お子さまの見守り・英語あそび</li></ul>
+    </div>
+    <div class="pl">
+      <h3>週3プラン</h3><div class="fq">毎週3回 ・ 各4時間</div>
+      <div class="yen">148,500<small>円/月（税込）</small></div>
+      <ul><li>平日の家事をほぼフルカバー</li><li>曜日ごとのメニューを設計</li><li>ご高齢のご家族の見守りにも</li></ul>
+    </div>
+  </div>
+  <p class="note0">※ ご契約時にご自宅ごとの手順書「ファミリーブック」を作成し、内容をオーダーメイドします。介護・医療行為はお受けしていません。対応エリア：名古屋市 東・千種・昭和・名東・瑞穂区とその近郊。</p>
+</div></section>
+
+<!-- 4時間 -->
+<section style="background:var(--paper);border-block:1px solid var(--cream)"><div class="wrap">
+  <div class="eyeb">4 HOURS</div>
+  <h2>1回4時間で、家がリセットされる。</h2>
+  <p class="lead">時間の使い方は固定の型＋ご家庭ごとのリクエスト枠。「今日は何をお願いしよう」と考える必要はありません。</p>
+  <div class="sch">
+    <div class="sg d" style="grid-column:span 2"><b>申し送り</b><small>10分</small></div>
+    <div class="sg g1" style="grid-column:span 9"><b>掃除</b><small>90分・水回り→リビング→寝室</small></div>
+    <div class="sg d" style="grid-column:span 1"><b>ゴミ</b><small>10分</small></div>
+    <div class="sg g2" style="grid-column:span 6"><b>洗濯・たたみ</b><small>60分</small></div>
+    <div class="sg g3" style="grid-column:span 4"><b>買い物</b><small>40分・現金なしのプリペイド</small></div>
+    <div class="sg g1" style="grid-column:span 2"><b>仕上げ</b><small>30分・リクエスト枠</small></div>
+  </div>
+  <div class="stime"><span>10:00</span><span>11:00</span><span>12:00</span><span>13:00</span><span>14:00</span></div>
+</div></section>
+
+<!-- できること -->
+<section><div class="wrap">
+  <div class="eyeb">WHAT WE DO</div>
+  <h2>所作は、ごまかせない。</h2>
+  <p class="lead">実際のトレーニング風景から。道具の持ち方ひとつまで、プロの所作です。</p>
+  <div class="vgrid">
+    <div class="vc"><video src="film-sink.mp4" autoplay muted loop playsinline></video><div class="b"><b>キッチン・水回り</b><p>シンクは「映り込むまで」。排水口のお手入れまで毎回。</p></div></div>
+    <div class="vc"><video src="film-bath.mp4" autoplay muted loop playsinline></video><div class="b"><b>浴室</b><p>鏡の水垢、床の皮脂まで。換気まで整えて退出します。</p></div></div>
+    <div class="vc"><video src="film-toilet.mp4" autoplay muted loop playsinline></video><div class="b"><b>トイレ・洗面</b><p>見えない縁の裏まで。消耗品の補充もお任せ。</p></div></div>
+    <div class="vc"><video src="film-trash.mp4" autoplay muted loop playsinline></video><div class="b"><b>ゴミ出し・段取り</b><p>分別から収集日管理まで、ファミリーブックどおりに。</p></div></div>
+  </div>
+</div></section>
+
+<!-- 英語 -->
+<section style="background:var(--paper);border-block:1px solid var(--cream)"><div class="wrap">
+  <div class="eyeb">ENGLISH AT HOME</div>
+  <h2>毎日の家事が、子どもの「英語の時間」になる。</h2>
+  <div class="eng">
+    <video src="eng-kid.mp4" autoplay muted loop playsinline></video>
+    <div>
+      <div class="bub s">Good morning! Shall we fold the towels together?<small>おはよう！いっしょにタオルたたもうか？</small></div>
+      <div class="bub k">Yes! This one is big!<small>うん！これおっきい！</small></div>
+      <div class="bub s">That's right! Which one is small?<small>そうだね！ちいさいのはどっち？</small></div>
+      <p style="font-size:12px;color:var(--mut);margin-top:16px">※ フィリピンは英語が公用語。「英語教育」ではなく、暮らしの中の自然な英語です。お子さまへの関わり方はご希望に合わせます。</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 安心 -->
+<section><div class="wrap">
+  <div class="eyeb">SAFETY BY DESIGN</div>
+  <h2>安心は、性格ではなく仕組みでつくる。</h2>
+  <div class="tgrid">
+    <div class="tc"><div class="ic">🔑</div><b>鍵は本部が厳重管理</b><p>お預かり証を発行し、持ち出し・返却を毎回記録。退出時は施錠写真までセットで、不在時のご利用も安心。</p></div>
+    <div class="tc"><div class="ic">📱</div><b>毎回、清掃レポートが届く</b><p>自社開発のお客様専用アプリに、その日のタスク達成・作業時間・施錠写真が自動で届きます。ご要望はアプリからいつでも。</p></div>
+    <div class="tc"><div class="ic">💳</div><b>現金を扱わない買い物</b><p>買い物は当社名義のプリペイドカードのみ。レシートは当日中にアプリで確認できます。</p></div>
+    <div class="tc"><div class="ic">🛡</div><b>保険と日本語窓口</b><p>賠償責任保険に加入。ご契約・ご要望のやりとりは日本人スタッフが日本語で対応します。</p></div>
+  </div>
+</div></section>
+
+<!-- 流れ -->
+<section style="background:var(--paper);border-block:1px solid var(--cream)"><div class="wrap">
+  <div class="eyeb">FLOW</div>
+  <h2>ご利用までの流れ</h2>
+  <div class="fgrid">
+    <div class="fc"><div class="n">01</div><b>資料請求・ご相談</b><p>フォームから1分。ご質問だけでも歓迎です。</p></div>
+    <div class="fc"><div class="n">02</div><b>ご自宅で相談</b><p>住環境とご要望を確認し、プランとお伺い曜日を決めます。</p></div>
+    <div class="fc"><div class="n">03</div><b>ファミリーブック作成</b><p>「わが家のやり方」を一冊に。業務は全部ここから。</p></div>
+    <div class="fc"><div class="n">04</div><b>2027年1月〜 スタート</b><p>初回はコーディネーターが同行。以降も月1回訪問でフォロー。</p></div>
+  </div>
+  <div class="center mt30"><a class="btn" href="request.html">先行受付に申し込む →</a></div>
+</div></section>
+
+<!-- 専属予告 -->
+<section class="zoku"><div class="wrap">
+  <div class="eyeb">COMING 2028</div>
+  <h2>その先に、「わが家専属」という選択。</h2>
+  <p class="lead">国家戦略特区の制度を活用し、フィリピンから来日する専任スタッフ1名があなたの家だけを担当する「プライベート専属」を準備中（2028年・認定取得後に開始予定）。定期プランのお客様には優先してご案内します。</p>
+  <div class="box">
+    <div><div class="yen">550,000<small>円/月（税込）・平日毎日</small></div><p class="z" style="margin-top:6px">年間3世帯限定 ・ 先行予約5万円（スタッフをご紹介できなければ全額返金）</p></div>
+    <a class="btn ghost" href="index.html" style="color:var(--honey2);border-color:var(--honey2)">専属プランについて見る →</a>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta2"><div class="wrap">
+  <div class="eyeb" style="justify-content:center">CONTACT</div>
+  <h2>先行受付は、お伺いできる枠まで。</h2>
+  <p class="lead" style="margin:0 auto">2027年1月の稼働開始に向けて、エリアと曜日の枠が埋まり次第締め切ります。</p>
+  <div class="mt30"><a class="btn" href="request.html">資料請求・ご相談フォームへ →</a></div>
+  <div class="tel">0565-42-5002</div>
+  <p class="tsub">受付時間 平日 9:00–18:00</p>
+</div></section>
+
+<footer><div class="wrap">
+  <b>Hachi Life（ハチライフ）</b><br>
+  運営：サンエスサービス株式会社（外国人雇用30年）<br>
+  名古屋市 東・千種・昭和・名東・瑞穂区とその近郊 ｜ <a href="index.html" style="text-decoration:underline">専属プラン（2028年予定）はこちら</a>
+</div></footer>
+
+</body>
+</html>
