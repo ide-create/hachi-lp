@@ -736,6 +736,23 @@ $('sendBtn').onclick=async()=>{
   }catch(e){toast(L('tSendErr'));console.error(e)}
 };
 // Enterは文字確定のみ（送信は右の送信ボタン）。PCの物理キーボードでも誤送信防止のため送信しない。
+// iOSでキーボードが開いたら入力バーをキーボードの上に移動（LINE方式）
+if(window.visualViewport){
+  const vv=window.visualViewport;
+  const adj=()=>{
+    const kb=Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+    const cb=$('chatbar'), nav=document.querySelector('.nav');
+    if(kb>60){
+      cb.style.bottom=kb+'px';
+      nav.style.transform='translateY(110%)';
+      if(!$('vChat').classList.contains('hide'))window.scrollTo(0,document.body.scrollHeight);
+    }else{
+      cb.style.bottom='';nav.style.transform='';
+    }
+  };
+  vv.addEventListener('resize',adj);
+  vv.addEventListener('scroll',adj);
+}
 
 /* ---------- tabs ---------- */
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
