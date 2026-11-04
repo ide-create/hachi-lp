@@ -312,9 +312,20 @@ function renderMon(){
     const stMap={none:'<span class="st3 f">未出勤</span>',working:'<span class="st3 w">稼働中</span>',break:'<span class="st3 b">休憩中</span>',done:reportsToday[st.id]?'<span class="st3 d">完了・日報✓</span>':'<span class="st3 d">退勤・日報待ち</span>'};
     rows+=`<tr><td class="nm">${esc(st.name||'')}</td><td>${esc(st.clientName||'—')}</td><td>${stMap[c.state]}</td>
       <td class="hv">${c.firstIn?hm(c.firstIn.at):'—'}</td><td class="hv">${c.lastOut?c.lastOut.toTimeString().slice(0,5):'—'}</td>
-      <td class="hv">${minToH(c.workedMin)}</td><td class="hv ${over?'warn':''}">${minToH(wkMin)}${over?' ⚠':''}</td></tr>`;
+      <td class="hv">${minToH(c.workedMin)}</td><td class="hv ${over?'warn':''}">${minToH(wkMin)}${over?' ⚠':''}</td>
+      <td>${mine.length||reportsToday[st.id]?`<button class="dayreset" data-id="${st.id}" style="border:none;background:none;color:var(--red);cursor:pointer;font-weight:900;font-size:11px">本日リセット</button>`:''}</td></tr>`;
   });
-  $('monTbl').innerHTML='<tr><th>スタッフ</th><th>担当</th><th>状態</th><th>出勤</th><th>退勤</th><th>本日</th><th>今週</th></tr>'+(rows||'<tr><td colspan="7" style="color:var(--mut)">スタッフが登録されていません</td></tr>');
+  $('monTbl').innerHTML='<tr><th>スタッフ</th><th>担当</th><th>状態</th><th>出勤</th><th>退勤</th><th>本日</th><th>今週</th><th></th></tr>'+(rows||'<tr><td colspan="8" style="color:var(--mut)">スタッフが登録されていません</td></tr>');
+  document.querySelectorAll('.dayreset').forEach(b=>b.onclick=async()=>{
+    if(!confirm('このスタッフの本日の打刻と日報を削除してやり直せる状態に戻します。よろしいですか？'))return;
+    try{
+      const uid=b.dataset.id;
+      const ps=await db.collection('punches').where('uid','==',uid).where('day','==',todayStr()).get();
+      await Promise.all(ps.docs.map(d=>d.ref.delete()));
+      await db.collection('reports').doc(todayStr()+'_'+uid).delete().catch(()=>{});
+      toast('本日分をリセットしました');
+    }catch(e){toast('リセット失敗');console.error(e)}
+  });
   $('kWork').textContent=working+' / '+staffs.length+'名';
   $('kWorkS').textContent=working?'リアルタイム':'—';
   $('kHours').textContent=minToH(totalMin);
