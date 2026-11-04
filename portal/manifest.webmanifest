@@ -1,0 +1,17 @@
+{
+  "name": "Hachi Life",
+  "short_name": "Hachi Life",
+  "description": "Hachi Life staff app — time clock, tasks & chat",
+  "id": "hachi-life-staff",
+  "start_url": "staff.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F0A05",
+  "theme_color": "#0F0A05",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
