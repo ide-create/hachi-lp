@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Hachi Life 本部</title>
+<style>
+:root{--bg:#f3f1ec;--ink:#1d1a14;--gold:#e8a200;--goldl:#ffd45e;--golddeep:#8a6a00;
+--mut:#8f8674;--line:#e7e2d6;--grn:#2e8c4e;--red:#cf4f36;--blu:#3a6ea8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;font-size:13.5px;line-height:1.75}
+.hide{display:none!important}
+/* login */
+#login{max-width:360px;margin:0 auto;padding:70px 20px}
+#login .hex{width:52px;height:52px;margin:0 auto 18px;background:linear-gradient(135deg,#ffd45e,#e8a200);clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%)}
+#login h1{text-align:center;font-size:20px;margin:0 0 24px}
+#login input{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:12px;background:#fff}
+#login button{width:100%;padding:16px;border:none;border-radius:999px;background:var(--ink);color:var(--goldl);font-size:15px;font-weight:700;cursor:pointer}
+#loginErr{color:var(--red);font-size:12px;text-align:center;min-height:18px;margin-top:8px}
+/* nav */
+.top{background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 max(14px,env(safe-area-inset-left)) 0 max(14px,env(safe-area-inset-right));overflow-x:auto}
+.logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:14px;padding:13px 0;white-space:nowrap}
+.hex2{width:22px;height:22px;background:linear-gradient(135deg,#ffd45e,#e8a200);clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%)}
+.tabs{display:flex;gap:2px}
+.tab{padding:15px 14px;font-size:12.5px;font-weight:700;color:var(--mut);cursor:pointer;border:none;background:none;font-family:inherit;white-space:nowrap;border-bottom:2.5px solid transparent}
+.tab.on{color:var(--golddeep);border-color:var(--gold)}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:11px;color:var(--mut);white-space:nowrap}
+.top .right button{border:none;background:none;color:var(--mut);text-decoration:underline;cursor:pointer;font-family:inherit;font-size:11px}
+.main{padding:18px max(14px,env(safe-area-inset-left)) 60px;max-width:1150px;margin:0 auto}
+h2{font-size:17px;margin:4px 0 12px}
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 15px}
+.kpi .l{font-size:10.5px;color:var(--mut);font-weight:700}
+.kpi .v{font-size:21px;font-weight:900;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:10.5px;font-weight:700;color:var(--mut)}
+.kpi .s.g{color:var(--grn)}.kpi .s.r{color:var(--red)}.kpi .s.o{color:var(--golddeep)}
+/* panel/table */
+.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 16px;margin-bottom:14px}
+.panel h3{font-size:11px;font-weight:900;letter-spacing:2px;color:#b08900;margin:0 0 8px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:620px}
+th{text-align:left;font-size:10px;letter-spacing:1px;color:#b0a692;font-weight:900;padding:7px 8px;border-bottom:1.5px solid var(--line);white-space:nowrap}
+td{padding:9px 8px;border-bottom:1px solid #f0ece0;color:#4a4436;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.nm{font-weight:900;color:var(--ink)}
+.st3{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:900;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.st3::before{content:"";width:6px;height:6px;border-radius:50%}
+.st3.w{background:#e8f6ec;color:var(--grn)}.st3.w::before{background:var(--grn)}
+.st3.b{background:#fff4d6;color:#9a7200}.st3.b::before{background:var(--gold)}
+.st3.f{background:#f0ede4;color:#8f8674}.st3.f::before{background:#b0a692}
+.st3.d{background:#e6f0fb;color:var(--blu)}.st3.d::before{background:#5a9bd4}
+.hv{font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums}
+.warn{color:var(--red);font-weight:900}
+/* reports */
+.repgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.rep{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.rep .rh{background:var(--ink);color:#fdfcf8;padding:9px 14px;display:flex;justify-content:space-between;font-size:12px;font-weight:700}
+.rep .rh small{color:var(--goldl)}
+.rep .rb{padding:11px 14px;font-size:12px}
+.rep .t{padding:2px 0;color:#4a4436}
+.rep .t.on:before{content:"✓ ";color:var(--grn);font-weight:900}
+.rep .t.off:before{content:"✗ ";color:var(--red);font-weight:900}
+.rep img{width:100%;border-radius:10px;margin-top:8px;cursor:pointer}
+input[type=date],select,input[type=text],textarea{padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:13.5px;background:#fff;font-family:inherit}
+/* chat */
+.chatwrap{display:grid;grid-template-columns:220px 1fr;gap:12px}
+@media(max-width:700px){.chatwrap{grid-template-columns:1fr}}
+.threads{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;align-self:start}
+.th-item{padding:12px 14px;border-bottom:1px solid #f0ece0;cursor:pointer;font-weight:700;font-size:13px}
+.th-item.on{background:#fff4d6}
+.chatpane{background:#fff;border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;min-height:420px}
+#aChatBox{flex:1;padding:14px;display:flex;flex-direction:column;gap:9px;overflow-y:auto;max-height:52vh}
+.msg{max-width:78%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.6;word-break:break-word}
+.msg small{display:block;font-size:9.5px;color:var(--mut);margin-top:2px}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,#ffd45e,#f0c040);border-bottom-right-radius:4px}
+.msg.them{align-self:flex-start;background:var(--bg);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg .tr{display:inline-block;margin-top:4px;font-size:10px;font-weight:900;color:var(--golddeep);text-decoration:none;border:1px solid #f0c860;border-radius:99px;padding:1px 8px;background:#fff7e0}
+.sendrow{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.sendrow input{flex:1}
+.sendrow button{border:none;border-radius:999px;padding:0 20px;background:var(--ink);color:var(--goldl);font-weight:700;cursor:pointer;font-family:inherit}
+/* staff edit */
+.sed{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.sed .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:600px){.sed .row2{grid-template-columns:1fr}}
+.sed label{font-size:11px;font-weight:900;color:var(--mut);display:block;margin-bottom:3px}
+.sed input,.sed textarea{width:100%}
+.sed textarea{min-height:80px}
+.sed .save{border:none;border-radius:999px;padding:12px 26px;background:linear-gradient(135deg,#ffd45e,#f0a800);color:#241a02;font-weight:900;cursor:pointer;font-family:inherit;font-size:13.5px}
+.note{font-size:11.5px;color:var(--mut)}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--goldl);font-weight:700;font-size:13px;padding:11px 20px;border-radius:999px;z-index:99;transition:opacity .3s}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="hex"></div>
+  <h1>Hachi Life 本部モニター</h1>
+  <input type="email" id="email" placeholder="メールアドレス" autocomplete="username">
+  <input type="password" id="pass" placeholder="パスワード" autocomplete="current-password">
+  <button id="loginBtn">ログイン</button>
+  <p id="loginErr"></p>
+</div>
+
+<div id="app" class="hide">
+<nav class="top">
+  <div class="logo"><div class="hex2"></div>Hachi Life <span style="color:#b0a692;font-weight:700;font-size:10px">HQ</span></div>
+  <div class="tabs">
+    <button class="tab on" data-v="mon">稼働モニター</button>
+    <button class="tab" data-v="rep">日報</button>
+    <button class="tab" data-v="chat">メッセージ</button>
+    <button class="tab" data-v="staff">スタッフ設定</button>
+  </div>
+  <div class="right"><span id="clock"></span><button id="logout">ログアウト</button></div>
+</nav>
+
+<div class="main">
+  <!-- monitor -->
+  <div id="vmon">
+    <div class="kpis">
+      <div class="kpi"><div class="l">いま稼働中</div><div class="v" id="kWork">—</div><div class="s" id="kWorkS"></div></div>
+      <div class="kpi"><div class="l">本日の総稼働時間</div><div class="v" id="kHours">—</div><div class="s">全スタッフ合計</div></div>
+      <div class="kpi"><div class="l">本日の日報</div><div class="v" id="kRep">—</div><div class="s">提出済み / 稼働者</div></div>
+      <div class="kpi"><div class="l">扶養枠アラート（週20h）</div><div class="v" id="kAlert">—</div><div class="s" id="kAlertS">18h超えで赤</div></div>
+    </div>
+    <div class="panel"><h3>本日の稼働状況</h3><div class="tw"><table id="monTbl">
+      <tr><th>スタッフ</th><th>担当</th><th>状態</th><th>出勤</th><th>退勤</th><th>本日</th><th>今週</th></tr>
+    </table></div></div>
+    <div class="panel"><h3>本日の打刻ログ</h3><div class="tw"><table id="logTbl">
+      <tr><th>時刻</th><th>スタッフ</th><th>種別</th><th>位置</th></tr>
+    </table></div></div>
+  </div>
+
+  <!-- reports -->
+  <div id="vrep" class="hide">
+    <h2>日報 <input type="date" id="repDate" style="margin-left:10px"></h2>
+    <div class="repgrid" id="repGrid"></div>
+    <p class="note" id="repNone" style="display:none">この日の日報はありません。</p>
+  </div>
+
+  <!-- chat -->
+  <div id="vchat" class="hide">
+    <h2>メッセージ</h2>
+    <div class="chatwrap">
+      <div class="threads" id="threads"></div>
+      <div class="chatpane">
+        <div id="aChatBox"></div>
+        <div class="sendrow"><input id="aMsgIn" placeholder="メッセージ（英語でもOK）"><button id="aSendBtn">送信</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- staff -->
+  <div id="vstaff" class="hide">
+    <h2>スタッフ設定</h2>
+    <p class="note" style="margin-bottom:12px">新しいスタッフの追加: ①Firebaseコンソール→Authentication→「ユーザーを追加」でメール＋パスワードを作成 ②そのUIDをコピー ③下の「新規作成」にUIDを貼って保存。</p>
+    <div class="sed">
+      <label>新規作成（AuthenticationのUIDを貼る）</label>
+      <div style="display:flex;gap:8px"><input type="text" id="newUid" placeholder="UID" style="flex:1"><button class="save" id="newBtn">作成</button></div>
+    </div>
+    <div id="staffList"></div>
+  </div>
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+let staffMap={}, punchToday=[], punchWeek=[], reportsToday={}, curThread=null, unsubChat=null;
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>{e.style.opacity=0;setTimeout(()=>e.remove(),400)},1800)}
+function esc(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+$('loginBtn').onclick=async()=>{
+  $('loginErr').textContent='';
+  try{await auth.signInWithEmailAndPassword($('email').value.trim(),$('pass').value)}
+  catch(e){$('loginErr').textContent='ログインに失敗しました'}
+};
+$('pass').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});
+$('logout').onclick=()=>auth.signOut();
+
+auth.onAuthStateChanged(async u=>{
+  if(!u){$('login').classList.remove('hide');$('app').classList.add('hide');return}
+  const snap=await db.collection('staff').doc(u.uid).get();
+  if(!snap.exists||snap.data().role!=='admin'){$('loginErr').textContent='本部アカウントではありません';auth.signOut();return}
+  $('login').classList.add('hide');$('app').classList.remove('hide');
+  boot();
+});
+
+function boot(){
+  setInterval(()=>{const n=new Date();$('clock').textContent=(n.getMonth()+1)+'/'+n.getDate()+'（'+'日月火水木金土'[n.getDay()]+'）'+n.toTimeString().slice(0,5)},1000);
+  // staff
+  db.collection('staff').onSnapshot(s=>{
+    staffMap={};s.docs.forEach(d=>staffMap[d.id]={id:d.id,...d.data()});
+    renderMon();renderThreads();renderStaff();
+  });
+  // punches (today / week)
+  db.collection('punches').where('day','==',todayStr()).onSnapshot(s=>{
+    punchToday=s.docs.map(d=>d.data());renderMon();
+  });
+  db.collection('punches').where('day','in',weekDays()).onSnapshot(s=>{
+    punchWeek=s.docs.map(d=>d.data());renderMon();
+  });
+  // today's reports
+  db.collection('reports').where('day','==',todayStr()).onSnapshot(s=>{
+    reportsToday={};s.docs.forEach(d=>reportsToday[d.data().uid]=true);renderMon();
+  });
+  $('repDate').value=todayStr();
+  $('repDate').onchange=loadReports;loadReports();
+}
+
+/* ---------- monitor ---------- */
+function renderMon(){
+  const staffs=Object.values(staffMap).filter(s=>s.role!=='admin'&&s.active!==false);
+  let rows='',working=0,totalMin=0,alerts=0,repCnt=0,activeCnt=0;
+  staffs.forEach(st=>{
+    const mine=punchToday.filter(p=>p.uid===st.id);
+    const c=calcDay(mine);
+    const wk=punchWeek.filter(p=>p.uid===st.id);
+    const wkMin=calcWeek(wk);
+    if(c.state==='working'||c.state==='break')working++;
+    if(mine.length)activeCnt++;
+    if(reportsToday[st.id])repCnt++;
+    totalMin+=c.workedMin;
+    const over=wkMin>=18*60;
+    if(over)alerts++;
+    const stMap={none:'<span class="st3 f">未出勤</span>',working:'<span class="st3 w">稼働中</span>',break:'<span class="st3 b">休憩中</span>',done:reportsToday[st.id]?'<span class="st3 d">完了・日報✓</span>':'<span class="st3 d">退勤・日報待ち</span>'};
+    rows+=`<tr><td class="nm">${esc(st.name||'')}</td><td>${esc(st.clientName||'—')}</td><td>${stMap[c.state]}</td>
+      <td class="hv">${c.firstIn?hm(c.firstIn.at):'—'}</td><td class="hv">${c.lastOut?c.lastOut.toTimeString().slice(0,5):'—'}</td>
+      <td class="hv">${minToH(c.workedMin)}</td><td class="hv ${over?'warn':''}">${minToH(wkMin)}${over?' ⚠':''}</td></tr>`;
+  });
+  $('monTbl').innerHTML='<tr><th>スタッフ</th><th>担当</th><th>状態</th><th>出勤</th><th>退勤</th><th>本日</th><th>今週</th></tr>'+(rows||'<tr><td colspan="7" style="color:var(--mut)">スタッフが登録されていません</td></tr>');
+  $('kWork').textContent=working+' / '+staffs.length+'名';
+  $('kWorkS').textContent=working?'リアルタイム':'—';
+  $('kHours').textContent=minToH(totalMin);
+  $('kRep').textContent=repCnt+' / '+activeCnt;
+  $('kAlert').textContent=alerts;
+  $('kAlert').style.color=alerts?'var(--red)':'';
+  $('kAlertS').textContent=alerts?'要振替の相談':'18h超えで赤';
+  $('kAlertS').className='s '+(alerts?'r':'');
+  // punch log
+  const logs=punchToday.slice().sort((a,b)=>(b.at?.toMillis?.()||0)-(a.at?.toMillis?.()||0));
+  const tMap={in:'出勤',bs:'休憩開始',be:'休憩終了',out:'退勤'};
+  $('logTbl').innerHTML='<tr><th>時刻</th><th>スタッフ</th><th>種別</th><th>位置</th></tr>'+
+    (logs.map(p=>`<tr><td class="hv">${hm(p.at)}</td><td class="nm">${esc(p.name)}</td><td>${tMap[p.type]||p.type}</td>
+     <td>${p.lat?`<a target="_blank" href="https://www.google.com/maps?q=${p.lat},${p.lng}">地図 ↗</a>`:'—'}</td></tr>`).join('')||'<tr><td colspan="4" style="color:var(--mut)">まだ打刻がありません</td></tr>');
+}
+function calcWeek(punches){
+  const byDay={};
+  punches.forEach(p=>{(byDay[p.day]=byDay[p.day]||[]).push(p)});
+  let min=0;Object.values(byDay).forEach(ps=>{min+=calcDay(ps).workedMin});
+  return min;
+}
+
+/* ---------- reports ---------- */
+function loadReports(){
+  const d=$('repDate').value||todayStr();
+  db.collection('reports').where('day','==',d).get().then(s=>{
+    const docs=s.docs.map(x=>x.data());
+    $('repNone').style.display=docs.length?'none':'block';
+    $('repGrid').innerHTML=docs.map(r=>{
+      const tasks=(r.tasks||[]).map((t,i)=>`<div class="t ${r.tasksDone&&r.tasksDone[i]?'on':'off'}">${esc(t)}</div>`).join('');
+      return `<div class="rep"><div class="rh"><span>${esc(r.name)} ・ ${esc(r.client||'')}</span><small>${minToH(r.workedMin||0)}</small></div>
+        <div class="rb">${tasks||'<span class="note">タスクなし</span>'}
+        ${r.photo?`<img src="${r.photo}" onclick="window.open('').document.write('<img src=\\'${r.photo}\\' style=width:100%>')" alt="施錠写真">`:'<p class="note" style="margin-top:6px">施錠写真なし</p>'}
+        </div></div>`;
+    }).join('');
+  });
+}
+
+/* ---------- chat ---------- */
+function renderThreads(){
+  const staffs=Object.values(staffMap).filter(s=>s.role!=='admin');
+  $('threads').innerHTML=staffs.map(s=>`<div class="th-item ${curThread===s.id?'on':''}" data-id="${s.id}">${esc(s.name||s.id)}</div>`).join('')||'<div class="th-item">スタッフなし</div>';
+  document.querySelectorAll('.th-item[data-id]').forEach(e=>e.onclick=()=>openThread(e.dataset.id));
+  if(!curThread&&staffs[0])openThread(staffs[0].id);
+}
+function openThread(uid){
+  curThread=uid;renderThreads();
+  if(unsubChat)unsubChat();
+  unsubChat=db.collection('messages').where('uid','==',uid).onSnapshot(s=>{
+    const msgs=s.docs.map(d=>d.data()).sort((a,b)=>(a.at?.toMillis?.()||9e15)-(b.at?.toMillis?.()||9e15));
+    $('aChatBox').innerHTML=msgs.map(m=>{
+      const mine=m.from==='hq';
+      const tr=mine?'':`<a class="tr" target="_blank" href="https://translate.google.com/?sl=auto&tl=ja&text=${encodeURIComponent(m.text)}&op=translate">日本語訳 ↗</a>`;
+      return `<div class="msg ${mine?'me':'them'}">${esc(m.text)}${tr}<small>${mine?'本部':esc(m.fromName||'スタッフ')} ・ ${hm(m.at)}</small></div>`;
+    }).join('');
+    $('aChatBox').scrollTop=1e9;
+  });
+}
+$('aSendBtn').onclick=async()=>{
+  const t=$('aMsgIn').value.trim();if(!t||!curThread)return;
+  $('aMsgIn').value='';
+  try{await db.collection('messages').add({uid:curThread,from:'hq',fromName:'Hachi Life Office',text:t,at:TS()})}
+  catch(e){toast('送信失敗');console.error(e)}
+};
+$('aMsgIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('aSendBtn').click()});
+
+/* ---------- staff mgmt ---------- */
+function renderStaff(){
+  const list=Object.values(staffMap);
+  $('staffList').innerHTML=list.map(s=>`
+   <div class="sed" data-id="${s.id}">
+     <div class="row2">
+       <div><label>名前（英語表記・アプリ表示名）</label><input type="text" class="f-name" value="${esc(s.name||'')}"></div>
+       <div><label>担当ファミリー</label><input type="text" class="f-client" value="${esc(s.clientName||'')}"></div>
+     </div>
+     <div class="row2">
+       <div><label>エリア表示（例: Chikusa-ku ・ 12 min by subway）</label><input type="text" class="f-area" value="${esc(s.clientArea||'')}"></div>
+       <div><label>勤務時間表示（例: 10:00–13:00）</label><input type="text" class="f-sched" value="${esc(s.schedule||'')}"></div>
+     </div>
+     <div style="margin-bottom:10px"><label>タスク（1行1つ・英語）</label><textarea class="f-tasks">${esc((s.tasks||[]).join('\n'))}</textarea></div>
+     <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+       <label style="display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" class="f-admin" ${s.role==='admin'?'checked':''}>本部権限</label>
+       <label style="display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" class="f-active" ${s.active!==false?'checked':''}>有効</label>
+       <button class="save">保存</button>
+       <span class="note">UID: ${s.id}</span>
+     </div>
+   </div>`).join('');
+  document.querySelectorAll('.sed[data-id] .save').forEach(b=>b.onclick=async()=>{
+    const e=b.closest('.sed');
+    try{
+      await db.collection('staff').doc(e.dataset.id).set({
+        name:e.querySelector('.f-name').value.trim(),
+        clientName:e.querySelector('.f-client').value.trim(),
+        clientArea:e.querySelector('.f-area').value.trim(),
+        schedule:e.querySelector('.f-sched').value.trim(),
+        tasks:e.querySelector('.f-tasks').value.split('\n').map(x=>x.trim()).filter(Boolean),
+        role:e.querySelector('.f-admin').checked?'admin':'staff',
+        active:e.querySelector('.f-active').checked
+      },{merge:true});
+      toast('保存しました');
+    }catch(err){toast('保存失敗');console.error(err)}
+  });
+}
+$('newBtn').onclick=async()=>{
+  const uid=$('newUid').value.trim();if(!uid)return;
+  try{
+    await db.collection('staff').doc(uid).set({name:'New Staff',role:'staff',active:true,tasks:[]},{merge:true});
+    $('newUid').value='';toast('作成しました。下で編集してください');
+  }catch(e){toast('作成失敗');console.error(e)}
+};
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  ['mon','rep','chat','staff'].forEach(v=>$('v'+v).classList.toggle('hide',v!==b.dataset.v));
+});
+setInterval(()=>{renderMon()},30000);
+</script>
+</body>
+</html>

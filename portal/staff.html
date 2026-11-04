@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Hachi Life Staff</title>
+<style>
+:root{--bg:#f6f4ef;--ink:#1d1a14;--gold:#e8a200;--goldl:#ffd45e;--golddeep:#8a6a00;
+--mut:#9b9182;--line:#e7e2d6;--grn:#2e8c4e;--red:#cf4f36}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+font-size:14px;line-height:1.7;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+.hide{display:none!important}
+.wrap{max-width:430px;margin:0 auto;padding:0 16px}
+/* login */
+#login{max-width:360px;margin:0 auto;padding:60px 20px}
+#login .hex{width:52px;height:52px;margin:0 auto 18px;background:linear-gradient(135deg,#ffd45e,#e8a200);clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%)}
+#login h1{text-align:center;font-size:22px;margin:0 0 4px}
+#login .sub{text-align:center;color:var(--mut);font-size:12px;margin-bottom:28px}
+#login input{width:100%;padding:15px 16px;border:1.5px solid var(--line);border-radius:13px;font-size:16px;margin-bottom:12px;background:#fff}
+#login button{width:100%;padding:17px;border:none;border-radius:999px;background:var(--ink);color:var(--goldl);font-size:16px;font-weight:700;cursor:pointer}
+#loginErr{color:var(--red);font-size:12.5px;text-align:center;min-height:20px;margin-top:10px}
+/* header */
+.head{display:flex;align-items:center;justify-content:space-between;padding:18px 0 6px}
+.head .dt{font-size:11px;font-weight:700;color:var(--mut);letter-spacing:1.5px}
+.head .hi{font-size:23px;font-weight:900;margin-top:2px}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#ffd45e,#f0a800);display:flex;align-items:center;justify-content:center;font-weight:900;color:#3a2c05;border:3px solid #fff;box-shadow:0 2px 8px rgba(29,26,20,.12)}
+/* cards */
+.card{background:#fff;border-radius:18px;padding:15px 17px;margin-top:14px;box-shadow:0 2px 12px rgba(29,26,20,.07)}
+.lb{font-size:10px;font-weight:900;letter-spacing:2px;color:#b08900}
+.visit{display:flex;justify-content:space-between;align-items:center;margin-top:7px;gap:8px}
+.visit .fam{font-weight:900;font-size:17px}
+.visit .loc{font-size:11.5px;color:var(--mut)}
+.timechip{background:#fff7e0;border:1.5px solid #f0c860;color:#8a6a00;font-size:11.5px;font-weight:900;padding:7px 11px;border-radius:10px;white-space:nowrap;text-align:center}
+.steps{display:flex;gap:5px;margin-top:13px}
+.stp{flex:1;text-align:center;font-size:9.5px;font-weight:700;color:#b9b0a0;padding-top:7px}
+.stp::before{content:"";display:block;height:5px;border-radius:99px;background:#eee8da;margin-bottom:6px}
+.stp.done{color:#7a5f00}.stp.done::before{background:linear-gradient(90deg,#f5b301,#ffd45e)}
+.stp.now{color:var(--ink)}.stp.now::before{background:var(--ink)}
+/* big button */
+.big{margin-top:16px;border:none;width:100%;background:linear-gradient(135deg,#ffc93d,#f5a300);border-radius:20px;padding:20px;box-shadow:0 10px 22px rgba(240,168,0,.35);display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;font-family:inherit}
+.big:disabled{opacity:.45}
+.big .t1{font-size:10px;font-weight:900;letter-spacing:2.5px;color:#6e5200}
+.big .t2{font-size:22px;font-weight:900;color:#241a02;margin-top:3px}
+.big .play{width:52px;height:52px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex:none;color:var(--goldl);font-size:20px}
+.subrow{display:flex;gap:9px;margin-top:11px}
+.sb{flex:1;background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:13px 0;text-align:center;font-weight:900;font-size:12.5px;color:#5c543f;cursor:pointer;font-family:inherit}
+.sb:disabled{opacity:.4}
+.elapsed{margin-top:13px;background:var(--ink);border-radius:16px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between}
+.elapsed .l{font-size:9.5px;font-weight:900;letter-spacing:2px;color:#b08900}
+.elapsed .v{font-size:24px;font-weight:900;color:var(--goldl);font-variant-numeric:tabular-nums}
+.elapsed .st2{font-size:11px;font-weight:900;color:#cbbd9e}
+/* tasks */
+.task .row{display:flex;align-items:center;gap:10px;padding:9px 0;font-weight:700;font-size:13.5px;color:#3c362a;cursor:pointer;user-select:none}
+.ck{width:22px;height:22px;border-radius:7px;border:2px solid #ddd3bd;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:transparent}
+.row.on .ck{background:#f5b301;border-color:#f5b301;color:#241a02}
+.row.on{color:#b9b0a0;text-decoration:line-through}
+.photo{display:flex;align-items:center;gap:10px;margin-top:10px;background:#fff7e0;border:1.5px dashed #f0c860;border-radius:12px;padding:12px 13px;font-weight:700;font-size:12.5px;color:#8a6a00;cursor:pointer}
+.photo.on{border-style:solid;background:#eafbef;border-color:#9fd8b0;color:#2e8c4e}
+.photo img{width:44px;height:44px;object-fit:cover;border-radius:8px}
+.donebox{margin-top:14px;background:#eafbef;border:1.5px solid #9fd8b0;border-radius:18px;padding:18px;text-align:center}
+.donebox b{display:block;font-size:16px;margin-top:4px}
+.donebox p{margin:6px 0 0;font-size:12px;color:#4a6e55}
+/* chat */
+#chatBox{display:flex;flex-direction:column;gap:10px;padding:14px 0 10px;min-height:40vh}
+.msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:13.5px;line-height:1.65;word-break:break-word}
+.msg small{display:block;font-size:10px;color:var(--mut);margin-top:3px}
+.msg.me{align-self:flex-end;background:linear-gradient(135deg,#ffd45e,#f0c040);border-bottom-right-radius:4px}
+.msg.them{align-self:flex-start;background:#fff;border:1.5px solid var(--line);border-bottom-left-radius:4px}
+.msg .tr{display:inline-block;margin-top:5px;font-size:10.5px;font-weight:900;color:var(--golddeep);text-decoration:none;border:1px solid #f0c860;border-radius:99px;padding:2px 9px;background:#fff7e0}
+.chatbar{position:fixed;left:0;right:0;bottom:calc(66px + env(safe-area-inset-bottom));background:var(--bg);padding:8px 16px;display:flex;gap:8px}
+.chatbar input{flex:1;padding:13px 15px;border:1.5px solid var(--line);border-radius:999px;font-size:15px;background:#fff}
+.chatbar button{border:none;border-radius:50%;width:46px;height:46px;background:var(--ink);color:var(--goldl);font-size:17px;cursor:pointer}
+/* tabs */
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:22px 22px 0 0;box-shadow:0 -4px 20px rgba(29,26,20,.08);display:flex;padding:11px 6px calc(12px + env(safe-area-inset-bottom))}
+.nav button{flex:1;text-align:center;font-size:10px;font-weight:900;color:#b9b0a0;letter-spacing:.5px;border:none;background:none;cursor:pointer;font-family:inherit}
+.nav .ic{display:block;font-size:18px;margin-bottom:3px;filter:grayscale(1);opacity:.5}
+.nav button.on{color:#8a6a00}
+.nav button.on .ic{filter:none;opacity:1}
+.badge{display:inline-block;min-width:16px;background:var(--red);color:#fff;border-radius:99px;font-size:9px;padding:1px 4px;margin-left:3px}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--goldl);font-weight:700;font-size:13px;padding:11px 20px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,.25);z-index:99;transition:opacity .3s}
+.out{margin-top:16px;text-align:center}
+.out button{background:none;border:none;color:var(--mut);font-size:11.5px;text-decoration:underline;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="hex"></div>
+  <h1>Hachi Life Staff</h1>
+  <p class="sub">Sign in with your staff account</p>
+  <input type="email" id="email" placeholder="Email" autocomplete="username">
+  <input type="password" id="pass" placeholder="Password" autocomplete="current-password">
+  <button id="loginBtn">Sign In</button>
+  <p id="loginErr"></p>
+</div>
+
+<!-- APP -->
+<div id="app" class="hide">
+<div class="wrap">
+  <div class="head">
+    <div><div class="dt" id="dt"></div><div class="hi" id="hi">Hi 👋</div></div>
+    <div class="avatar" id="av">?</div>
+  </div>
+
+  <!-- HOME -->
+  <div id="vHome">
+    <div class="card">
+      <div class="lb">TODAY'S FAMILY</div>
+      <div class="visit">
+        <div><div class="fam" id="cName">—</div><div class="loc" id="cArea"></div></div>
+        <div class="timechip" id="cTime">—</div>
+      </div>
+      <div class="steps" id="steps">
+        <div class="stp" data-s="0">Check In</div><div class="stp" data-s="1">Work</div><div class="stp" data-s="2">Tasks</div><div class="stp" data-s="3">Report</div><div class="stp" data-s="4">Done</div>
+      </div>
+    </div>
+
+    <button class="big" id="bigBtn"><span><span class="t1" id="bigT1">READY</span><span class="t2" id="bigT2" style="display:block">Check In</span></span><span class="play">▶</span></button>
+    <div class="subrow">
+      <button class="sb" id="btnBreak" disabled>☕ Break</button>
+      <button class="sb" id="btnFinish" disabled>⏹ Finish</button>
+    </div>
+
+    <div class="elapsed hide" id="elapsed">
+      <div><div class="l">WORKING TIME</div><div class="v" id="elV">0:00</div></div>
+      <div class="st2" id="elS">● On duty</div>
+    </div>
+
+    <div class="card task hide" id="taskCard">
+      <div class="lb">FAMILY BOOK ・ TODAY'S TASKS</div>
+      <div id="taskList"></div>
+      <label class="photo hide" id="photoBtn">
+        <input type="file" accept="image/*" capture="environment" id="photoIn" style="display:none">
+        <span id="photoIc">📷</span><span id="photoT">Take photo of locked door</span>
+      </label>
+      <button class="big hide" id="submitBtn" style="margin-top:12px;padding:16px 20px"><span><span class="t1">ALL DONE?</span><span class="t2" style="display:block;font-size:18px">Submit Report</span></span><span class="play">✓</span></button>
+    </div>
+
+    <div class="donebox hide" id="doneBox">
+      <div style="font-size:28px">🎉</div><b>Great work today!</b>
+      <p id="doneSum"></p>
+    </div>
+    <div class="out"><button id="logout">Sign out</button></div>
+  </div>
+
+  <!-- CHAT -->
+  <div id="vChat" class="hide">
+    <div class="card" style="margin-top:14px"><div class="lb">CHAT WITH HACHI LIFE OFFICE</div>
+    <div style="font-size:11.5px;color:var(--mut)">English is OK! The office replies in English.</div></div>
+    <div id="chatBox"></div>
+  </div>
+</div>
+
+<div class="chatbar hide" id="chatbar">
+  <input id="msgIn" placeholder="Message...">
+  <button id="sendBtn">➤</button>
+</div>
+
+<div class="nav">
+  <button class="on" data-v="Home"><span class="ic">🏠</span>HOME</button>
+  <button data-v="Chat"><span class="ic">💬</span>CHAT<span class="badge hide" id="unread">0</span></button>
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script>
+let me=null, meDoc=null, punches=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
+const $=id=>document.getElementById(id);
+
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>{e.style.opacity=0;setTimeout(()=>e.remove(),400)},1800)}
+
+/* ---------- login ---------- */
+$('loginBtn').onclick=async()=>{
+  $('loginErr').textContent='';
+  try{ await auth.signInWithEmailAndPassword($('email').value.trim(), $('pass').value); }
+  catch(e){ $('loginErr').textContent='Sign in failed. Check email / password.'; }
+};
+$('pass').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});
+
+auth.onAuthStateChanged(async u=>{
+  if(!u){ $('login').classList.remove('hide'); $('app').classList.add('hide'); return; }
+  me=u;
+  const snap=await db.collection('staff').doc(u.uid).get();
+  if(!snap.exists){ $('loginErr').textContent='No staff profile. Contact the office.'; auth.signOut(); return; }
+  meDoc=snap.data();
+  $('login').classList.add('hide'); $('app').classList.remove('hide');
+  boot();
+});
+$('logout').onclick=()=>auth.signOut();
+
+/* ---------- boot ---------- */
+function boot(){
+  const n=new Date();
+  $('dt').textContent=['SUN','MON','TUE','WED','THU','FRI','SAT'][n.getDay()]+', '+['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][n.getMonth()]+' '+n.getDate();
+  $('hi').textContent='Hi, '+(meDoc.name||'Staff')+' 👋';
+  $('av').textContent=(meDoc.name||'?')[0].toUpperCase();
+  $('cName').textContent=meDoc.clientName||'No assignment';
+  $('cArea').textContent=meDoc.clientArea||'';
+  $('cTime').textContent=meDoc.schedule||'';
+  tasksState=(meDoc.tasks||[]).map(t=>({t,done:false}));
+  renderTasks();
+  // 今日の打刻を購読
+  db.collection('punches').where('uid','==',me.uid).where('day','==',todayStr())
+    .onSnapshot(s=>{punches=s.docs.map(d=>d.data());render()},e=>console.error(e));
+  // 今日の日報があるか
+  db.collection('reports').doc(todayStr()+'_'+me.uid).onSnapshot(s=>{
+    reportDone=s.exists; render();
+  });
+  // chat購読
+  db.collection('messages').where('uid','==',me.uid)
+    .onSnapshot(s=>{renderChat(s.docs.map(d=>d.data()))},e=>console.error(e));
+  if(timer)clearInterval(timer);
+  timer=setInterval(()=>{const c=calcDay(punches);if(c.state==='working'||c.state==='break'){$('elV').textContent=Math.floor(c.workedMin/60)+':'+String(c.workedMin%60).padStart(2,'0')}},20000);
+}
+
+/* ---------- punch ---------- */
+async function punch(type){
+  let geo=null;
+  try{
+    const pos=await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:4000,maximumAge:60000}));
+    geo={lat:pos.coords.latitude,lng:pos.coords.longitude};
+  }catch(e){}
+  await db.collection('punches').add({
+    uid:me.uid,name:meDoc.name||'',day:todayStr(),type,at:TS(),
+    lat:geo?geo.lat:null,lng:geo?geo.lng:null
+  });
+}
+$('bigBtn').onclick=async()=>{
+  const c=calcDay(punches);
+  try{
+    if(reportDone)return;
+    if(c.state==='none'){await punch('in');toast('Checked in! Have a good day 🐝');}
+    else if(c.state==='break'){await punch('be');toast('Back to work!');}
+    else if(c.state==='done'){ /* submit flow handled by submitBtn */ }
+  }catch(e){toast('Error. Try again.');console.error(e)}
+};
+$('btnBreak').onclick=()=>punch('bs').then(()=>toast('Break ☕')).catch(()=>toast('Error'));
+$('btnFinish').onclick=async()=>{
+  const c=calcDay(punches);
+  if(c.state==='break'){await punch('be');}
+  await punch('out');toast('Finished! Please submit your report.');
+};
+/* ---------- tasks / photo / report ---------- */
+function renderTasks(){
+  $('taskList').innerHTML=tasksState.map((x,i)=>`<div class="row ${x.done?'on':''}" data-i="${i}"><span class="ck">✓</span>${x.t}</div>`).join('')||'<div style="color:var(--mut);font-size:12px">No tasks set. Ask the office.</div>';
+  document.querySelectorAll('#taskList .row').forEach(r=>r.onclick=()=>{tasksState[+r.dataset.i].done=!tasksState[+r.dataset.i].done;renderTasks();render()});
+}
+$('photoIn').onchange=e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const img=new Image();
+  img.onload=()=>{
+    const cv=document.createElement('canvas');
+    const sc=Math.min(1,900/Math.max(img.width,img.height));
+    cv.width=img.width*sc;cv.height=img.height*sc;
+    cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
+    photoData=cv.toDataURL('image/jpeg',0.65);
+    if(photoData.length>900000){photoData=cv.toDataURL('image/jpeg',0.4);}
+    $('photoBtn').classList.add('on');$('photoIc').innerHTML='<img src="'+photoData+'">';$('photoT').textContent='Lock photo ready ✓';
+    render();
+  };
+  img.src=URL.createObjectURL(f);
+};
+$('submitBtn').onclick=async()=>{
+  const c=calcDay(punches);
+  const tasksObj={};tasksState.forEach((x,i)=>tasksObj[i]=x.done);
+  try{
+    await db.collection('reports').doc(todayStr()+'_'+me.uid).set({
+      uid:me.uid,name:meDoc.name||'',day:todayStr(),client:meDoc.clientName||'',
+      tasks:(meDoc.tasks||[]),tasksDone:tasksObj,photo:photoData||null,
+      workedMin:c.workedMin,breakMin:c.breakMin,submittedAt:TS()
+    });
+    toast('Report sent! 🎉');
+  }catch(e){toast('Error sending report');console.error(e)}
+};
+
+/* ---------- render ---------- */
+function render(){
+  const c=calcDay(punches);
+  let phase=0;
+  if(c.state==='working')phase=tasksState.some(x=>x.done)?2:1;
+  if(c.state==='break')phase=1;
+  if(c.state==='done')phase=3;
+  if(reportDone)phase=4;
+  document.querySelectorAll('#steps .stp').forEach((el,i)=>{el.classList.toggle('done',i<phase);el.classList.toggle('now',i===phase)});
+  const map={
+    none:['READY','Check In',false],
+    working:['ON DUTY','Working…',true],
+    break:['ON BREAK','Resume Work',false],
+    done:['SHIFT ENDED','Submit report below ↓',true]
+  };
+  const m=reportDone?['SEE YOU NEXT TIME','Done ✓',true]:map[c.state];
+  $('bigT1').textContent=m[0];$('bigT2').textContent=m[1];$('bigBtn').disabled=m[2];
+  $('btnBreak').disabled=c.state!=='working';
+  $('btnFinish').disabled=!(c.state==='working'||c.state==='break');
+  $('elapsed').classList.toggle('hide',!(c.state==='working'||c.state==='break'));
+  $('elV').textContent=Math.floor(c.workedMin/60)+':'+String(c.workedMin%60).padStart(2,'0');
+  $('elS').textContent=c.state==='break'?'☕ On break':'● On duty';
+  $('taskCard').classList.toggle('hide',c.state==='none'||reportDone);
+  $('photoBtn').classList.toggle('hide',!(c.state==='done'));
+  const allTasks=tasksState.length===0||tasksState.every(x=>x.done);
+  $('submitBtn').classList.toggle('hide',!(c.state==='done'&&!reportDone));
+  $('submitBtn').disabled=!(allTasks&&photoData);
+  $('doneBox').classList.toggle('hide',!reportDone);
+  if(reportDone)$('doneSum').textContent='Worked '+minToH(c.workedMin)+' ・ Break '+c.breakMin+'min ・ Report ✓';
+}
+
+/* ---------- chat ---------- */
+function renderChat(msgs){
+  msgs.sort((a,b)=>(a.at?.toMillis?.()||9e15)-(b.at?.toMillis?.()||9e15));
+  $('chatBox').innerHTML=msgs.map(m=>{
+    const mine=m.from==='staff';
+    const tr=mine?'':`<a class="tr" target="_blank" href="https://translate.google.com/?sl=auto&tl=en&text=${encodeURIComponent(m.text)}&op=translate">EN translate</a>`;
+    return `<div class="msg ${mine?'me':'them'}">${esc(m.text)}${tr}<small>${m.from==='staff'?'You':'Office'} ・ ${hm(m.at)}</small></div>`;
+  }).join('');
+  $('chatBox').scrollTop=1e9;window.scrollTo(0,document.body.scrollHeight);
+  const hq=msgs.filter(m=>m.from==='hq').length;
+  const v=$('vChat').classList.contains('hide');
+  if(v&&hq>lastChatSeen&&lastChatSeen>0){$('unread').textContent=hq-lastChatSeen;$('unread').classList.remove('hide')}
+  if(!v)lastChatSeen=hq;
+  if(lastChatSeen===0)lastChatSeen=hq;
+}
+function esc(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('sendBtn').onclick=async()=>{
+  const t=$('msgIn').value.trim();if(!t)return;
+  $('msgIn').value='';
+  try{await db.collection('messages').add({uid:me.uid,from:'staff',fromName:meDoc.name||'',text:t,at:TS()})}
+  catch(e){toast('Send failed');console.error(e)}
+};
+$('msgIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('sendBtn').click()});
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  const v=b.dataset.v;
+  $('vHome').classList.toggle('hide',v!=='Home');
+  $('vChat').classList.toggle('hide',v!=='Chat');
+  $('chatbar').classList.toggle('hide',v!=='Chat');
+  if(v==='Chat'){$('unread').classList.add('hide');lastChatSeen=0;/* reset on open */}
+});
+</script>
+</body>
+</html>
