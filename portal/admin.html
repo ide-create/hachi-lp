@@ -138,6 +138,8 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
     <button class="tab on" data-v="mon">稼働モニター</button>
     <button class="tab" data-v="rep">日報</button>
     <button class="tab" data-v="chat">メッセージ</button>
+    <button class="tab" data-v="plan">予定・申請</button>
+    <button class="tab" data-v="notice">お知らせ</button>
     <button class="tab" data-v="staff">スタッフ設定</button>
   </div>
   <div class="right"><span id="clock"></span><button id="logout">ログアウト</button></div>
@@ -179,6 +181,38 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
     </div>
   </div>
 
+  <!-- plan: visits + leaves -->
+  <div id="vplan" class="hide">
+    <h2>訪問予定</h2>
+    <div class="panel">
+      <h3>予定を追加</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <select id="vsStaff"></select>
+        <input type="date" id="vsDay">
+        <input type="text" id="vsTime" placeholder="10:00–13:00" style="width:130px">
+        <input type="text" id="vsNote" placeholder="メモ（任意）" style="flex:1;min-width:160px">
+        <button class="save" id="vsAdd">追加</button>
+      </div>
+    </div>
+    <div class="panel"><h3>今後の予定</h3><div class="tw"><table id="vsTbl"></table></div></div>
+    <h2 style="margin-top:22px">休み申請</h2>
+    <div class="panel"><h3>承認待ち</h3><div id="lvPend"></div></div>
+    <div class="panel"><h3>対応済み</h3><div id="lvDone"></div></div>
+  </div>
+
+  <!-- notices -->
+  <div id="vnotice" class="hide">
+    <h2>お知らせ配信</h2>
+    <div class="panel">
+      <h3>全スタッフへ配信（自動で英訳が付きます）</h3>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="ntText" placeholder="例: 12月29日〜1月3日は年末休みです" style="flex:1">
+        <button class="save" id="ntSend">配信</button>
+      </div>
+    </div>
+    <div class="panel"><h3>配信済み</h3><div id="ntList"></div></div>
+  </div>
+
   <!-- staff -->
   <div id="vstaff" class="hide">
     <h2>スタッフ設定</h2>
@@ -198,7 +232,7 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
 <script src="config.js"></script>
 <script>
 const $=id=>document.getElementById(id);
-let staffMap={}, punchToday=[], punchWeek=[], reportsToday={}, curThread=null, unsubChat=null;
+let staffMap={}, punchToday=[], punchWeek=[], reportsToday={}, curThread=null, unsubChat=null, allVisits=[], allLeaves=[], allNotices=[];
 function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>{e.style.opacity=0;setTimeout(()=>e.remove(),400)},1800)}
 function esc(s){return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
@@ -238,6 +272,15 @@ function boot(){
   });
   $('repDate').value=todayStr();
   $('repDate').onchange=loadReports;loadReports();
+  // 予定・申請・お知らせ
+  db.collection('visits').onSnapshot(s=>{allVisits=s.docs.map(d=>({id:d.id,...d.data()}));renderPlan()},e=>console.error(e));
+  db.collection('leaves').onSnapshot(s=>{allLeaves=s.docs.map(d=>({id:d.id,...d.data()}));renderPlan()},e=>console.error(e));
+  db.collection('notices').onSnapshot(s=>{allNotices=s.docs.map(d=>({id:d.id,...d.data()}));renderNtc()},e=>console.error(e));
+}
+function fmtD(ds){
+  const p=(ds||'').split('-');if(p.length<3)return ds||'—';
+  const d=new Date(+p[0],+p[1]-1,+p[2]);
+  return (+p[1])+'/'+(+p[2])+'（'+'日月火水木金土'[d.getDay()]+'）';
 }
 
 /* ---------- monitor ---------- */
@@ -329,6 +372,64 @@ $('aSendBtn').onclick=async()=>{
 };
 $('aMsgIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('aSendBtn').click()});
 
+/* ---------- plan: visits + leaves ---------- */
+function renderPlan(){
+  // スタッフ選択肢
+  const staffs=Object.values(staffMap).filter(s=>s.role!=='admin'&&s.active!==false);
+  const cur=$('vsStaff').value;
+  $('vsStaff').innerHTML=staffs.map(s=>`<option value="${s.id}">${esc(s.name||s.id)}</option>`).join('');
+  if(cur)$('vsStaff').value=cur;
+  // 今後の予定
+  const up=allVisits.filter(v=>(v.day||'')>=todayStr()).sort((a,b)=>(a.day||'').localeCompare(b.day||''));
+  $('vsTbl').innerHTML='<tr><th>日付</th><th>スタッフ</th><th>時間</th><th>メモ</th><th></th></tr>'+
+    (up.map(v=>`<tr><td class="hv">${fmtD(v.day)}</td><td class="nm">${esc(v.name||'')}</td><td>${esc(v.time||'')}</td><td>${esc(v.note||'')}</td>
+      <td><button class="vdel" data-id="${v.id}" style="border:none;background:none;color:var(--red);cursor:pointer;font-weight:900">削除</button></td></tr>`).join('')
+    ||'<tr><td colspan="5" class="note">予定がありません</td></tr>');
+  document.querySelectorAll('.vdel').forEach(b=>b.onclick=()=>db.collection('visits').doc(b.dataset.id).delete().then(()=>toast('削除しました')));
+  // 休み申請
+  const pend=allLeaves.filter(l=>l.status==='pending').sort((a,b)=>(a.from||'').localeCompare(b.from||''));
+  $('lvPend').innerHTML=pend.map(l=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #F3F1EA;flex-wrap:wrap">
+      <b>${esc(l.name||'')}</b><span>${fmtD(l.from)}${l.to&&l.to!==l.from?' 〜 '+fmtD(l.to):''}</span>
+      <span class="note">${esc(l.reason||'')}</span>
+      <span style="margin-left:auto;display:flex;gap:8px">
+        <button class="save lvap" data-id="${l.id}" style="padding:8px 18px">承認</button>
+        <button class="lvrj" data-id="${l.id}" style="border:1px solid var(--line2);background:none;border-radius:999px;padding:8px 18px;color:var(--red);font-weight:900;cursor:pointer">却下</button>
+      </span></div>`).join('')||'<p class="note">承認待ちはありません</p>';
+  document.querySelectorAll('.lvap').forEach(b=>b.onclick=()=>db.collection('leaves').doc(b.dataset.id).set({status:'approved',decidedAt:TS()},{merge:true}).then(()=>toast('承認しました')));
+  document.querySelectorAll('.lvrj').forEach(b=>b.onclick=()=>db.collection('leaves').doc(b.dataset.id).set({status:'rejected',decidedAt:TS()},{merge:true}).then(()=>toast('却下しました')));
+  const done=allLeaves.filter(l=>l.status!=='pending').sort((a,b)=>(b.from||'').localeCompare(a.from||'')).slice(0,20);
+  $('lvDone').innerHTML=done.map(l=>`<div style="padding:7px 0;border-bottom:1px solid #F3F1EA;font-size:12.5px">
+    <b>${esc(l.name||'')}</b> ・ ${fmtD(l.from)}${l.to&&l.to!==l.from?' 〜 '+fmtD(l.to):''} ・ ${l.status==='approved'?'<span style="color:var(--grn);font-weight:900">承認</span>':'<span style="color:var(--red);font-weight:900">却下</span>'}</div>`).join('')||'<p class="note">まだありません</p>';
+}
+$('vsAdd').onclick=async()=>{
+  const uid=$('vsStaff').value,day=$('vsDay').value;
+  if(!uid||!day){toast('スタッフと日付を選んでください');return}
+  try{
+    await db.collection('visits').add({uid,name:(staffMap[uid]||{}).name||'',day,time:$('vsTime').value.trim(),note:$('vsNote').value.trim(),at:TS()});
+    $('vsDay').value='';$('vsTime').value='';$('vsNote').value='';
+    toast('予定を追加しました');
+  }catch(e){toast('追加失敗');console.error(e)}
+};
+
+/* ---------- notices ---------- */
+function renderNtc(){
+  const list=allNotices.slice().sort((a,b)=>(b.at?.toMillis?.()||0)-(a.at?.toMillis?.()||0));
+  $('ntList').innerHTML=list.map(n=>`<div style="padding:9px 0;border-bottom:1px solid #F3F1EA;font-size:12.5px;display:flex;gap:10px;align-items:baseline">
+    <span class="note" style="min-width:52px">${n.at&&n.at.toDate?(n.at.toDate().getMonth()+1)+'/'+n.at.toDate().getDate():''}</span>
+    <span style="flex:1">${esc(n.text||'')}${n.textTr?'<br><span class="note">'+esc(n.textTr)+'</span>':''}</span>
+    <button class="ndel" data-id="${n.id}" style="border:none;background:none;color:var(--red);cursor:pointer;font-weight:900">削除</button></div>`).join('')||'<p class="note">まだありません</p>';
+  document.querySelectorAll('.ndel').forEach(b=>b.onclick=()=>db.collection('notices').doc(b.dataset.id).delete().then(()=>toast('削除しました')));
+}
+$('ntSend').onclick=async()=>{
+  const t=$('ntText').value.trim();if(!t)return;
+  try{
+    const tr=await autoTranslate(t);
+    await db.collection('notices').add({text:t,textTr:tr||null,at:TS()});
+    $('ntText').value='';toast('配信しました');
+  }catch(e){toast('配信失敗');console.error(e)}
+};
+
 /* ---------- staff mgmt ---------- */
 function renderStaff(){
   const list=Object.values(staffMap);
@@ -343,6 +444,7 @@ function renderStaff(){
        <div><label>勤務時間表示（例: 10:00–13:00）</label><input type="text" class="f-sched" value="${esc(s.schedule||'')}"></div>
      </div>
      <div style="margin-bottom:10px"><label>タスク（1行1つ・英語）</label><textarea class="f-tasks">${esc((s.tasks||[]).join('\n'))}</textarea></div>
+     <div style="margin-bottom:10px"><label>ご家庭メモ（Family Book・スタッフのアプリに表示。英語推奨）</label><textarea class="f-manual">${esc(s.manual||'')}</textarea></div>
      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
        <label style="display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" class="f-admin" ${s.role==='admin'?'checked':''}>本部権限</label>
        <label style="display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" class="f-active" ${s.active!==false?'checked':''}>有効</label>
@@ -359,6 +461,7 @@ function renderStaff(){
         clientArea:e.querySelector('.f-area').value.trim(),
         schedule:e.querySelector('.f-sched').value.trim(),
         tasks:e.querySelector('.f-tasks').value.split('\n').map(x=>x.trim()).filter(Boolean),
+        manual:e.querySelector('.f-manual').value.trim(),
         role:e.querySelector('.f-admin').checked?'admin':'staff',
         active:e.querySelector('.f-active').checked
       },{merge:true});
@@ -378,7 +481,7 @@ $('newBtn').onclick=async()=>{
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');
-  ['mon','rep','chat','staff'].forEach(v=>$('v'+v).classList.toggle('hide',v!==b.dataset.v));
+  ['mon','rep','chat','plan','notice','staff'].forEach(v=>$('v'+v).classList.toggle('hide',v!==b.dataset.v));
 });
 setInterval(()=>{renderMon()},30000);
 </script>

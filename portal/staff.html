@@ -167,6 +167,28 @@ button{font-family:inherit}
 .hit img{width:46px;height:46px;object-fit:cover;border-radius:12px;flex:none}
 .hempty{text-align:center;color:var(--mut2);font-size:12.5px;padding:40px 0}
 
+/* ===== notices / book ===== */
+.notice{background:#FFF8E6;border:1px solid #F1E0AE;border-radius:18px;padding:13px 16px;margin-top:12px;box-shadow:0 4px 14px rgba(233,161,59,.1)}
+.notice .nh{display:flex;justify-content:space-between;font-size:10px;font-weight:900;letter-spacing:1.5px;color:#8A6410;margin-bottom:3px}
+.notice .nt{font-size:13px}
+.notice .tr2{display:block;margin-top:6px;padding-top:6px;border-top:1px solid #F1E0AE;font-size:12px;color:#8A6410}
+.nextv{display:flex;align-items:center;gap:9px;margin-top:12px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:12.5px;font-weight:700;color:var(--mut);box-shadow:var(--shadow)}
+.nextv b{color:var(--ink)}
+.manual{font-size:13.5px;white-space:pre-wrap;margin-top:8px;color:#473C2B;line-height:1.85}
+.vrow{display:flex;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid #F3F1EA;font-size:13px}
+.vrow:last-child{border-bottom:none}
+.vrow .vd{font-weight:900;min-width:96px}
+.vrow .vt{color:var(--mut)}
+.lrow{display:flex;gap:10px;margin-top:10px}
+.lrow>div{flex:1}
+.lrow label{font-size:10px;font-weight:900;color:var(--mut2);display:block;margin-bottom:3px}
+.lrow input,.lreason{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;font-size:15px;background:var(--bg);color:var(--ink);outline:none;font-family:inherit}
+.lreason{margin-top:10px}
+.lvitem{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #F3F1EA;font-size:12.5px}
+.lvitem:last-child{border-bottom:none}
+.lvst{font-size:10px;font-weight:900;padding:3px 10px;border-radius:99px;white-space:nowrap}
+.lvst.p{background:#FDF3D9;color:#9A7200}.lvst.a{background:#E9F5EC;color:var(--grn)}.lvst.r{background:#FBE9E4;color:var(--red)}
+
 /* ===== chat ===== */
 .chathead{display:flex;align-items:center;gap:11px;padding:16px 2px 12px}
 .chathead .avw{width:42px;height:42px;border-radius:50%;background:linear-gradient(180deg,var(--honey2),var(--honey));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(233,161,59,.3)}
@@ -246,6 +268,9 @@ button{font-family:inherit}
       <div class="hi" id="hi">Hi 👋</div>
     </div>
 
+    <div id="noticeBox"></div>
+    <div class="nextv hide" id="nextV"></div>
+
     <div class="card">
       <div class="visit">
         <div><div class="fam" id="cName">—</div><div class="loc" id="cArea"></div></div>
@@ -298,6 +323,20 @@ button{font-family:inherit}
     <div class="out"><button id="logout">Sign out</button></div>
   </div>
 
+  <!-- BOOK -->
+  <div id="vBook" class="hide">
+    <div class="hth" id="bookTitle">Family Book</div>
+    <div class="card"><div class="lb" id="manualLb">HOUSE NOTES</div><div class="manual" id="manualBox"></div></div>
+    <div class="card"><div class="lb" id="upcomingLb">UPCOMING VISITS</div><div id="visitList"></div></div>
+    <div class="card"><div class="lb" id="leaveLb2">TIME OFF REQUEST</div>
+      <div class="lrow"><div><label id="lFromLb">From</label><input type="date" id="lvFrom"></div><div><label id="lToLb">To</label><input type="date" id="lvTo"></div></div>
+      <input type="text" id="lvReason" class="lreason" placeholder="Reason (optional)">
+      <button class="big" id="lvBtn" style="margin-top:12px;padding:14px 20px"><span class="t2" id="lSendT" style="font-size:15px">Request Time Off</span></button>
+      <div class="lb" id="myReqLb" style="margin-top:20px">MY REQUESTS</div>
+      <div id="leaveList"></div>
+    </div>
+  </div>
+
   <!-- HISTORY -->
   <div id="vHist" class="hide">
     <div class="hth" id="histTitle">History</div>
@@ -324,6 +363,9 @@ button{font-family:inherit}
   <button class="on" data-v="Home">
     <span class="icw"><svg class="ic" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg></span>
     Home</button>
+  <button data-v="Book">
+    <span class="icw"><svg class="ic" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21Z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg></span>
+    Book</button>
   <button data-v="Hist">
     <span class="icw"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
     History</button>
@@ -338,7 +380,7 @@ button{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="config.js"></script>
 <script>
-let me=null, meDoc=null, lastMsgs=null, punches=[], punchWeek=[], myReports=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
+let me=null, meDoc=null, lastMsgs=null, punches=[], punchWeek=[], myReports=[], notices=[], myVisits=[], myLeaves=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
 const $=id=>document.getElementById(id);
 
 /* ---------- i18n ---------- */
@@ -354,7 +396,11 @@ en:{sub:'STAFF APP',email:'Email',pass:'Password',signin:'Sign In',loginErr:'Sig
  hist:'History',reports:'reports',tasksW:'tasks',worked:'worked',
  chatSub:'Messages are translated automatically \ud83c\udf10',msgPh:'Message in English is OK!',office:'Hachi Office',
  signout:'Sign out',
- tCheckin:'Checked in! Have a good day \ud83d\udc1d',tBack:'Back to work!',tBreak:'Break \u2615',tFin:'Finished! Please submit your report.',tSent:'Report sent! \ud83c\udf89',tErr:'Error. Try again.',tSendErr:'Send failed',tRepErr:'Error sending report'},
+ tCheckin:'Checked in! Have a good day \ud83d\udc1d',tBack:'Back to work!',tBreak:'Break \u2615',tFin:'Finished! Please submit your report.',tSent:'Report sent! \ud83c\udf89',tErr:'Error. Try again.',tSendErr:'Send failed',tRepErr:'Error sending report',
+ book:'Family Book',tabBook:'Book',noticeLb:'NOTICE',manualLb:'HOUSE NOTES',noManual:'No notes yet. Ask the office.',
+ upcoming:'UPCOMING VISITS',noVisits:'No scheduled visits yet.',nextV:'Next visit',
+ leaveLb:'TIME OFF REQUEST',lFrom:'From',lTo:'To',lReason:'Reason (optional)',lSend:'Request Time Off',
+ myReq:'MY REQUESTS',noReq:'No requests yet.',stP:'Pending',stA:'Approved',stR:'Rejected',tReq:'Request sent!'},
 ja:{sub:'\u30b9\u30bf\u30c3\u30d5\u30a2\u30d7\u30ea',email:'\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9',pass:'\u30d1\u30b9\u30ef\u30fc\u30c9',signin:'\u30ed\u30b0\u30a4\u30f3',loginErr:'\u30ed\u30b0\u30a4\u30f3\u306b\u5931\u6557\u3057\u307e\u3057\u305f',noProfile:'\u30b9\u30bf\u30c3\u30d5\u767b\u9332\u304c\u3042\u308a\u307e\u305b\u3093\u3002\u672c\u90e8\u306b\u9023\u7d61\u3057\u3066\u304f\u3060\u3055\u3044\u3002',
  steps:['\u51fa\u52e4','\u52e4\u52d9','\u30bf\u30b9\u30af','\u65e5\u5831','\u5b8c\u4e86'],
  t1:{none:'\u6e96\u5099OK',working:'\u52e4\u52d9\u4e2d',brk:'\u4f11\u61a9\u4e2d',done:'\u304a\u3064\u304b\u308c\u3055\u307e',rep:'\u307e\u305f\u6765\u9031\uff01'},
@@ -366,7 +412,11 @@ ja:{sub:'\u30b9\u30bf\u30c3\u30d5\u30a2\u30d7\u30ea',email:'\u30e1\u30fc\u30eb\u
  hist:'\u5c65\u6b74',reports:'\u4ef6',tasksW:'\u30bf\u30b9\u30af',worked:'\u52e4\u52d9',
  chatSub:'\u30e1\u30c3\u30bb\u30fc\u30b8\u306f\u81ea\u52d5\u3067\u7ffb\u8a33\u3055\u308c\u307e\u3059 \ud83c\udf10',msgPh:'\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u5165\u529b...',office:'\u30cf\u30c1\u672c\u90e8',
  signout:'\u30ed\u30b0\u30a2\u30a6\u30c8',
- tCheckin:'\u51fa\u52e4\u3057\u307e\u3057\u305f\uff01\u4eca\u65e5\u3082\u3088\u308d\u3057\u304f \ud83d\udc1d',tBack:'\u52e4\u52d9\u518d\u958b\uff01',tBreak:'\u4f11\u61a9 \u2615',tFin:'\u9000\u52e4\u3057\u307e\u3057\u305f\u3002\u65e5\u5831\u3092\u9001\u4fe1\u3057\u3066\u304f\u3060\u3055\u3044\u3002',tSent:'\u65e5\u5831\u3092\u9001\u4fe1\u3057\u307e\u3057\u305f\uff01\ud83c\udf89',tErr:'\u30a8\u30e9\u30fc\u3002\u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002',tSendErr:'\u9001\u4fe1\u5931\u6557',tRepErr:'\u65e5\u5831\u306e\u9001\u4fe1\u306b\u5931\u6557'}
+ tCheckin:'\u51fa\u52e4\u3057\u307e\u3057\u305f\uff01\u4eca\u65e5\u3082\u3088\u308d\u3057\u304f \ud83d\udc1d',tBack:'\u52e4\u52d9\u518d\u958b\uff01',tBreak:'\u4f11\u61a9 \u2615',tFin:'\u9000\u52e4\u3057\u307e\u3057\u305f\u3002\u65e5\u5831\u3092\u9001\u4fe1\u3057\u3066\u304f\u3060\u3055\u3044\u3002',tSent:'\u65e5\u5831\u3092\u9001\u4fe1\u3057\u307e\u3057\u305f\uff01\ud83c\udf89',tErr:'\u30a8\u30e9\u30fc\u3002\u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002',tSendErr:'\u9001\u4fe1\u5931\u6557',tRepErr:'\u65e5\u5831\u306e\u9001\u4fe1\u306b\u5931\u6557',
+ book:'\u5bb6\u5ead\u30ce\u30fc\u30c8',tabBook:'\u30ce\u30fc\u30c8',noticeLb:'\u304a\u77e5\u3089\u305b',manualLb:'\u3054\u5bb6\u5ead\u30e1\u30e2',noManual:'\u307e\u3060\u767b\u9332\u304c\u3042\u308a\u307e\u305b\u3093\u3002',
+ upcoming:'\u4eca\u5f8c\u306e\u4e88\u5b9a',noVisits:'\u4e88\u5b9a\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002',nextV:'\u6b21\u306e\u8a2a\u554f',
+ leaveLb:'\u4f11\u307f\u7533\u8acb',lFrom:'\u958b\u59cb\u65e5',lTo:'\u7d42\u4e86\u65e5',lReason:'\u7406\u7531\uff08\u4efb\u610f\uff09',lSend:'\u4f11\u307f\u3092\u7533\u8acb\u3059\u308b',
+ myReq:'\u7533\u8acb\u5c65\u6b74',noReq:'\u7533\u8acb\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093\u3002',stP:'\u627f\u8a8d\u5f85\u3061',stA:'\u627f\u8a8d',stR:'\u5374\u4e0b',tReq:'\u7533\u8acb\u3057\u307e\u3057\u305f\uff01'}
 };
 let lang='en';try{lang=localStorage.getItem('hachiLang')||'en'}catch(e){}
 const L=k=>I18N[lang][k]??I18N.en[k]??k;
@@ -391,12 +441,20 @@ function applyLang(){
   $('chatSub').textContent=L('chatSub');
   $('msgIn').placeholder=L('msgPh');
   $('logout').textContent=L('signout');
-  document.querySelectorAll('.nav button')[0].lastChild.textContent=lang==='ja'?'\u30db\u30fc\u30e0':'Home';
-  document.querySelectorAll('.nav button')[1].lastChild.textContent=lang==='ja'?'\u5c65\u6b74':'History';
-  document.querySelectorAll('.nav button')[2].lastChild.textContent=lang==='ja'?'\u30c1\u30e3\u30c3\u30c8':'Chat';
+  $('bookTitle').textContent=L('book');
+  $('manualLb').textContent=L('manualLb');
+  $('upcomingLb').textContent=L('upcoming');
+  $('leaveLb2').textContent=L('leaveLb');
+  $('lFromLb').textContent=L('lFrom');$('lToLb').textContent=L('lTo');
+  $('lvReason').placeholder=L('lReason');
+  $('lSendT').textContent=L('lSend');
+  $('myReqLb').textContent=L('myReq');
+  const navT=[lang==='ja'?'\u30db\u30fc\u30e0':'Home',L('tabBook'),lang==='ja'?'\u5c65\u6b74':'History',lang==='ja'?'\u30c1\u30e3\u30c3\u30c8':'Chat'];
+  document.querySelectorAll('.nav button').forEach((b,i)=>b.lastChild.textContent=navT[i]);
   if(meDoc){
     $('hi').textContent=(lang==='ja'?'\u3053\u3093\u306b\u3061\u306f\u3001'+(meDoc.name||'')+'\u3055\u3093':'Hi, '+(meDoc.name||'Staff'))+' \ud83d\udc4b';
     render();renderTasks();renderWeek();renderStats();renderHistory();
+    renderNotices();renderVisits();renderLeaves();renderManual();
     if(lastMsgs)renderChat(lastMsgs);
   }
 }
@@ -454,6 +512,13 @@ function boot(){
   // chat購読
   db.collection('messages').where('uid','==',me.uid)
     .onSnapshot(s=>{renderChat(s.docs.map(d=>d.data()))},e=>console.error(e));
+  // お知らせ・訪問予定・休み申請
+  db.collection('notices').onSnapshot(s=>{notices=s.docs.map(d=>d.data());renderNotices()},e=>console.error(e));
+  db.collection('visits').where('uid','==',me.uid)
+    .onSnapshot(s=>{myVisits=s.docs.map(d=>d.data());renderVisits()},e=>console.error(e));
+  db.collection('leaves').where('uid','==',me.uid)
+    .onSnapshot(s=>{myLeaves=s.docs.map(d=>d.data());renderLeaves()},e=>console.error(e));
+  renderManual();
   if(timer)clearInterval(timer);
   timer=setInterval(()=>{const c=calcDay(punches);if(c.state==='working'||c.state==='break'){$('elV').textContent=Math.floor(c.workedMin/60)+':'+String(c.workedMin%60).padStart(2,'0')}},20000);
 }
@@ -592,6 +657,55 @@ function renderHistory(){
   }).join('')||('<div class="hempty">'+(lang==='ja'?'まだ日報がありません':'No reports yet.')+'<br>🐝</div>');
 }
 
+/* ---------- notices / visits / leaves / manual ---------- */
+function fmtDay(ds){
+  const p=(ds||'').split('-');if(p.length<3)return ds;
+  const d=new Date(+p[0],+p[1]-1,+p[2]);
+  if(lang==='ja')return (+p[1])+'/'+(+p[2])+'（'+'日月火水木金土'[d.getDay()]+'）';
+  return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()]+', '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]+' '+(+p[2]);
+}
+function renderNotices(){
+  const list=notices.slice().sort((a,b)=>(b.at?.toMillis?.()||0)-(a.at?.toMillis?.()||0)).slice(0,3);
+  $('noticeBox').innerHTML=list.map(n=>{
+    const isJa=/[぀-ヿ一-鿿]/.test(n.text||'');
+    const jaT=isJa?n.text:n.textTr, enT=isJa?n.textTr:n.text;
+    const body=lang==='ja'?(jaT||enT||''):(enT||jaT||'');
+    const other=lang==='ja'?(body===jaT?enT:null):(body===enT?jaT:null);
+    const sub=other?`<span class="tr2">${esc(other)}</span>`:'';
+    return `<div class="notice"><div class="nh"><span>📢 ${L('noticeLb')}</span><span>${n.at&&n.at.toDate?(n.at.toDate().getMonth()+1)+'/'+n.at.toDate().getDate():''}</span></div><div class="nt">${esc(body)}${sub}</div></div>`;
+  }).join('');
+}
+function renderVisits(){
+  const today=todayStr();
+  const up=myVisits.filter(v=>(v.day||'')>=today).sort((a,b)=>(a.day||'').localeCompare(b.day||'')).slice(0,10);
+  if(up.length){
+    $('nextV').innerHTML='📅 <span>'+L('nextV')+':</span> <b>'+fmtDay(up[0].day)+(up[0].time?' ・ '+esc(up[0].time):'')+'</b>';
+    $('nextV').classList.remove('hide');
+  }else{$('nextV').classList.add('hide')}
+  $('visitList').innerHTML=up.map(v=>`<div class="vrow"><span class="vd">${fmtDay(v.day)}</span><span>${esc(v.time||'')}</span><span class="vt">${esc(v.note||'')}</span></div>`).join('')
+    ||'<div style="color:var(--mut2);font-size:12px;margin-top:6px">'+L('noVisits')+'</div>';
+}
+function renderLeaves(){
+  const list=myLeaves.slice().sort((a,b)=>(b.at?.toMillis?.()||0)-(a.at?.toMillis?.()||0)).slice(0,20);
+  const st={pending:['p',L('stP')],approved:['a',L('stA')],rejected:['r',L('stR')]};
+  $('leaveList').innerHTML=list.map(l=>{
+    const s=st[l.status]||st.pending;
+    return `<div class="lvitem"><span><b>${fmtDay(l.from)}</b>${l.to&&l.to!==l.from?' → <b>'+fmtDay(l.to)+'</b>':''}${l.reason?' ・ '+esc(l.reason):''}</span><span class="lvst ${s[0]}">${s[1]}</span></div>`;
+  }).join('')||'<div style="color:var(--mut2);font-size:12px;margin-top:6px">'+L('noReq')+'</div>';
+}
+function renderManual(){
+  $('manualBox').textContent=(meDoc&&meDoc.manual)?meDoc.manual:L('noManual');
+}
+$('lvBtn').onclick=async()=>{
+  const from=$('lvFrom').value;if(!from)return;
+  const to=$('lvTo').value||from;
+  try{
+    await db.collection('leaves').add({uid:me.uid,name:meDoc.name||'',from,to,reason:$('lvReason').value.trim(),status:'pending',at:TS()});
+    $('lvFrom').value='';$('lvTo').value='';$('lvReason').value='';
+    toast(L('tReq'));
+  }catch(e){toast(L('tSendErr'));console.error(e)}
+};
+
 /* ---------- chat ---------- */
 function renderChat(msgs){
   lastMsgs=msgs;
@@ -629,6 +743,7 @@ document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
   b.classList.add('on');
   const v=b.dataset.v;
   $('vHome').classList.toggle('hide',v!=='Home');
+  $('vBook').classList.toggle('hide',v!=='Book');
   $('vHist').classList.toggle('hide',v!=='Hist');
   $('vChat').classList.toggle('hide',v!=='Chat');
   $('chatbar').classList.toggle('hide',v!=='Chat');

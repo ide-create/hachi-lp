@@ -26,5 +26,19 @@ service cloud.firestore {
       allow read: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
       allow update, delete: if isAdmin();
     }
+    match /notices/{id} {
+      allow read: if signedIn();
+      allow create, update, delete: if isAdmin();
+    }
+    match /visits/{id} {
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow create, update, delete: if isAdmin();
+    }
+    match /leaves/{id} {
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status == 'pending';
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow update, delete: if isAdmin();
+    }
   }
 }
