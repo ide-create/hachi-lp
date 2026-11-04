@@ -2,12 +2,12 @@
 // Firebaseコンソール（プロジェクトの設定 > 全般 > マイアプリ > SDKの設定と構成）
 // に表示される firebaseConfig をここに貼り付ける
 const firebaseConfig = {
-  apiKey: "PASTE_HERE",
-  authDomain: "PASTE_HERE",
-  projectId: "PASTE_HERE",
-  storageBucket: "PASTE_HERE",
-  messagingSenderId: "PASTE_HERE",
-  appId: "PASTE_HERE"
+  apiKey: "AIzaSyA8SU4Fe6RsOFUjLSzeerkuuqqOxbBTE3s",
+  authDomain: "hachi-portal.firebaseapp.com",
+  projectId: "hachi-portal",
+  storageBucket: "hachi-portal.firebasestorage.app",
+  messagingSenderId: "950289266003",
+  appId: "1:950289266003:web:844e30a7d7fccfb829dda6"
 };
 // ============================================
 
