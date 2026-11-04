@@ -74,10 +74,15 @@ button{font-family:inherit}
 .topbar .sp{flex:1}
 .topbar .dt{font-size:10.5px;font-weight:900;color:var(--mut2);letter-spacing:.8px}
 
-.hi{font-size:25px;font-weight:900;margin:20px 0 0;letter-spacing:-.3px}
+.hirow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px}
+.hi{font-size:25px;font-weight:900;letter-spacing:-.3px;margin:0}
+.wx{font-size:13px;font-weight:900;color:var(--mut);background:var(--paper);border:1px solid var(--line);
+  border-radius:999px;padding:6px 13px;white-space:nowrap;box-shadow:0 2px 8px rgba(33,27,18,.05)}
 
-/* ===== hero card ===== */
+/* ===== cards ===== */
 .card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:19px 20px;margin-top:16px;box-shadow:var(--shadow)}
+.lb{font-size:10.5px;font-weight:900;letter-spacing:1.8px;color:var(--gold)}
+.rowh{display:flex;align-items:baseline;justify-content:space-between}
 .visit{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .visit .fam{font-weight:900;font-size:19px;letter-spacing:-.2px}
 .visit .loc{font-size:12px;color:var(--mut);margin-top:1px}
@@ -113,7 +118,6 @@ button{font-family:inherit}
 .sb svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* ===== tasks ===== */
-.lb{font-size:10.5px;font-weight:900;letter-spacing:1.8px;color:var(--gold)}
 .task .row{display:flex;align-items:center;gap:13px;padding:12px 0;font-weight:700;font-size:14.5px;color:var(--ink);cursor:pointer;user-select:none;border-bottom:1px solid #F3F1EA}
 .task .row:last-of-type{border-bottom:none;padding-bottom:4px}
 .task .row:first-of-type{margin-top:4px}
@@ -128,6 +132,40 @@ button{font-family:inherit}
 .donebox{margin-top:16px;background:#EDF7EF;border:1px solid #CBE5D3;border-radius:24px;padding:22px;text-align:center}
 .donebox b{display:block;font-size:16px;margin-top:4px;color:#2C7A4B}
 .donebox p{margin:6px 0 0;font-size:12px;color:#5E8A6D}
+
+/* ===== weekly ===== */
+.wkTot{font-family:var(--disp);font-size:24px;font-weight:600;font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:8px;align-items:flex-end;height:72px;margin-top:14px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%}
+.bar .bf{width:100%;max-width:26px;border-radius:7px;background:linear-gradient(180deg,var(--honey2),var(--honey));min-height:4px;box-shadow:0 2px 6px rgba(233,161,59,.25)}
+.bar.zero .bf{background:var(--cream);box-shadow:none}
+.bar span{font-size:9px;font-weight:900;color:var(--mut2);line-height:1}
+.bar.today span{color:var(--golddeep)}
+.capbar{position:relative;height:8px;border-radius:99px;background:var(--cream);margin-top:16px}
+.capfill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--honey),var(--honey2));transition:width .4s;max-width:100%}
+.capfill.warn{background:linear-gradient(90deg,var(--honey),var(--red))}
+.capmark{position:absolute;top:-3px;bottom:-3px;left:90%;width:2px;background:var(--line2);border-radius:2px}
+.caplbl{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;color:var(--mut2);margin-top:8px}
+.caplbl .warn{color:var(--red)}
+/* ===== stats ===== */
+.strow{display:flex;gap:12px;margin-top:14px}
+.stat{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:15px 17px;box-shadow:var(--shadow)}
+.stat .sv{font-family:var(--disp);font-size:31px;font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums}
+.stat .sv small{font-size:17px}
+.stat .sl{font-size:10.5px;font-weight:700;color:var(--mut2)}
+
+/* ===== history ===== */
+.hth{font-size:25px;font-weight:900;letter-spacing:-.3px;margin:20px 0 2px}
+.hsub{font-size:11.5px;color:var(--mut2);font-weight:700}
+.hit{display:flex;align-items:center;gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:13px 16px;margin-top:10px;box-shadow:var(--shadow)}
+.hit .hd{text-align:center;min-width:38px}
+.hit .dnum{display:block;font-family:var(--disp);font-size:25px;font-weight:600;line-height:1}
+.hit .dmon{font-size:8.5px;font-weight:900;letter-spacing:1.5px;color:var(--mut2)}
+.hit .hb{flex:1;min-width:0}
+.hit .hb b{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hit .hb span{display:block;font-size:11px;color:var(--mut)}
+.hit img{width:46px;height:46px;object-fit:cover;border-radius:12px;flex:none}
+.hempty{text-align:center;color:var(--mut2);font-size:12.5px;padding:40px 0}
 
 /* ===== chat ===== */
 .chathead{display:flex;align-items:center;gap:11px;padding:16px 2px 12px}
@@ -203,7 +241,10 @@ button{font-family:inherit}
 <div class="wrap">
   <!-- HOME -->
   <div id="vHome">
-    <div class="hi" id="hi">Hi 👋</div>
+    <div class="hirow">
+      <div class="hi" id="hi">Hi 👋</div>
+      <div class="wx hide" id="wx"></div>
+    </div>
 
     <div class="card">
       <div class="visit">
@@ -239,7 +280,29 @@ button{font-family:inherit}
       <div style="font-size:28px">🎉</div><b>Great work today!</b>
       <p id="doneSum"></p>
     </div>
+
+    <!-- THIS WEEK -->
+    <div class="card">
+      <div class="rowh"><span class="lb">THIS WEEK</span><span class="wkTot" id="wkTot">0h</span></div>
+      <div class="bars" id="wkBars"></div>
+      <div class="capbar"><div class="capfill" id="capFill" style="width:0%"></div><div class="capmark"></div></div>
+      <div class="caplbl"><span>Weekly limit 20h</span><span id="capTxt">0 / 20h</span></div>
+    </div>
+
+    <!-- THIS MONTH -->
+    <div class="strow">
+      <div class="stat"><div class="sv" id="stVisits">0</div><div class="sl">Visits this month</div></div>
+      <div class="stat"><div class="sv" id="stHours">0<small>h</small></div><div class="sl">Hours this month</div></div>
+    </div>
+
     <div class="out"><button id="logout">Sign out</button></div>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="vHist" class="hide">
+    <div class="hth">History</div>
+    <div class="hsub" id="histSub"></div>
+    <div id="histList"></div>
   </div>
 
   <!-- CHAT -->
@@ -261,6 +324,9 @@ button{font-family:inherit}
   <button class="on" data-v="Home">
     <span class="icw"><svg class="ic" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg></span>
     Home</button>
+  <button data-v="Hist">
+    <span class="icw"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+    History</button>
   <button data-v="Chat">
     <span class="icw"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5c0 4.14-4.03 7.5-9 7.5-1.03 0-2.02-.14-2.94-.41L4 20l1.28-3.42C3.86 15.3 3 13.49 3 11.5 3 7.36 7.03 4 12 4s9 3.36 9 7.5Z"/></svg><span class="badge hide" id="unread">0</span></span>
     Chat</button>
@@ -272,7 +338,7 @@ button{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="config.js"></script>
 <script>
-let me=null, meDoc=null, punches=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
+let me=null, meDoc=null, punches=[], punchWeek=[], myReports=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
 const $=id=>document.getElementById(id);
 
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
@@ -311,6 +377,12 @@ function boot(){
   // 今日の打刻を購読
   db.collection('punches').where('uid','==',me.uid).where('day','==',todayStr())
     .onSnapshot(s=>{punches=s.docs.map(d=>d.data());render()},e=>console.error(e));
+  // 今週の打刻（週間グラフ・扶養枠）
+  db.collection('punches').where('uid','==',me.uid).where('day','in',weekDays())
+    .onSnapshot(s=>{punchWeek=s.docs.map(d=>d.data());renderWeek()},e=>console.error(e));
+  // 自分の日報（履歴・月間実績）
+  db.collection('reports').where('uid','==',me.uid)
+    .onSnapshot(s=>{myReports=s.docs.map(d=>d.data());renderStats();renderHistory()},e=>console.error(e));
   // 今日の日報があるか
   db.collection('reports').doc(todayStr()+'_'+me.uid).onSnapshot(s=>{
     reportDone=s.exists; render();
@@ -318,8 +390,20 @@ function boot(){
   // chat購読
   db.collection('messages').where('uid','==',me.uid)
     .onSnapshot(s=>{renderChat(s.docs.map(d=>d.data()))},e=>console.error(e));
+  fetchWeather();
   if(timer)clearInterval(timer);
   timer=setInterval(()=>{const c=calcDay(punches);if(c.state==='working'||c.state==='break'){$('elV').textContent=Math.floor(c.workedMin/60)+':'+String(c.workedMin%60).padStart(2,'0')}},20000);
+}
+
+/* ---------- weather (Nagoya) ---------- */
+function wxIcon(c){return c===0?'☀️':c<=2?'🌤️':c<=48?'☁️':c<=67?'🌦️':c<=77?'❄️':c<=82?'🌧️':'⛈️'}
+async function fetchWeather(){
+  try{
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=35.17&longitude=136.91&current=temperature_2m,weather_code&timezone=Asia%2FTokyo');
+    const j=await r.json();
+    $('wx').textContent=wxIcon(j.current.weather_code)+' '+Math.round(j.current.temperature_2m)+'°C Nagoya';
+    $('wx').classList.remove('hide');
+  }catch(e){}
 }
 
 /* ---------- punch ---------- */
@@ -415,6 +499,49 @@ function render(){
   $('submitBtn').disabled=!(allTasks&&photoData);
   $('doneBox').classList.toggle('hide',!reportDone);
   if(reportDone)$('doneSum').textContent='Worked '+minToH(c.workedMin)+' ・ Break '+c.breakMin+'min ・ Report ✓';
+  renderWeek(); // 今日の変化を週グラフにも反映
+}
+
+/* ---------- weekly / stats / history ---------- */
+function renderWeek(){
+  const days=weekDays();
+  const today=todayStr();
+  const per=days.map(d=>calcDay(punchWeek.filter(p=>p.day===d)).workedMin);
+  // 今日は punches（リアルタイム購読）を優先
+  const ti=days.indexOf(today);
+  if(ti>=0)per[ti]=calcDay(punches).workedMin;
+  const tot=per.reduce((a,b)=>a+b,0);
+  const max=Math.max(60,...per);
+  const lbl=['M','T','W','T','F','S','S'];
+  $('wkBars').innerHTML=per.map((m,i)=>`<div class="bar ${m?'':'zero'} ${i===ti?'today':''}"><div class="bf" style="height:${Math.max(5,Math.round(m/max*100))}%"></div><span>${lbl[i]}</span></div>`).join('');
+  $('wkTot').textContent=minToH(tot);
+  const pct=Math.min(100,tot/(20*60)*100);
+  $('capFill').style.width=pct+'%';
+  $('capFill').classList.toggle('warn',tot>=18*60);
+  $('capTxt').textContent=minToH(tot)+' / 20h';
+  $('capTxt').className=tot>=18*60?'warn':'';
+}
+function renderStats(){
+  const ym=todayStr().slice(0,7);
+  const mine=myReports.filter(r=>(r.day||'').startsWith(ym));
+  $('stVisits').textContent=mine.length;
+  const h=mine.reduce((a,r)=>a+(r.workedMin||0),0)/60;
+  $('stHours').innerHTML=(h<10?h.toFixed(1):Math.round(h))+'<small>h</small>';
+}
+function renderHistory(){
+  const list=myReports.slice().sort((a,b)=>(b.day||'').localeCompare(a.day||'')).slice(0,60);
+  $('histSub').textContent=list.length?list.length+' reports':'';
+  const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  $('histList').innerHTML=list.map(r=>{
+    const d=(r.day||'').split('-');
+    const done=r.tasksDone?Object.values(r.tasksDone).filter(Boolean).length:0;
+    const total=(r.tasks||[]).length;
+    return `<div class="hit">
+      <div class="hd"><span class="dnum">${+d[2]||'?'}</span><span class="dmon">${MON[(+d[1]||1)-1]}</span></div>
+      <div class="hb"><b>${esc(r.client||'—')}</b><span>${done}/${total} tasks ・ ${minToH(r.workedMin||0)} worked</span></div>
+      ${r.photo?`<img src="${r.photo}" alt="">`:''}
+    </div>`;
+  }).join('')||'<div class="hempty">No reports yet.<br>Your work history will appear here 🐝</div>';
 }
 
 /* ---------- chat ---------- */
@@ -453,9 +580,11 @@ document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{
   b.classList.add('on');
   const v=b.dataset.v;
   $('vHome').classList.toggle('hide',v!=='Home');
+  $('vHist').classList.toggle('hide',v!=='Hist');
   $('vChat').classList.toggle('hide',v!=='Chat');
   $('chatbar').classList.toggle('hide',v!=='Chat');
   if(v==='Chat'){$('unread').classList.add('hide');lastChatSeen=0;/* reset on open */ window.scrollTo(0,document.body.scrollHeight);}
+  else{window.scrollTo(0,0)}
 });
 </script>
 </body>
