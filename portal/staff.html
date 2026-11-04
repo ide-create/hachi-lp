@@ -76,8 +76,8 @@ button{font-family:inherit}
 
 .hirow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px}
 .hi{font-size:25px;font-weight:900;letter-spacing:-.3px;margin:0}
-.wx{font-size:13px;font-weight:900;color:var(--mut);background:var(--paper);border:1px solid var(--line);
-  border-radius:999px;padding:6px 13px;white-space:nowrap;box-shadow:0 2px 8px rgba(33,27,18,.05)}
+.lang{font-size:11px;font-weight:900;color:var(--golddeep);background:var(--paper);border:1px solid var(--line);
+  border-radius:999px;padding:6px 12px;cursor:pointer;box-shadow:0 2px 8px rgba(33,27,18,.05)}
 
 /* ===== cards ===== */
 .card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:19px 20px;margin-top:16px;box-shadow:var(--shadow)}
@@ -222,7 +222,7 @@ button{font-family:inherit}
 <div id="login">
   <img class="appicon" src="icons/icon-192.png" alt="">
   <h1>Hachi Life</h1>
-  <p class="sub">STAFF APP</p>
+  <p class="sub" id="loginSub">STAFF APP</p>
   <input type="email" id="email" placeholder="Email" autocomplete="username">
   <input type="password" id="pass" placeholder="Password" autocomplete="current-password">
   <button id="loginBtn">Sign In</button>
@@ -236,6 +236,7 @@ button{font-family:inherit}
   <div class="brand">Hachi Life</div>
   <div class="sp"></div>
   <div class="dt" id="dt"></div>
+  <button class="lang" id="langBtn">日本語</button>
 </div></div>
 
 <div class="wrap">
@@ -243,7 +244,6 @@ button{font-family:inherit}
   <div id="vHome">
     <div class="hirow">
       <div class="hi" id="hi">Hi 👋</div>
-      <div class="wx hide" id="wx"></div>
     </div>
 
     <div class="card">
@@ -267,7 +267,7 @@ button{font-family:inherit}
     </div>
 
     <div class="card task hide" id="taskCard">
-      <div class="lb">TODAY'S TASKS</div>
+      <div class="lb" id="tasksLb">TODAY'S TASKS</div>
       <div id="taskList"></div>
       <label class="photo hide" id="photoBtn">
         <input type="file" accept="image/*" capture="environment" id="photoIn" style="display:none">
@@ -277,22 +277,22 @@ button{font-family:inherit}
     </div>
 
     <div class="donebox hide" id="doneBox">
-      <div style="font-size:28px">🎉</div><b>Great work today!</b>
+      <div style="font-size:28px">🎉</div><b id="doneTtl">Great work today!</b>
       <p id="doneSum"></p>
     </div>
 
     <!-- THIS WEEK -->
     <div class="card">
-      <div class="rowh"><span class="lb">THIS WEEK</span><span class="wkTot" id="wkTot">0h</span></div>
+      <div class="rowh"><span class="lb" id="wkLb">THIS WEEK</span><span class="wkTot" id="wkTot">0h</span></div>
       <div class="bars" id="wkBars"></div>
       <div class="capbar"><div class="capfill" id="capFill" style="width:0%"></div><div class="capmark"></div></div>
-      <div class="caplbl"><span>Weekly limit 20h</span><span id="capTxt">0 / 20h</span></div>
+      <div class="caplbl"><span id="capLb">Weekly limit 20h</span><span id="capTxt">0 / 20h</span></div>
     </div>
 
     <!-- THIS MONTH -->
     <div class="strow">
-      <div class="stat"><div class="sv" id="stVisits">0</div><div class="sl">Visits this month</div></div>
-      <div class="stat"><div class="sv" id="stHours">0<small>h</small></div><div class="sl">Hours this month</div></div>
+      <div class="stat"><div class="sv" id="stVisits">0</div><div class="sl" id="stVl">Visits this month</div></div>
+      <div class="stat"><div class="sv" id="stHours">0<small>h</small></div><div class="sl" id="stHl">Hours this month</div></div>
     </div>
 
     <div class="out"><button id="logout">Sign out</button></div>
@@ -300,7 +300,7 @@ button{font-family:inherit}
 
   <!-- HISTORY -->
   <div id="vHist" class="hide">
-    <div class="hth">History</div>
+    <div class="hth" id="histTitle">History</div>
     <div class="hsub" id="histSub"></div>
     <div id="histList"></div>
   </div>
@@ -309,7 +309,7 @@ button{font-family:inherit}
   <div id="vChat" class="hide">
     <div class="chathead">
       <div class="avw"><img src="icons/mark-160.png" alt=""></div>
-      <div><div class="n">Hachi Life Office</div><div class="s">Messages are translated automatically 🌐</div></div>
+      <div><div class="n">Hachi Life Office</div><div class="s" id="chatSub">Messages are translated automatically 🌐</div></div>
     </div>
     <div id="chatBox"></div>
   </div>
@@ -338,8 +338,72 @@ button{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="config.js"></script>
 <script>
-let me=null, meDoc=null, punches=[], punchWeek=[], myReports=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
+let me=null, meDoc=null, lastMsgs=null, punches=[], punchWeek=[], myReports=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
 const $=id=>document.getElementById(id);
+
+/* ---------- i18n ---------- */
+const I18N={
+en:{sub:'STAFF APP',email:'Email',pass:'Password',signin:'Sign In',loginErr:'Sign in failed. Check email / password.',noProfile:'No staff profile. Contact the office.',
+ steps:['Check In','Work','Tasks','Report','Done'],
+ t1:{none:'READY',working:'ON DUTY',brk:'ON BREAK',done:'SHIFT ENDED',rep:'SEE YOU NEXT TIME'},
+ t2:{none:'Check In',working:'Working\u2026',brk:'Resume Work',done:'Submit report below \u2193',rep:'Done \u2713'},
+ breakBtn:'Break',finishBtn:'Finish',workingTime:'WORKING TIME',onDuty:'\u25cf On duty',onBreak:'\u2615 On break',
+ tasksLb:"TODAY'S TASKS",noTasks:'No tasks set. Ask the office.',photoTake:'Take photo of locked door',photoReady:'Lock photo ready \u2713',
+ allDone:'ALL DONE?',submit:'Submit Report',greatWork:'Great work today!',
+ wkLb:'THIS WEEK',capLb:'Weekly limit 20h',stVl:'Visits this month',stHl:'Hours this month',
+ hist:'History',reports:'reports',tasksW:'tasks',worked:'worked',
+ chatSub:'Messages are translated automatically \ud83c\udf10',msgPh:'Message in English is OK!',office:'Hachi Office',
+ signout:'Sign out',
+ tCheckin:'Checked in! Have a good day \ud83d\udc1d',tBack:'Back to work!',tBreak:'Break \u2615',tFin:'Finished! Please submit your report.',tSent:'Report sent! \ud83c\udf89',tErr:'Error. Try again.',tSendErr:'Send failed',tRepErr:'Error sending report'},
+ja:{sub:'\u30b9\u30bf\u30c3\u30d5\u30a2\u30d7\u30ea',email:'\u30e1\u30fc\u30eb\u30a2\u30c9\u30ec\u30b9',pass:'\u30d1\u30b9\u30ef\u30fc\u30c9',signin:'\u30ed\u30b0\u30a4\u30f3',loginErr:'\u30ed\u30b0\u30a4\u30f3\u306b\u5931\u6557\u3057\u307e\u3057\u305f',noProfile:'\u30b9\u30bf\u30c3\u30d5\u767b\u9332\u304c\u3042\u308a\u307e\u305b\u3093\u3002\u672c\u90e8\u306b\u9023\u7d61\u3057\u3066\u304f\u3060\u3055\u3044\u3002',
+ steps:['\u51fa\u52e4','\u52e4\u52d9','\u30bf\u30b9\u30af','\u65e5\u5831','\u5b8c\u4e86'],
+ t1:{none:'\u6e96\u5099OK',working:'\u52e4\u52d9\u4e2d',brk:'\u4f11\u61a9\u4e2d',done:'\u304a\u3064\u304b\u308c\u3055\u307e',rep:'\u307e\u305f\u6765\u9031\uff01'},
+ t2:{none:'\u51fa\u52e4\u3059\u308b',working:'\u52e4\u52d9\u4e2d\u2026',brk:'\u52e4\u52d9\u306b\u3082\u3069\u308b',done:'\u4e0b\u306e\u65e5\u5831\u3092\u9001\u4fe1 \u2193',rep:'\u5b8c\u4e86 \u2713'},
+ breakBtn:'\u4f11\u61a9',finishBtn:'\u9000\u52e4',workingTime:'\u52e4\u52d9\u6642\u9593',onDuty:'\u25cf \u52e4\u52d9\u4e2d',onBreak:'\u2615 \u4f11\u61a9\u4e2d',
+ tasksLb:'\u4eca\u65e5\u306e\u30bf\u30b9\u30af',noTasks:'\u30bf\u30b9\u30af\u672a\u8a2d\u5b9a\u3002\u672c\u90e8\u306b\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044\u3002',photoTake:'\u65bd\u9320\u5199\u771f\u3092\u64ae\u308b',photoReady:'\u65bd\u9320\u5199\u771fOK \u2713',
+ allDone:'\u5168\u90e8\u7d42\u308f\u3063\u305f\uff1f',submit:'\u65e5\u5831\u3092\u9001\u4fe1',greatWork:'\u4eca\u65e5\u3082\u304a\u3064\u304b\u308c\u3055\u307e\u3067\u3057\u305f\uff01',
+ wkLb:'\u4eca\u9031',capLb:'\u9031\u306e\u4e0a\u965020h\uff08\u6276\u990a\u67a0\uff09',stVl:'\u4eca\u6708\u306e\u8a2a\u554f',stHl:'\u4eca\u6708\u306e\u6642\u9593',
+ hist:'\u5c65\u6b74',reports:'\u4ef6',tasksW:'\u30bf\u30b9\u30af',worked:'\u52e4\u52d9',
+ chatSub:'\u30e1\u30c3\u30bb\u30fc\u30b8\u306f\u81ea\u52d5\u3067\u7ffb\u8a33\u3055\u308c\u307e\u3059 \ud83c\udf10',msgPh:'\u30e1\u30c3\u30bb\u30fc\u30b8\u3092\u5165\u529b...',office:'\u30cf\u30c1\u672c\u90e8',
+ signout:'\u30ed\u30b0\u30a2\u30a6\u30c8',
+ tCheckin:'\u51fa\u52e4\u3057\u307e\u3057\u305f\uff01\u4eca\u65e5\u3082\u3088\u308d\u3057\u304f \ud83d\udc1d',tBack:'\u52e4\u52d9\u518d\u958b\uff01',tBreak:'\u4f11\u61a9 \u2615',tFin:'\u9000\u52e4\u3057\u307e\u3057\u305f\u3002\u65e5\u5831\u3092\u9001\u4fe1\u3057\u3066\u304f\u3060\u3055\u3044\u3002',tSent:'\u65e5\u5831\u3092\u9001\u4fe1\u3057\u307e\u3057\u305f\uff01\ud83c\udf89',tErr:'\u30a8\u30e9\u30fc\u3002\u3082\u3046\u4e00\u5ea6\u304a\u8a66\u3057\u304f\u3060\u3055\u3044\u3002',tSendErr:'\u9001\u4fe1\u5931\u6557',tRepErr:'\u65e5\u5831\u306e\u9001\u4fe1\u306b\u5931\u6557'}
+};
+let lang='en';try{lang=localStorage.getItem('hachiLang')||'en'}catch(e){}
+const L=k=>I18N[lang][k]??I18N.en[k]??k;
+function applyLang(){
+  document.documentElement.lang=lang==='ja'?'ja':'en';
+  $('langBtn').textContent=lang==='en'?'\u65e5\u672c\u8a9e':'EN';
+  $('loginSub').textContent=L('sub');
+  $('email').placeholder=L('email');$('pass').placeholder=L('pass');
+  $('loginBtn').textContent=L('signin');
+  document.querySelectorAll('#steps .stp').forEach((el,i)=>el.textContent=L('steps')[i]);
+  $('btnBreak').lastChild.textContent=L('breakBtn');
+  $('btnFinish').lastChild.textContent=L('finishBtn');
+  document.querySelector('#elapsed .l').textContent=L('workingTime');
+  $('tasksLb').textContent=L('tasksLb');
+  $('photoT').textContent=photoData?L('photoReady'):L('photoTake');
+  document.querySelector('#submitBtn .t1').textContent=L('allDone');
+  document.querySelector('#submitBtn .t2').textContent=L('submit');
+  $('doneTtl').textContent=L('greatWork');
+  $('wkLb').textContent=L('wkLb');$('capLb').textContent=L('capLb');
+  $('stVl').textContent=L('stVl');$('stHl').textContent=L('stHl');
+  $('histTitle').textContent=L('hist');
+  $('chatSub').textContent=L('chatSub');
+  $('msgIn').placeholder=L('msgPh');
+  $('logout').textContent=L('signout');
+  document.querySelectorAll('.nav button')[0].lastChild.textContent=lang==='ja'?'\u30db\u30fc\u30e0':'Home';
+  document.querySelectorAll('.nav button')[1].lastChild.textContent=lang==='ja'?'\u5c65\u6b74':'History';
+  document.querySelectorAll('.nav button')[2].lastChild.textContent=lang==='ja'?'\u30c1\u30e3\u30c3\u30c8':'Chat';
+  if(meDoc){
+    $('hi').textContent=(lang==='ja'?'\u3053\u3093\u306b\u3061\u306f\u3001'+(meDoc.name||'')+'\u3055\u3093':'Hi, '+(meDoc.name||'Staff'))+' \ud83d\udc4b';
+    render();renderTasks();renderWeek();renderStats();renderHistory();
+    if(lastMsgs)renderChat(lastMsgs);
+  }
+}
+
+
+$('langBtn').onclick=()=>{lang=lang==='en'?'ja':'en';try{localStorage.setItem('hachiLang',lang)}catch(e){};applyLang()};
+applyLang();
 
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 
@@ -349,7 +413,7 @@ function toast(t){const e=document.createElement('div');e.className='toast';e.te
 $('loginBtn').onclick=async()=>{
   $('loginErr').textContent='';
   try{ await auth.signInWithEmailAndPassword($('email').value.trim(), $('pass').value); }
-  catch(e){ $('loginErr').textContent='Sign in failed. Check email / password.'; }
+  catch(e){ $('loginErr').textContent=L('loginErr'); }
 };
 $('pass').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});
 
@@ -357,7 +421,7 @@ auth.onAuthStateChanged(async u=>{
   if(!u){ $('login').classList.remove('hide'); $('app').classList.add('hide'); return; }
   me=u;
   const snap=await db.collection('staff').doc(u.uid).get();
-  if(!snap.exists){ $('loginErr').textContent='No staff profile. Contact the office.'; auth.signOut(); return; }
+  if(!snap.exists){ $('loginErr').textContent=L('noProfile'); auth.signOut(); return; }
   meDoc=snap.data();
   $('login').classList.add('hide'); $('app').classList.remove('hide');
   boot();
@@ -368,7 +432,7 @@ $('logout').onclick=()=>auth.signOut();
 function boot(){
   const n=new Date();
   $('dt').textContent=['SUN','MON','TUE','WED','THU','FRI','SAT'][n.getDay()]+', '+['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][n.getMonth()]+' '+n.getDate();
-  $('hi').textContent='Hi, '+(meDoc.name||'Staff')+' 👋';
+  $('hi').textContent=(lang==='ja'?'こんにちは、'+(meDoc.name||'')+'さん':'Hi, '+(meDoc.name||'Staff'))+' 👋';
   $('cName').textContent=meDoc.clientName||'No assignment';
   $('cArea').textContent=meDoc.clientArea||'';
   $('cTime').textContent=meDoc.schedule||'';
@@ -390,20 +454,8 @@ function boot(){
   // chat購読
   db.collection('messages').where('uid','==',me.uid)
     .onSnapshot(s=>{renderChat(s.docs.map(d=>d.data()))},e=>console.error(e));
-  fetchWeather();
   if(timer)clearInterval(timer);
   timer=setInterval(()=>{const c=calcDay(punches);if(c.state==='working'||c.state==='break'){$('elV').textContent=Math.floor(c.workedMin/60)+':'+String(c.workedMin%60).padStart(2,'0')}},20000);
-}
-
-/* ---------- weather (Nagoya) ---------- */
-function wxIcon(c){return c===0?'☀️':c<=2?'🌤️':c<=48?'☁️':c<=67?'🌦️':c<=77?'❄️':c<=82?'🌧️':'⛈️'}
-async function fetchWeather(){
-  try{
-    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=35.17&longitude=136.91&current=temperature_2m,weather_code&timezone=Asia%2FTokyo');
-    const j=await r.json();
-    $('wx').textContent=wxIcon(j.current.weather_code)+' '+Math.round(j.current.temperature_2m)+'°C Nagoya';
-    $('wx').classList.remove('hide');
-  }catch(e){}
 }
 
 /* ---------- punch ---------- */
@@ -424,21 +476,21 @@ $('bigBtn').onclick=async()=>{
   const c=calcDay(punches);
   try{
     if(reportDone)return;
-    if(c.state==='none'){await punch('in');toast('Checked in! Have a good day 🐝');}
-    else if(c.state==='break'){await punch('be');toast('Back to work!');}
+    if(c.state==='none'){await punch('in');toast(L('tCheckin'));}
+    else if(c.state==='break'){await punch('be');toast(L('tBack'));}
     else if(c.state==='done'){ /* submit flow handled by submitBtn */ }
-  }catch(e){toast('Error. Try again.');console.error(e)}
+  }catch(e){toast(L('tErr'));console.error(e)}
 };
-$('btnBreak').onclick=()=>punch('bs').then(()=>toast('Break ☕')).catch(()=>toast('Error'));
+$('btnBreak').onclick=()=>punch('bs').then(()=>toast(L('tBreak'))).catch(()=>toast(L('tErr')));
 $('btnFinish').onclick=async()=>{
   const c=calcDay(punches);
   if(c.state==='none'||c.state==='done')return; // 未出勤・退勤済みは無視
   if(c.state==='break'){punchLock=false;await punch('be');}
-  punchLock=false;await punch('out');toast('Finished! Please submit your report.');
+  punchLock=false;await punch('out');toast(L('tFin'));
 };
 /* ---------- tasks / photo / report ---------- */
 function renderTasks(){
-  $('taskList').innerHTML=tasksState.map((x,i)=>`<div class="row ${x.done?'on':''}" data-i="${i}"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg></span>${x.t}</div>`).join('')||'<div style="color:var(--mut);font-size:12px">No tasks set. Ask the office.</div>';
+  $('taskList').innerHTML=tasksState.map((x,i)=>`<div class="row ${x.done?'on':''}" data-i="${i}"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17.5 19 7"/></svg></span>${x.t}</div>`).join('')||'<div style="color:var(--mut);font-size:12px">'+L('noTasks')+'</div>';
   document.querySelectorAll('#taskList .row').forEach(r=>r.onclick=()=>{tasksState[+r.dataset.i].done=!tasksState[+r.dataset.i].done;renderTasks();render()});
 }
 $('photoIn').onchange=e=>{
@@ -451,7 +503,7 @@ $('photoIn').onchange=e=>{
     cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
     photoData=cv.toDataURL('image/jpeg',0.65);
     if(photoData.length>900000){photoData=cv.toDataURL('image/jpeg',0.4);}
-    $('photoBtn').classList.add('on');$('photoIc').innerHTML='<img src="'+photoData+'">';$('photoT').textContent='Lock photo ready ✓';
+    $('photoBtn').classList.add('on');$('photoIc').innerHTML='<img src="'+photoData+'">';$('photoT').textContent=L('photoReady');
     render();
   };
   img.src=URL.createObjectURL(f);
@@ -465,8 +517,8 @@ $('submitBtn').onclick=async()=>{
       tasks:(meDoc.tasks||[]),tasksDone:tasksObj,photo:photoData||null,
       workedMin:c.workedMin,breakMin:c.breakMin,submittedAt:TS()
     });
-    toast('Report sent! 🎉');
-  }catch(e){toast('Error sending report');console.error(e)}
+    toast(L('tSent'));
+  }catch(e){toast(L('tRepErr'));console.error(e)}
 };
 
 /* ---------- render ---------- */
@@ -478,27 +530,23 @@ function render(){
   if(c.state==='done')phase=3;
   if(reportDone)phase=4;
   document.querySelectorAll('#steps .stp').forEach((el,i)=>{el.classList.toggle('done',i<phase);el.classList.toggle('now',i===phase)});
-  const map={
-    none:['READY','Check In',false],
-    working:['ON DUTY','Working…',true],
-    break:['ON BREAK','Resume Work',false],
-    done:['SHIFT ENDED','Submit report below ↓',true]
-  };
-  const m=reportDone?['SEE YOU NEXT TIME','Done ✓',true]:map[c.state];
+  const key={none:'none',working:'working',break:'brk',done:'done'}[c.state];
+  const dis={none:false,working:true,break:false,done:true}[c.state];
+  const m=reportDone?[L('t1').rep,L('t2').rep,true]:[L('t1')[key],L('t2')[key],dis];
   $('bigT1').textContent=m[0];$('bigT2').textContent=m[1];$('bigBtn').disabled=m[2];
   $('bigBtn').classList.toggle('hide',m[2]); // 押せない時はボタン自体を隠す
   $('btnBreak').disabled=c.state!=='working';
   $('btnFinish').disabled=!(c.state==='working'||c.state==='break');
   $('elapsed').classList.toggle('hide',!(c.state==='working'||c.state==='break'));
   $('elV').textContent=Math.floor(c.workedMin/60)+':'+String(c.workedMin%60).padStart(2,'0');
-  $('elS').textContent=c.state==='break'?'☕ On break':'● On duty';
+  $('elS').textContent=c.state==='break'?L('onBreak'):L('onDuty');
   $('taskCard').classList.toggle('hide',c.state==='none'||reportDone);
   $('photoBtn').classList.toggle('hide',!(c.state==='done'));
   const allTasks=tasksState.length===0||tasksState.every(x=>x.done);
   $('submitBtn').classList.toggle('hide',!(c.state==='done'&&!reportDone));
   $('submitBtn').disabled=!(allTasks&&photoData);
   $('doneBox').classList.toggle('hide',!reportDone);
-  if(reportDone)$('doneSum').textContent='Worked '+minToH(c.workedMin)+' ・ Break '+c.breakMin+'min ・ Report ✓';
+  if(reportDone)$('doneSum').textContent=lang==='ja'?('勤務 '+minToH(c.workedMin)+' ・ 休憩 '+c.breakMin+'分 ・ 日報 ✓'):('Worked '+minToH(c.workedMin)+' ・ Break '+c.breakMin+'min ・ Report ✓');
   renderWeek(); // 今日の変化を週グラフにも反映
 }
 
@@ -530,7 +578,7 @@ function renderStats(){
 }
 function renderHistory(){
   const list=myReports.slice().sort((a,b)=>(b.day||'').localeCompare(a.day||'')).slice(0,60);
-  $('histSub').textContent=list.length?list.length+' reports':'';
+  $('histSub').textContent=list.length?list.length+' '+L('reports'):'';
   const MON=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   $('histList').innerHTML=list.map(r=>{
     const d=(r.day||'').split('-');
@@ -538,14 +586,15 @@ function renderHistory(){
     const total=(r.tasks||[]).length;
     return `<div class="hit">
       <div class="hd"><span class="dnum">${+d[2]||'?'}</span><span class="dmon">${MON[(+d[1]||1)-1]}</span></div>
-      <div class="hb"><b>${esc(r.client||'—')}</b><span>${done}/${total} tasks ・ ${minToH(r.workedMin||0)} worked</span></div>
+      <div class="hb"><b>${esc(r.client||'—')}</b><span>${lang==='ja'?('タスク '+done+'/'+total+' ・ 勤務 '+minToH(r.workedMin||0)):(done+'/'+total+' tasks ・ '+minToH(r.workedMin||0)+' worked')}</span></div>
       ${r.photo?`<img src="${r.photo}" alt="">`:''}
     </div>`;
-  }).join('')||'<div class="hempty">No reports yet.<br>Your work history will appear here 🐝</div>';
+  }).join('')||('<div class="hempty">'+(lang==='ja'?'まだ日報がありません':'No reports yet.')+'<br>🐝</div>');
 }
 
 /* ---------- chat ---------- */
 function renderChat(msgs){
+  lastMsgs=msgs;
   msgs.sort((a,b)=>(a.at?.toMillis?.()||9e15)-(b.at?.toMillis?.()||9e15));
   $('chatBox').innerHTML=msgs.map(m=>{
     const mine=m.from==='staff';
@@ -553,7 +602,7 @@ function renderChat(msgs){
     if(mine){
       return `<div class="mrow me"><span class="tm">${hm(m.at)}</span><div class="bub">${esc(m.text)}${tr2}</div></div>`;
     }
-    return `<div><div class="sender">Hachi Office</div>
+    return `<div><div class="sender">${L('office')}</div>
       <div class="mrow them"><img class="avy" src="icons/mark-160.png" alt=""><div class="bub">${esc(m.text)}${tr2}</div><span class="tm">${hm(m.at)}</span></div></div>`;
   }).join('');
   window.scrollTo(0,document.body.scrollHeight);
@@ -570,7 +619,7 @@ $('sendBtn').onclick=async()=>{
   try{
     const tr=await autoTranslate(t); // 原文＋自動翻訳の両方を保存
     await db.collection('messages').add({uid:me.uid,from:'staff',fromName:meDoc.name||'',text:t,textTr:tr||null,at:TS()});
-  }catch(e){toast('Send failed');console.error(e)}
+  }catch(e){toast(L('tSendErr'));console.error(e)}
 };
 $('msgIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('sendBtn').click()});
 
