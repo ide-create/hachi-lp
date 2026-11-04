@@ -254,7 +254,12 @@ auth.onAuthStateChanged(async u=>{
   if(!u){$('login').classList.remove('hide');$('app').classList.add('hide');return}
   me=u;
   const snap=await db.collection('clients').doc(u.uid).get();
-  if(!snap.exists){$('loginErr').textContent='お客様アカウントが見つかりません。事務局へご連絡ください。';auth.signOut();return}
+  if(!snap.exists){
+    // スタッフ/本部アカウントなら各アプリへ（ログアウトさせない）
+    try{const s=await db.collection('staff').doc(u.uid).get();
+      if(s.exists){location.replace(s.data().role==='admin'?'admin.html':'staff.html');return}}catch(e){}
+    $('loginErr').textContent='お客様アカウントが見つかりません。事務局へご連絡ください。';auth.signOut();return
+  }
   meDoc=snap.data();
   $('login').classList.add('hide');$('app').classList.remove('hide');
   boot();

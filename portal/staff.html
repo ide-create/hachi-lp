@@ -481,7 +481,11 @@ auth.onAuthStateChanged(async u=>{
   if(!u){ $('login').classList.remove('hide'); $('app').classList.add('hide'); return; }
   me=u;
   const snap=await db.collection('staff').doc(u.uid).get();
-  if(!snap.exists){ $('loginErr').textContent=L('noProfile'); auth.signOut(); return; }
+  if(!snap.exists){
+    // 顧客アカウントならお客様ページへ（ログアウトさせない）
+    try{const c=await db.collection('clients').doc(u.uid).get();if(c.exists){location.replace('client.html');return}}catch(e){}
+    $('loginErr').textContent=L('noProfile'); auth.signOut(); return;
+  }
   meDoc=snap.data();
   $('login').classList.add('hide'); $('app').classList.remove('hide');
   boot();

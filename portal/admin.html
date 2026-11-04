@@ -257,7 +257,12 @@ $('logout').onclick=()=>auth.signOut();
 auth.onAuthStateChanged(async u=>{
   if(!u){$('login').classList.remove('hide');$('app').classList.add('hide');return}
   const snap=await db.collection('staff').doc(u.uid).get();
-  if(!snap.exists||snap.data().role!=='admin'){$('loginErr').textContent='本部アカウントではありません';auth.signOut();return}
+  if(!snap.exists||snap.data().role!=='admin'){
+    // スタッフ/顧客アカウントなら各アプリへ（ログアウトさせない）
+    if(snap.exists){location.replace('staff.html');return}
+    try{const c=await db.collection('clients').doc(u.uid).get();if(c.exists){location.replace('client.html');return}}catch(e){}
+    $('loginErr').textContent='本部アカウントではありません';auth.signOut();return
+  }
   $('login').classList.add('hide');$('app').classList.remove('hide');
   boot();
 });
