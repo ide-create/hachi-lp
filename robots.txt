@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /portal/
-Disallow: /kintai.html
 Disallow: /request.html
 
 Sitemap: https://hachi-lp-eta.vercel.app/sitemap.xml
