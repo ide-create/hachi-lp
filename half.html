@@ -161,7 +161,7 @@ footer b{color:#C9BA98}
 
 <!-- HERO -->
 <div class="hero">
-  <video src="film-sink.mp4" autoplay muted loop playsinline></video>
+  <video src="film-sink.mp4" poster="poster/film-sink.jpg" autoplay muted loop playsinline></video>
   <div class="in">
     <span class="tag">2027年1月スタート ・ 先行受付中</span>
     <h1>英語のある暮らしを、<br><em>年明けから</em>はじめる。</h1>
@@ -224,10 +224,10 @@ footer b{color:#C9BA98}
   <h2>所作は、ごまかせない。</h2>
   <p class="lead">実際のトレーニング風景から。道具の持ち方ひとつまで、プロの所作です。</p>
   <div class="vgrid">
-    <div class="vc"><video src="film-sink.mp4" autoplay muted loop playsinline></video><div class="b"><b>キッチン・水回り</b><p>シンクは「映り込むまで」。排水口のお手入れまで毎回。</p></div></div>
-    <div class="vc"><video src="film-bath.mp4" autoplay muted loop playsinline></video><div class="b"><b>浴室</b><p>鏡の水垢、床の皮脂まで。換気まで整えて退出します。</p></div></div>
-    <div class="vc"><video src="film-toilet.mp4" autoplay muted loop playsinline></video><div class="b"><b>トイレ・洗面</b><p>見えない縁の裏まで。消耗品の補充もお任せ。</p></div></div>
-    <div class="vc"><video src="film-trash.mp4" autoplay muted loop playsinline></video><div class="b"><b>ゴミ出し・段取り</b><p>分別から収集日管理まで、ファミリーブックどおりに。</p></div></div>
+    <div class="vc"><video src="film-sink.mp4" poster="poster/film-sink.jpg" autoplay muted loop playsinline></video><div class="b"><b>キッチン・水回り</b><p>シンクは「映り込むまで」。排水口のお手入れまで毎回。</p></div></div>
+    <div class="vc"><video src="film-bath.mp4" poster="poster/film-bath.jpg" autoplay muted loop playsinline></video><div class="b"><b>浴室</b><p>鏡の水垢、床の皮脂まで。換気まで整えて退出します。</p></div></div>
+    <div class="vc"><video src="film-toilet.mp4" poster="poster/film-toilet.jpg" autoplay muted loop playsinline></video><div class="b"><b>トイレ・洗面</b><p>見えない縁の裏まで。消耗品の補充もお任せ。</p></div></div>
+    <div class="vc"><video src="film-trash.mp4" poster="poster/film-trash.jpg" autoplay muted loop playsinline></video><div class="b"><b>ゴミ出し・段取り</b><p>分別から収集日管理まで、ファミリーブックどおりに。</p></div></div>
   </div>
 </div></section>
 
@@ -236,7 +236,7 @@ footer b{color:#C9BA98}
   <div class="eyeb">ENGLISH AT HOME</div>
   <h2>毎日の家事が、子どもの「英語の時間」になる。</h2>
   <div class="eng">
-    <video src="eng-kid.mp4" autoplay muted loop playsinline></video>
+    <video src="eng-kid.mp4" poster="poster/eng-kid.jpg" autoplay muted loop playsinline></video>
     <div>
       <div class="bub s">Good morning! Shall we fold the towels together?<small>おはよう！いっしょにタオルたたもうか？</small></div>
       <div class="bub k">Yes! This one is big!<small>うん！これおっきい！</small></div>
@@ -312,5 +312,12 @@ footer b{color:#C9BA98}
   名古屋市 東・千種・昭和・名東・瑞穂区とその近郊 ｜ <a href="index.html" style="text-decoration:underline">専属プラン（2028年予定）はこちら</a>
 </div></footer>
 
+<script>
+// 画面に入った動画だけ再生（iOSの同時再生上限対策）
+const vids=document.querySelectorAll('video');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{});}else{v.pause();}})},{threshold:.15});
+vids.forEach(v=>io.observe(v));
+document.addEventListener('touchstart',()=>{vids.forEach(v=>{const r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)v.play().catch(()=>{});})},{once:true,passive:true});
+</script>
 </body>
 </html>
