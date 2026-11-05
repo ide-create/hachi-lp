@@ -39,6 +39,11 @@ section{padding:72px 0}
 .top .bs{font-size:10px;color:var(--mut);font-weight:700;letter-spacing:1px;margin-left:2px}
 @media(max-width:600px){.top .bs{display:none}}
 @media(max-width:480px){.top .in{gap:6px;padding:10px 14px}.top .bn{font-size:18px}.top .cta{padding:10px 14px;font-size:12px}}
+.top .tabs{max-width:1040px;margin:0 auto;padding:0 22px 10px;display:flex;gap:8px}
+.top .tabs a{border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);font-weight:900;font-size:13px;border-radius:999px;padding:8px 20px;white-space:nowrap;line-height:1.4}
+.top .tabs a:active{background:var(--honey2)}
+@media(max-width:480px){.top .tabs{padding:0 14px 10px}}
+html{scroll-padding-top:110px}
 .top .sp{flex:1}
 .top .cta{background:var(--dark2);color:var(--honey2);font-weight:900;font-size:13px;border-radius:999px;padding:11px 20px;white-space:nowrap}
 
@@ -106,6 +111,7 @@ section{padding:72px 0}
 .tc .ic{font-size:26px}
 .tc b{display:block;font-family:var(--serif);font-size:16.5px;margin:10px 0 6px}
 .tc p{font-size:12.5px;color:var(--mut);line-height:1.9}
+.tc p b{display:inline;font-family:inherit;font-size:inherit;margin:0;color:var(--ink)}
 
 /* flow */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:30px}
@@ -163,9 +169,10 @@ footer b{color:#C9BA98}
   <img src="portal/icons/mark-160.png" alt="">
   <span class="bn">Hachi Life</span><span class="bs">名古屋の定期ハウスキーピング</span>
   <span class="sp"></span>
-  <a href="column/" style="font-size:13px;font-weight:700;color:var(--ink);padding:8px 6px;white-space:nowrap">コラム</a>
   <a class="cta" href="request.html">資料請求・ご相談</a>
-</div></header>
+</div>
+<nav class="tabs"><a href="#plans">料金プラン</a><a href="#faq">よくあるご質問</a><a href="column/">コラム</a></nav>
+</header>
 
 <!-- HERO -->
 <div class="hero">
@@ -280,7 +287,7 @@ footer b{color:#C9BA98}
 </div></section>
 
 <!-- FAQ -->
-<section><div class="wrap">
+<section id="faq"><div class="wrap">
   <div class="eyeb">FAQ</div>
   <h2>よくあるご質問</h2>
   <div class="tgrid" style="grid-template-columns:1fr;gap:12px">
