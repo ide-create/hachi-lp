@@ -327,6 +327,14 @@ footer a{color:#C9B98D;border-bottom:1px solid rgba(201,185,141,.4)}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.22,.8,.3,1)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.mq-track{animation:none}}
+.startnow{display:inline-flex;flex-direction:column;gap:2px;margin-bottom:22px;padding:13px 26px 13px 22px;border-radius:16px;background:linear-gradient(120deg,#F7D26A,#EBA23B);color:#2A1D07;border:none;box-shadow:0 0 0 0 rgba(242,193,78,.55),0 18px 36px -14px rgba(235,162,59,.8);animation:snpulse 2.4s ease-out infinite;max-width:100%}
+.startnow small{font-size:11.5px;font-weight:900;letter-spacing:.12em;opacity:.78}
+.startnow b{font-size:clamp(15px,1.6vw,18px);font-weight:900;letter-spacing:.04em;line-height:1.5}
+.startnow b i{font-style:normal;display:inline-block;transition:transform .25s}
+.startnow:hover b i{transform:translateX(4px)}
+@keyframes snpulse{0%{box-shadow:0 0 0 0 rgba(242,193,78,.55),0 18px 36px -14px rgba(235,162,59,.8)}70%{box-shadow:0 0 0 16px rgba(242,193,78,0),0 18px 36px -14px rgba(235,162,59,.8)}100%{box-shadow:0 0 0 0 rgba(242,193,78,0),0 18px 36px -14px rgba(235,162,59,.8)}}
+@media(prefers-reduced-motion:reduce){.startnow{animation:none}}
+@media(max-width:480px){.startnow{padding:12px 18px}.startnow b{font-size:14.5px;white-space:nowrap}}
 </style>
 <link rel="canonical" href="https://hachi-lp-eta.vercel.app/">
 <meta property="og:type" content="website">
@@ -357,7 +365,7 @@ footer a{color:#C9B98D;border-bottom:1px solid rgba(201,185,141,.4)}
   <div class="vtext">名古屋 <i>・</i> 専属ハウスキーパー <i>・</i> 二〇二八年 始動予定</div>
   <div class="hero-in">
     <div class="wrap">
-      <a href="half.html" style="display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:8px 16px 8px 8px;border-radius:999px;background:rgba(36,26,13,.62);backdrop-filter:blur(6px);border:1px solid var(--honey2);color:#FFF1CC;font-size:12.5px;font-weight:700;letter-spacing:.03em;line-height:1.4"><span style="background:var(--honey2);color:#2A1D07;border-radius:999px;padding:4px 11px;font-size:11.5px;font-weight:900;white-space:nowrap">すぐ始めたい方</span><span>2027年1月スタートの定期プランはこちら →</span></a>
+      <a class="startnow" href="half.html"><small>すぐ始めたい方はこちら</small><b>2027年1月スタート｜定期プランを見る <i>→</i></b></a>
       <div class="kick">Your Own Housekeeper</div>
       <h1>わが家に、専属の<br><span class="u">ハウスキーパー</span>を。</h1>
       <p class="sub">NATIONAL STRATEGIC ZONE ・ NAGOYA</p>
