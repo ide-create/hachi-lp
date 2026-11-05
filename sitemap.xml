@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://hachi-lp-eta.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://hachi-lp-eta.vercel.app/half.html</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://hachi-lp-eta.vercel.app/en.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://hachi-lp-eta.vercel.app/column/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://hachi-lp-eta.vercel.app/column/kaji-kaseifu-chigai.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://hachi-lp-eta.vercel.app/column/ryokin-sentaku.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
