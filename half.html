@@ -43,7 +43,12 @@ section{padding:72px 0}
 .top .tabs a{border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);font-weight:900;font-size:13px;border-radius:999px;padding:8px 20px;white-space:nowrap;line-height:1.4}
 .top .tabs a:active{background:var(--honey2)}
 .top .tabs{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.top .tabs::-webkit-scrollbar{display:none}
-.top .tabs a.ext{background:var(--honey2)}
+.top .tabs a{flex-shrink:0}
+.top .tabs a.vip{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#171006,#3B2A0C);color:var(--honey2);border-color:var(--honey2);letter-spacing:.06em;box-shadow:0 4px 14px rgba(185,138,47,.35)}
+.top .tabs a.vip i{font-style:normal;font-size:10px;font-weight:900;background:var(--honey2);color:#2A1D07;border-radius:99px;padding:1px 8px;letter-spacing:.08em}
+.top .tabs a.vip::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(242,193,78,.45),transparent);transform:skewX(-20deg);animation:vipsh 3.2s ease-in-out infinite}
+@keyframes vipsh{0%,55%{left:-60%}100%{left:130%}}
+@media(prefers-reduced-motion:reduce){.top .tabs a.vip::after{animation:none;display:none}}
 @media(max-width:480px){.top .tabs{padding:0 14px 10px}}
 html{scroll-padding-top:110px}
 .top .sp{flex:1}
@@ -175,7 +180,7 @@ footer b{color:#C9BA98}
   <span class="sp"></span>
   <a class="cta" href="request.html">資料請求・ご相談</a>
 </div>
-<nav class="tabs"><a href="#plans">料金プラン</a><a href="#faq">よくあるご質問</a><a href="column/">コラム</a><a class="ext" href="index.html#english" target="_blank" rel="noopener">子どもの英語 ↗</a><a class="ext" href="index.html" target="_blank" rel="noopener">専属プラン（2028年〜） ↗</a><a class="ext" href="en.html" target="_blank" rel="noopener">English ↗</a></nav>
+<nav class="tabs"><a class="vip" href="index.html" target="_blank" rel="noopener"><span>✦ わが家だけの専属プラン</span><i>準備中</i></a><a href="#plans">料金プラン</a><a href="#faq">よくあるご質問</a><a href="column/">コラム</a><a href="index.html#english" target="_blank" rel="noopener">子どもの英語 ↗</a><a href="en.html" target="_blank" rel="noopener">English ↗</a></nav>
 </header>
 
 <!-- HERO -->
