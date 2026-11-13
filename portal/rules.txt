@@ -40,6 +40,9 @@ service cloud.firestore {
       allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
       allow write: if isAdmin();
     }
+    match /pushTokens/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
     match /leaves/{id} {
       allow create: if signedIn() && request.resource.data.uid == request.auth.uid
         && request.resource.data.status == 'pending';

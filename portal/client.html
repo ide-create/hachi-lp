@@ -232,6 +232,7 @@ button{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="config.js"></script>
+<script src="push.js"></script>
 <script>
 let me=null, meDoc=null, myReports=[], myVisits=[], lastMsgs=null, lastChatSeen=0;
 const $=id=>document.getElementById(id);
@@ -335,7 +336,7 @@ function renderChat(msgs){
 $('sendBtn').onclick=async()=>{
   const t=$('msgIn').value.trim();if(!t)return;
   $('msgIn').value='';
-  try{await db.collection('messages').add({uid:me.uid,from:'client',fromName:meDoc.name||'',text:t,textTr:null,at:TS()})}
+  try{const mRef=await db.collection('messages').add({uid:me.uid,from:'client',fromName:meDoc.name||'',text:t,textTr:null,at:TS()});hlNotify('message',mRef.id)}
   catch(e){toast('送信に失敗しました');console.error(e)}
 };
 // Enterは文字確定のみ（送信はボタン）

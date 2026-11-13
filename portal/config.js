@@ -11,6 +11,12 @@ const firebaseConfig = {
 };
 // ============================================
 
+// ===== 通知の設定（空のあいだは通知機能オフ） =====
+// PUSH_VAPID_KEY: Firebaseコンソール > プロジェクトの設定 > Cloud Messaging > ウェブプッシュ証明書 の鍵ペア
+// NOTIFY_URL: 通知用GAS（notify_gas.gs）をウェブアプリとしてデプロイしたURL
+const PUSH_VAPID_KEY = "";
+const NOTIFY_URL = "";
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();

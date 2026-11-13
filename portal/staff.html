@@ -381,6 +381,7 @@ button{font-family:inherit}
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="config.js"></script>
+<script src="push.js"></script>
 <script>
 let me=null, meDoc=null, lastMsgs=null, punches=[], punchWeek=[], myReports=[], notices=[], myVisits=[], myLeaves=[], tasksState=[], photoData=null, reportDone=false, timer=null, lastChatSeen=0;
 const $=id=>document.getElementById(id);
@@ -588,6 +589,7 @@ $('submitBtn').onclick=async()=>{
       tasks:(meDoc.tasks||[]),tasksDone:tasksObj,photo:photoData||null,
       workedMin:c.workedMin,breakMin:c.breakMin,submittedAt:TS()
     });
+    hlNotify('report',todayStr()+'_'+me.uid);
     toast(L('tSent'));
   }catch(e){toast(L('tRepErr'));console.error(e)}
 };
@@ -706,7 +708,8 @@ $('lvBtn').onclick=async()=>{
   const from=$('lvFrom').value;if(!from)return;
   const to=$('lvTo').value||from;
   try{
-    await db.collection('leaves').add({uid:me.uid,name:meDoc.name||'',from,to,reason:$('lvReason').value.trim(),status:'pending',at:TS()});
+    const lvRef=await db.collection('leaves').add({uid:me.uid,name:meDoc.name||'',from,to,reason:$('lvReason').value.trim(),status:'pending',at:TS()});
+    hlNotify('leave',lvRef.id);
     $('lvFrom').value='';$('lvTo').value='';$('lvReason').value='';
     toast(L('tReq'));
   }catch(e){toast(L('tSendErr'));console.error(e)}
@@ -738,7 +741,8 @@ $('sendBtn').onclick=async()=>{
   $('msgIn').value='';
   try{
     const tr=await autoTranslate(t); // 原文＋自動翻訳の両方を保存
-    await db.collection('messages').add({uid:me.uid,from:'staff',fromName:meDoc.name||'',text:t,textTr:tr||null,at:TS()});
+    const mRef=await db.collection('messages').add({uid:me.uid,from:'staff',fromName:meDoc.name||'',text:t,textTr:tr||null,at:TS()});
+    hlNotify('message',mRef.id);
   }catch(e){toast(L('tSendErr'));console.error(e)}
 };
 // Enterは文字確定のみ（送信は右の送信ボタン）。PCの物理キーボードでも誤送信防止のため送信しない。

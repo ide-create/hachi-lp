@@ -275,6 +275,7 @@ input:focus,textarea:focus{border-color:var(--honey);box-shadow:0 0 0 3px rgba(2
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="config.js"></script>
+<script src="push.js"></script>
 <script>
 const $=id=>document.getElementById(id);
 let staffMap={}, clientsMap={}, punchToday=[], punchWeek=[], reportsToday={}, curThread=null, unsubChat=null, allVisits=[], allLeaves=[], allNotices=[];
@@ -436,7 +437,8 @@ $('aSendBtn').onclick=async()=>{
   $('aMsgIn').value='';
   try{
     const tr=await autoTranslate(t); // 原文＋自動翻訳の両方を保存
-    await db.collection('messages').add({uid:curThread,from:'hq',fromName:'Hachi Life Office',text:t,textTr:tr||null,at:TS()});
+    const mRef=await db.collection('messages').add({uid:curThread,from:'hq',fromName:'Hachi Life Office',text:t,textTr:tr||null,at:TS()});
+    hlNotify('message',mRef.id);
   }catch(e){toast('送信失敗');console.error(e)}
 };
 $('aMsgIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing&&e.keyCode!==229)$('aSendBtn').click()});
@@ -465,8 +467,8 @@ function renderPlan(){
         <button class="save lvap" data-id="${l.id}" style="padding:8px 18px">承認</button>
         <button class="lvrj" data-id="${l.id}" style="border:1px solid var(--line2);background:none;border-radius:999px;padding:8px 18px;color:var(--red);font-weight:900;cursor:pointer">却下</button>
       </span></div>`).join('')||'<p class="note">承認待ちはありません</p>';
-  document.querySelectorAll('.lvap').forEach(b=>b.onclick=()=>db.collection('leaves').doc(b.dataset.id).set({status:'approved',decidedAt:TS()},{merge:true}).then(()=>toast('承認しました')));
-  document.querySelectorAll('.lvrj').forEach(b=>b.onclick=()=>db.collection('leaves').doc(b.dataset.id).set({status:'rejected',decidedAt:TS()},{merge:true}).then(()=>toast('却下しました')));
+  document.querySelectorAll('.lvap').forEach(b=>b.onclick=()=>db.collection('leaves').doc(b.dataset.id).set({status:'approved',decidedAt:TS()},{merge:true}).then(()=>{toast('承認しました');hlNotify('leave',b.dataset.id)}));
+  document.querySelectorAll('.lvrj').forEach(b=>b.onclick=()=>db.collection('leaves').doc(b.dataset.id).set({status:'rejected',decidedAt:TS()},{merge:true}).then(()=>{toast('却下しました');hlNotify('leave',b.dataset.id)}));
   const done=allLeaves.filter(l=>l.status!=='pending').sort((a,b)=>(b.from||'').localeCompare(a.from||'')).slice(0,20);
   $('lvDone').innerHTML=done.map(l=>`<div style="padding:7px 0;border-bottom:1px solid #F3F1EA;font-size:12.5px">
     <b>${esc(l.name||'')}</b> ・ ${fmtD(l.from)}${l.to&&l.to!==l.from?' 〜 '+fmtD(l.to):''} ・ ${l.status==='approved'?'<span style="color:var(--grn);font-weight:900">承認</span>':'<span style="color:var(--red);font-weight:900">却下</span>'}</div>`).join('')||'<p class="note">まだありません</p>';
@@ -482,7 +484,8 @@ $('vsAdd').onclick=async()=>{
   const uid=$('vsStaff').value,day=$('vsDay').value;
   if(!uid||!day){toast('スタッフと日付を選んでください');return}
   try{
-    await db.collection('visits').add({uid,name:(staffMap[uid]||{}).name||'',clientUid:(staffMap[uid]||{}).clientUid||null,day,time:$('vsT1').value+'–'+$('vsT2').value,note:$('vsNote').value.trim(),at:TS()});
+    const vRef=await db.collection('visits').add({uid,name:(staffMap[uid]||{}).name||'',clientUid:(staffMap[uid]||{}).clientUid||null,day,time:$('vsT1').value+'–'+$('vsT2').value,note:$('vsNote').value.trim(),at:TS()});
+    hlNotify('visit',vRef.id);
     $('vsDay').value='';$('vsNote').value='';
     toast('予定を追加しました');
   }catch(e){toast('追加失敗');console.error(e)}
@@ -501,7 +504,8 @@ $('ntSend').onclick=async()=>{
   const t=$('ntText').value.trim();if(!t)return;
   try{
     const tr=await autoTranslate(t);
-    await db.collection('notices').add({text:t,textTr:tr||null,at:TS()});
+    const nRef=await db.collection('notices').add({text:t,textTr:tr||null,at:TS()});
+    hlNotify('notice',nRef.id);
     $('ntText').value='';toast('配信しました');
   }catch(e){toast('配信失敗');console.error(e)}
 };
