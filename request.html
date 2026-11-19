@@ -62,12 +62,14 @@ button:disabled{opacity:.55;cursor:default}
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
   gtag('js', new Date());
 </script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:site_name" content="Hachi Life（ハチライフ）">
+<script src="/track.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -145,7 +147,12 @@ f.addEventListener('submit', async (e) => {
   const btn = document.getElementById('btn');
   btn.disabled = true; btn.textContent = '送信中…';
   try {
-    await fetch(GAS_URL, { method: 'POST', mode: 'no-cors', body: new FormData(f) });
+    const fd = new FormData(f);
+    const attr = (window.hlAttr && window.hlAttr()) || '';
+    if (attr) fd.set('source', (fd.get('source') || '') + '｜流入: ' + attr);
+    await fetch(GAS_URL, { method: 'POST', mode: 'no-cors', body: fd });
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'generate_lead', lead_source: attr, lead_plan: fd.get('plan') || '', lead_wish: fd.get('wish') || '' });
     f.style.display = 'none';
     document.getElementById('done').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });

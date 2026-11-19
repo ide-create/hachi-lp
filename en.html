@@ -168,12 +168,14 @@ h2{font-size:clamp(28px,5vw,40px)}
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
   gtag('js', new Date());
 </script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:site_name" content="Hachi Life（ハチライフ）">
+<script src="/track.js" defer></script>
 </head>
 <body>
 

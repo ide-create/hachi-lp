@@ -46,12 +46,14 @@ footer{background:var(--dark2);color:#C9B98C;font-size:12px;text-align:center;pa
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
   gtag('js', new Date());
 </script>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:site_name" content="Hachi Life（ハチライフ）">
+<script src="/track.js" defer></script>
 </head>
 <body>
 <div class="top"><div class="in"><a class="brand" href="half.html"><img src="portal/icons/mark-160.png" alt="">HACHI LIFE</a><a class="btn" href="request.html">資料請求</a></div></div>
