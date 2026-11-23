@@ -17,7 +17,7 @@
 <style>
 :root{
   --bg:#0E0D0B;--bg2:#15130F;--bg3:#1C1914;--on:#EEE8DC;--on2:#A8A091;--on3:#746D61;
-  --line:rgba(238,232,220,.16);--line2:rgba(238,232,220,.09);--green:#1F3B34;--green2:#2B5248;
+  --line:rgba(238,232,220,.16);--line2:rgba(238,232,220,.09);--green:#1F3B34;--gold:#CDBA8C;--gold2:#A08A55;--green2:#2B5248;
   --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;--en:"Cormorant Garamond","Shippori Mincho",serif;
   color-scheme:dark;
 }
@@ -176,6 +176,23 @@ h3.h{font-family:var(--serif);font-weight:400;font-size:clamp(22px,3.3vw,32px);l
 .pg .yen small{font-family:var(--serif);font-size:12px;color:var(--on2);margin-left:8px;letter-spacing:.1em}
 .pg ul{list-style:none;margin-top:22px}
 .pg li{padding:10px 0;border-top:1px solid var(--line2);font-size:13px;color:#D6CFC1}
+
+.pl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;margin-top:56px;text-align:center}
+.pl>div{border-left:1px solid var(--gold);border-right:1px solid var(--gold);padding:34px 30px 44px;min-width:0}
+.pl .nm{font-family:var(--en);font-size:21px;letter-spacing:.42em;padding-left:.42em;color:var(--green)}
+.pl .who{font-size:12px;letter-spacing:.2em;color:var(--gold2);margin-top:12px}
+.pl .rc{margin-left:10px;border:1px solid var(--gold);padding:1px 9px;font-size:10.5px;letter-spacing:.16em}
+.pl .yen{font-family:var(--en);font-size:44px;line-height:1.2;letter-spacing:.02em;margin-top:14px}
+.pl .yen small{font-family:var(--serif);font-size:12px;color:var(--on2);margin-left:6px;letter-spacing:.1em}
+.pl .nt{font-size:12px;letter-spacing:.14em;color:var(--gold2);margin-top:6px}
+.pl .nt::after{content:"";display:block;width:40px;height:1px;background:var(--gold);margin:16px auto 0}
+.pl ul{list-style:none;margin:30px 0 34px;text-align:left}
+.pl li{position:relative;padding:13px 0 13px 18px;border-bottom:1px solid var(--line);font-size:13.5px;letter-spacing:.08em;color:#3A352D}
+.pl li:last-child{border-bottom:none}
+.pl li::before{content:"";position:absolute;left:2px;top:50%;width:5px;height:5px;background:var(--green);transform:translateY(-50%) rotate(45deg)}
+.pl .ob{display:inline-block;border:1px solid var(--on);padding:15px 34px;font-size:12.5px;letter-spacing:.2em;transition:background .3s,color .3s}
+.pl .ob:hover{background:var(--green);border-color:var(--green);color:#F4EFE3}
+@media(max-width:820px){.pl{grid-template-columns:1fr;gap:0}.pl>div{border-left:none;border-right:none;border-top:1px solid var(--gold);padding:40px 4px 46px}.pl>div:last-child{border-bottom:1px solid var(--gold)}}
 
 .sf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:46px;border-top:1px solid var(--line)}
 .sf>div{padding:28px 26px 4px 0;min-width:0}
@@ -341,10 +358,10 @@ body{letter-spacing:.02em;line-height:1.9}h3.h{font-family:var(--en);letter-spac
   <div class="lab">Plan</div>
   <h3 class="h">Monthly fees</h3>
   <p class="lead">A monthly fee only. No joining fee and no extras. Four hours per visit, about ¥3,140 per hour (travel and tax included).</p>
-  <div class="pg">
-    <div><div class="nm">ONE</div><div class="fq">Once a week</div><div class="yen">54,500<small>yen / month</small></div><ul><li>1 visit a week, 4 hours</li><li>Kitchen, bath and the essentials</li><li>All services and inclusions</li></ul></div>
-    <div><div class="nm">TWO<span class="rec">Recommended</span></div><div class="fq">Twice a week</div><div class="yen">109,000<small>yen / month</small></div><ul><li>2 visits a week, 4 hours each</li><li>Most of your housework, handed over</li><li>All services and inclusions</li></ul></div>
-    <div><div class="nm">THREE</div><div class="fq">Three times a week</div><div class="yen">163,500<small>yen / month</small></div><ul><li>3 visits a week, 4 hours each</li><li>Nearly all weekday housework</li><li>All services and inclusions</li></ul></div>
+  <div class="pl">
+    <div class="fade"><div class="nm">ONE</div><div class="who">Once a week</div><div class="yen">54,500<small>yen / month</small></div><div class="nt">Kitchen, bath and the essentials</div><ul><li>1 visit a week, 4 hours</li><li>The same housekeeper every visit</li><li>Laundry, kitchen and bath, bedrooms and living spaces</li><li>Restocking and waiting in</li><li>Requests and reports in the app</li><li>The on-time promise</li><li>A monthly time statement</li></ul><a class="ob" href="request.html">Contact us</a></div>
+    <div class="fade"><div class="nm">TWO</div><div class="who">Twice a week<span class="rc">Recommended</span></div><div class="yen">109,000<small>yen / month</small></div><div class="nt">Most of your housework, handed over</div><ul><li>2 visits a week, 4 hours each</li><li>The same housekeeper every visit</li><li>Laundry, kitchen and bath, bedrooms and living spaces</li><li>Restocking and waiting in</li><li>Requests and reports in the app</li><li>The on-time promise</li><li>A monthly time statement</li></ul><a class="ob" href="request.html">Contact us</a></div>
+    <div class="fade"><div class="nm">THREE</div><div class="who">Three times a week</div><div class="yen">163,500<small>yen / month</small></div><div class="nt">Nearly all weekday housework</div><ul><li>3 visits a week, 4 hours each</li><li>The same housekeeper every visit</li><li>Laundry, kitchen and bath, bedrooms and living spaces</li><li>Restocking and waiting in</li><li>Requests and reports in the app</li><li>The on-time promise</li><li>A monthly time statement</li></ul><a class="ob" href="request.html">Contact us</a></div>
   </div>
   <p class="fine">* All prices include tax. Shopping is billed at cost the following month.</p>
 </div></section>
