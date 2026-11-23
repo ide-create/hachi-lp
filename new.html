@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0E0D0B">
 <title>【確認用】HACHI LIFE（ハチライフ）｜名古屋のプライベートハウスキーピング</title>
 <meta name="description" content="HACHI LIFE（ハチライフ）は、名古屋のプライベートハウスキーピング。担当固定のハウスキーパー、AIの個人秘書、日用品の補充と立ち会い、毎月の時間の明細書までを、一つの窓口でお引き受けします。">
 <link rel="canonical" href="https://hachi-lp-eta.vercel.app/new.html">
@@ -12,207 +13,200 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F6F3EC;--paper:#FBF9F4;--ink:#1B1915;--sub:#6E685E;--line:#D9D2C3;--line2:#E8E2D5;
-  --gold:#9C7C3C;--gold2:#C9A862;--dark:#13110E;--dark2:#1D1A15;--on:#EFE9DC;--on2:#A79E8D;
-  --serif:"Shippori Mincho",serif;--sans:"Zen Kaku Gothic New",sans-serif;--en:"Cormorant Garamond",serif;
+  --bg:#0E0D0B;--bg2:#15130F;--bg3:#1C1914;--on:#EEE8DC;--on2:#A8A091;--on3:#746D61;
+  --line:rgba(238,232,220,.16);--line2:rgba(238,232,220,.09);--green:#1F3B34;--green2:#2B5248;
+  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;--en:"Cormorant Garamond","Shippori Mincho",serif;
+  color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:15px;line-height:2.05;font-weight:400;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;background:var(--bg)}
+body{font-family:var(--serif);background:var(--bg);color:var(--on);font-size:15px;line-height:2.1;font-weight:400;-webkit-font-smoothing:antialiased;letter-spacing:.04em}
 img,video{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
-section{padding:112px 0}
-@media(max-width:700px){section{padding:76px 0}}
-.lab{font-family:var(--en);font-size:13px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:500}
-h2{font-family:var(--serif);font-weight:500;font-size:clamp(24px,3.9vw,36px);line-height:1.8;letter-spacing:.08em;margin:18px 0 22px;text-wrap:balance}
-.lead{color:var(--sub);max-width:36em;font-size:14.5px}
-.rule{width:44px;height:1px;background:var(--gold);margin:26px 0}
-.btn{display:inline-flex;align-items:center;gap:16px;border:1px solid currentColor;padding:15px 30px;font-size:13px;letter-spacing:.2em;font-weight:500;transition:background .25s,color .25s}
-.btn::after{content:"";width:26px;height:1px;background:currentColor;transition:width .25s}
-.btn:hover::after{width:38px}
-.btn.fill{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.more{display:inline-flex;align-items:center;gap:12px;font-size:12.5px;letter-spacing:.18em;color:var(--gold);margin-top:22px}
-.more::after{content:"";width:30px;height:1px;background:var(--gold)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 
 /* header */
-.hd{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .3s,border-color .3s;border-bottom:1px solid transparent;color:var(--on);padding-top:env(safe-area-inset-top,0px)}
-.hd.s{background:rgba(246,243,236,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--line2);color:var(--ink)}
-.hd .in{max-width:1240px;margin:0 auto;padding:16px max(24px,env(safe-area-inset-right,0px)) 16px max(24px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:28px}
-.brand{display:flex;flex-direction:column;line-height:1.2}
-.brand b{font-family:var(--en);font-weight:500;font-size:21px;letter-spacing:.3em;white-space:nowrap}
-.brand span{font-size:9.5px;letter-spacing:.42em;opacity:.75;margin-top:3px}
-.nav{margin-left:auto;display:flex;gap:30px;font-family:var(--en);font-size:15px;letter-spacing:.16em}
-.nav a{opacity:.85;padding:4px 0;border-bottom:1px solid transparent}
-.nav a:hover{opacity:1;border-color:currentColor}
-.hd .inq{border:1px solid currentColor;padding:9px 22px;font-family:var(--en);font-size:14px;letter-spacing:.22em;white-space:nowrap}
-.mn{display:none}
-@media(max-width:900px){
-  .nav{display:none}
-  .hd .in{gap:12px}
-  .hd .inq{margin-left:auto;padding:8px 16px;font-size:13px}
-  .mn{display:block;position:relative}
-  .mn summary{list-style:none;cursor:pointer;width:40px;height:38px;display:grid;place-items:center}
-  .mn summary::-webkit-details-marker{display:none}
-  .mn summary i{display:block;width:22px;height:1px;background:currentColor;box-shadow:0 7px 0 currentColor,0 -7px 0 currentColor}
-  .mn div{position:absolute;right:0;top:46px;background:var(--paper);color:var(--ink);border:1px solid var(--line);min-width:210px;padding:10px 0;box-shadow:0 18px 40px rgba(20,16,10,.16)}
-  .mn div a{display:block;padding:11px 22px;font-family:var(--en);font-size:16px;letter-spacing:.14em}
-  .mn div a small{font-family:var(--sans);font-size:10.5px;letter-spacing:.1em;color:var(--sub);margin-left:10px}
-}
-@media(max-width:380px){.brand b{font-size:16px;letter-spacing:.2em}.hd .inq{padding:7px 12px;font-size:12px;letter-spacing:.16em}.hd .in{gap:8px}}
+.hd{position:fixed;inset:0 0 auto 0;z-index:80;padding-top:env(safe-area-inset-top,0px);transition:background .4s}
+.hd.s{background:linear-gradient(180deg,rgba(14,13,11,.86),rgba(14,13,11,0))}
+.hd .in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px max(28px,env(safe-area-inset-right,0px)) 18px max(28px,env(safe-area-inset-left,0px))}
+.mb{background:none;border:0;color:inherit;width:44px;height:40px;display:grid;place-items:center;cursor:pointer;margin-left:-8px}
+.mb i{display:block;width:26px;height:1px;background:currentColor;box-shadow:0 7px 0 currentColor,0 -7px 0 currentColor}
+.mark{font-family:var(--en);font-size:17px;letter-spacing:.3em;white-space:nowrap;padding-left:.3em}
+.hr{display:flex;justify-content:flex-end;align-items:center;gap:22px}
+.hr .lg{font-family:var(--en);font-size:15px;letter-spacing:.14em;border-bottom:1px solid currentColor;padding-bottom:2px}
+.inq{background:var(--green);font-family:var(--en);font-size:14px;letter-spacing:.14em;padding:9px 18px;font-weight:500;transition:background .3s;white-space:nowrap}
+.inq:hover{background:var(--green2)}
+@media(max-width:560px){.hd .in{padding:12px 16px}.mark{font-size:14px;letter-spacing:.22em}.hr{gap:0}.hr .lg{display:none}.inq{padding:8px 12px;font-size:12.5px}}
+
+/* menu */
+.menu{position:fixed;inset:0;z-index:70;background:rgba(14,13,11,.97);display:grid;place-items:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.menu.on{opacity:1;visibility:visible}
+.menu nav{display:grid;gap:6px;text-align:center}
+.menu a{font-family:var(--en);font-size:clamp(24px,5vw,34px);letter-spacing:.2em;text-transform:uppercase;padding:8px 20px;color:var(--on2);transition:color .3s}
+.menu a:hover{color:var(--on)}
+.menu a small{display:block;font-family:var(--serif);font-size:11px;letter-spacing:.3em;color:var(--on3);margin-top:-4px}
 
 /* hero */
-.hero{position:relative;min-height:100vh;min-height:100svh;background:var(--dark);color:var(--on);display:flex;align-items:flex-end;overflow:hidden}
-.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,17,14,.42) 0%,rgba(19,17,14,.08) 34%,rgba(19,17,14,.82) 100%)}
-.hero .in{position:relative;z-index:2;width:100%;max-width:1240px;margin:0 auto;padding:0 max(24px,env(safe-area-inset-right,0px)) 84px max(24px,env(safe-area-inset-left,0px))}
-.hero .lab{color:var(--gold2)}
-.hero h1{white-space:nowrap;font-family:var(--en);font-weight:400;font-size:clamp(36px,10.5vw,112px);letter-spacing:.14em;line-height:1.12;margin:16px 0 6px}
-.hero .jp{font-family:var(--serif);font-size:clamp(15px,2.3vw,20px);letter-spacing:.3em;font-weight:400}
-.hero p{max-width:31em;font-size:14.5px;color:#DAD2C2;margin:26px 0 34px}
-.hero .note{margin-top:30px;font-size:11.5px;letter-spacing:.14em;color:var(--on2)}
-@media(max-width:700px){.hero .in{padding-bottom:58px}}
-@media(max-width:520px){.hero .jp{font-size:13.5px;letter-spacing:.16em;white-space:nowrap}.hero h1{letter-spacing:.1em}}
+.hero{position:relative;height:100vh;height:100svh;overflow:hidden;scroll-snap-align:start;display:grid;place-items:center;text-align:center}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,13,11,.25),rgba(14,13,11,.72))}
+.hero .c{position:relative;z-index:2;padding:0 24px}
+.hero h1{font-family:var(--en);font-weight:400;font-size:clamp(26px,5vw,46px);letter-spacing:.34em;padding-left:.34em;white-space:nowrap}
+.hero p{font-size:clamp(12px,1.5vw,14px);letter-spacing:.36em;color:#D9D2C4;margin-top:14px;padding-left:.36em}
+@media(max-width:480px){.hero p{letter-spacing:.2em;padding-left:.2em;font-size:11.5px}}
+.scr{position:absolute;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:2;font-family:var(--en);font-size:12px;letter-spacing:.3em;color:var(--on2);display:grid;justify-items:center;gap:10px}
+.scr::after{content:"";width:1px;height:44px;background:linear-gradient(var(--on2),transparent);animation:dr 2.2s ease-in-out infinite}
+@keyframes dr{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* strip */
-.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;background:var(--dark);padding:6px 0 0}
-.strip div{aspect-ratio:3/4;overflow:hidden;background:var(--dark2)}
-.strip img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.03);transition:transform 1.2s ease}
-.strip div:hover img{transform:scale(1.04)}
-@media(max-width:700px){.strip{grid-template-columns:repeat(5,62vw);overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}.strip::-webkit-scrollbar{display:none}.strip div{scroll-snap-align:start}}
-
-/* intro */
-.intro .g{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:70px;align-items:end}
-@media(max-width:860px){.intro .g{grid-template-columns:1fr;gap:34px}}
-.area{border-top:1px solid var(--line);font-family:var(--en);letter-spacing:.24em;font-size:15px}
-.area div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:15px 2px;border-bottom:1px solid var(--line)}
-.area span{font-family:var(--sans);font-size:12.5px;letter-spacing:.2em;color:var(--sub)}
-
-/* pillars */
-.pil{background:var(--paper);border-block:1px solid var(--line2)}
-.pr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:76px;align-items:center;padding:64px 0;border-top:1px solid var(--line2)}
-.pr:first-of-type{border-top:none;padding-top:26px}
-.pr.rev .tx{order:2}
-@media(max-width:860px){.pr{grid-template-columns:1fr;gap:30px;padding:48px 0}.pr.rev .tx{order:0}}
-.pr .no{font-family:var(--en);font-size:15px;letter-spacing:.3em;color:var(--sub)}
-.pr .no b{font-weight:500;color:var(--gold);margin-right:14px}
-.pr h3{text-wrap:balance;font-family:var(--serif);font-weight:500;font-size:clamp(21px,3vw,28px);letter-spacing:.08em;line-height:1.8;margin:14px 0 14px}
-.pr p{color:var(--sub);font-size:14.5px;max-width:30em}
-.pr ul{list-style:none;margin-top:20px;border-top:1px solid var(--line2);max-width:30em}
-.pr li{padding:11px 0;border-bottom:1px solid var(--line2);font-size:13.5px}
-.pr .fine{font-size:11.5px;color:var(--sub);margin-top:14px;line-height:1.9;max-width:34em}
-.md{position:relative}
-.md video,.md img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:saturate(.8)}
-.md.card{aspect-ratio:auto}
-
-/* chat */
-.chat{background:var(--bg);border:1px solid var(--line);padding:26px 22px 16px}
-.chat .t{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--en);letter-spacing:.24em;font-size:13px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
-.chat .t small{font-family:var(--sans);font-size:10.5px;letter-spacing:.14em;color:var(--sub)}
-.bub{padding:13px 17px;font-size:13.5px;line-height:1.85;margin-bottom:11px;max-width:88%}
-.bub small{display:block;font-size:10.5px;color:var(--sub);margin-top:3px;letter-spacing:.06em}
-.bub.me{background:var(--ink);color:var(--on);margin-left:auto}
-.bub.me small{color:var(--on2)}
-.bub.s{background:var(--paper);border:1px solid var(--line)}
-
-/* statement */
-.stm{background:var(--dark);color:var(--on);padding:34px 30px 26px}
-.stm .t{font-family:var(--en);letter-spacing:.3em;font-size:12.5px;color:var(--gold2)}
-.stm .cap{font-size:12px;color:var(--on2);margin-top:22px;letter-spacing:.12em}
-.stm .big{font-family:var(--en);font-weight:400;font-size:clamp(50px,9vw,72px);line-height:1.1;color:var(--on)}
-.stm .big small{font-family:var(--sans);font-size:13px;color:var(--on2);margin:0 10px 0 4px;letter-spacing:.1em}
-.stm table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
-.stm td{padding:11px 0;border-top:1px solid rgba(201,168,98,.22)}
+/* stage */
+.stage{position:relative;height:500vh}
+.stage .sn{position:absolute;left:0;width:1px;height:1px;scroll-snap-align:start}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--bg)}
+.sl{position:absolute;inset:0;display:grid;grid-template-columns:var(--l,50%) 1fr;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s}
+.sl.on{opacity:1;visibility:visible}
+.sl .p{position:relative;overflow:hidden;background:var(--bg2)}
+.sl .p video,.sl .p img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.72) brightness(.82) contrast(1.05);transform:scale(1.06);transition:transform 7s ease-out}
+.sl.on .p video,.sl.on .p img{transform:scale(1)}
+.sl .p:first-child::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(14,13,11,.78) 0%,rgba(14,13,11,.35) 42%,rgba(14,13,11,.1) 70%)}
+.sl .p+.p::after{content:"";position:absolute;inset:0;background:rgba(14,13,11,.12);pointer-events:none}
+.sl .tx{position:absolute;z-index:3;left:max(38px,env(safe-area-inset-left,0px));top:108px;max-width:min(520px,calc(var(--l,50%) - 60px))}
+.sl .tx>*{opacity:0;transform:translateY(14px);transition:opacity .9s ease .25s,transform .9s ease .25s}
+.sl.on .tx>*{opacity:1;transform:none}
+.sl.on .tx>*:nth-child(2){transition-delay:.38s}.sl.on .tx>*:nth-child(3){transition-delay:.5s}.sl.on .tx>*:nth-child(4){transition-delay:.62s}
+.sl .ct{font-size:14.5px;letter-spacing:.14em;font-weight:500}
+.sl h2{font-family:var(--en);font-weight:400;font-size:clamp(28px,3.1vw,40px);letter-spacing:.2em;text-transform:uppercase;line-height:1.15;margin:12px 0 14px}
+.sl h2.jp{font-family:var(--serif);font-size:clamp(22px,2.5vw,30px);letter-spacing:.14em;text-transform:none;line-height:1.6}
+.sl .bd{font-size:13.5px;line-height:2.05;color:#DDD6C8}
+.sl .mr{display:inline-block;margin-top:22px;font-size:12.5px;letter-spacing:.14em;border-bottom:1px solid rgba(238,232,220,.6);padding-bottom:5px}
+.cnt{position:absolute;z-index:4;left:max(38px,env(safe-area-inset-left,0px));bottom:calc(34px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:20px;font-family:var(--en);font-size:15px;letter-spacing:.12em}
+.cnt .bar{width:240px;max-width:38vw;height:1px;background:rgba(238,232,220,.28);position:relative}
+.cnt .bar i{position:absolute;left:0;top:0;height:1px;background:var(--on);width:20%;transition:width .8s ease}
+.map{position:absolute;inset:0;z-index:2;display:grid;place-items:center;pointer-events:none}
+.map svg{width:min(62vh,74vw);height:auto;overflow:visible}
+.map text{font-family:var(--en);font-size:13px;letter-spacing:.2em;fill:#EEE8DC}
+.sl .p.card{display:grid;place-items:center;padding:90px 28px 70px;background:var(--bg2)}
+.stm{width:min(420px,100%);border:1px solid var(--line);padding:34px 30px 26px;background:rgba(14,13,11,.55)}
+.stm .t{font-family:var(--en);letter-spacing:.3em;font-size:12.5px;color:var(--on2)}
+.stm .cap{font-size:12px;color:var(--on2);margin-top:20px;letter-spacing:.14em}
+.stm .big{font-family:var(--en);font-size:clamp(46px,6vw,68px);line-height:1.1}
+.stm .big small{font-family:var(--serif);font-size:13px;color:var(--on2);margin:0 10px 0 4px}
+.stm table{width:100%;border-collapse:collapse;margin-top:18px;font-size:13px}
+.stm td{padding:10px 0;border-top:1px solid var(--line)}
 .stm td:nth-child(2){color:var(--on2);font-size:12px}
 .stm td:last-child{text-align:right;font-family:var(--en);font-size:19px;white-space:nowrap}
-.stm .val{border-top:1px solid rgba(201,168,98,.5);margin-top:4px;padding-top:15px;font-size:12px;color:var(--on2)}
-.stm .val b{font-weight:500;color:var(--gold2);font-size:14px}
+.stm .val{border-top:1px solid rgba(238,232,220,.4);padding-top:14px;font-size:12px;color:var(--on2)}
+.stm .val b{font-weight:500;color:var(--on);font-size:14px}
+.chat{width:min(430px,100%);border:1px solid var(--line);padding:26px 22px 14px;background:rgba(14,13,11,.55)}
+.chat .t{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--en);letter-spacing:.26em;font-size:13px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+.chat .t small{font-family:var(--serif);font-size:10.5px;letter-spacing:.14em;color:var(--on2)}
+.bub{padding:12px 16px;font-size:13px;line-height:1.9;margin-bottom:11px;max-width:88%}
+.bub small{display:block;font-size:10.5px;color:var(--on3);margin-top:2px;font-family:var(--en);letter-spacing:.1em}
+.bub.me{background:var(--green);margin-left:auto}
+.bub.me small{color:#9DB3AC}
+.bub.s{border:1px solid var(--line)}
 
-/* ancillary */
-.anc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:46px}
-@media(max-width:860px){.anc{grid-template-columns:1fr;gap:40px}}
-.ac .ph{aspect-ratio:4/3;overflow:hidden;background:var(--dark2)}
-.ac .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.78);transition:transform 1.2s ease}
-.ac:hover .ph img{transform:scale(1.04)}
+@media(max-width:820px){
+  .sl{grid-template-columns:1fr;grid-template-rows:54% 46%}
+  .sl .tx{left:22px;right:22px;top:84px;max-width:none}
+  .sl .ct{font-size:13px}
+  .sl .bd{font-size:12.5px;line-height:1.95}
+  .sl .mr{margin-top:14px}
+  .sl .p:first-child::after{background:linear-gradient(180deg,rgba(14,13,11,.82) 0%,rgba(14,13,11,.5) 60%,rgba(14,13,11,.2) 100%)}
+  .cnt{left:22px;bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+  .cnt .bar{width:150px}
+  .sl .p.card{padding:16px 18px 62px;place-items:start center}
+  .stm{padding:18px 20px 14px}.stm .cap{margin-top:8px}.stm .big{font-size:38px}.stm table{margin-top:8px;font-size:12px}.stm td{padding:5px 0}.stm td:last-child{font-size:16px}.stm .val{display:none}.stm{padding:14px 20px 8px}.stm td{padding:4px 0}
+  .chat{padding:14px 16px 6px}.chat .t{padding-bottom:8px;margin-bottom:10px}.bub{padding:8px 12px;font-size:12px;line-height:1.75;margin-bottom:7px}.chat .bub:nth-child(n+4){display:none}
+  .map svg{width:min(40vh,78vw);margin-top:16vh}
+}
+
+@media(max-width:820px) and (max-height:720px){.stm tr:nth-child(n+3){display:none}.chat .bub:nth-child(n+3){display:none}.sl .bd{font-size:12px}}
+/* detail sections */
+section.d{padding:120px 0;border-top:1px solid var(--line2)}
+@media(max-width:700px){section.d{padding:80px 0}}
+.lab{font-family:var(--en);font-size:13.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--on2)}
+h3.h{font-family:var(--serif);font-weight:400;font-size:clamp(22px,3.3vw,32px);line-height:1.85;letter-spacing:.12em;margin:16px 0 22px;text-wrap:balance}
+.lead{color:var(--on2);max-width:36em;font-size:14px}
+.fine{font-size:11.5px;color:var(--on3);line-height:2;margin-top:26px;max-width:60em}
+.btn{display:inline-flex;align-items:center;gap:18px;background:var(--green);padding:16px 32px;font-size:13px;letter-spacing:.22em;transition:background .3s}
+.btn:hover{background:var(--green2)}
+.btn::after{content:"";width:28px;height:1px;background:currentColor}
+
+.sv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:50px;border-top:1px solid var(--line)}
+.sv>div{padding:38px 40px 40px 0;border-bottom:1px solid var(--line);min-width:0}
+.sv>div:nth-child(even){padding-left:40px;padding-right:0;border-left:1px solid var(--line)}
+@media(max-width:820px){.sv{grid-template-columns:1fr}.sv>div,.sv>div:nth-child(even){padding:32px 0;border-left:none}}
+.sv .n{font-family:var(--en);font-size:14px;letter-spacing:.28em;color:var(--on2)}
+.sv h4{font-family:var(--serif);font-weight:500;font-size:19px;letter-spacing:.1em;margin:8px 0 10px}
+.sv p{font-size:13.5px;color:var(--on2)}
+.sv ul{list-style:none;margin-top:14px}
+.sv li{font-size:13px;padding:8px 0;border-top:1px solid var(--line2);color:#D6CFC1}
+
+.anc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:50px}
+@media(max-width:820px){.anc{grid-template-columns:1fr;gap:44px}}
+.ac .ph{aspect-ratio:4/5;overflow:hidden;background:var(--bg2)}
+.ac .ph img,.ac .ph video{width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.8);transition:transform 1.4s ease,filter .8s}
+.ac:hover .ph img,.ac:hover .ph video{transform:scale(1.04);filter:saturate(.8) brightness(.92)}
 .ac .lab{display:block;margin-top:20px;font-size:12px}
-.ac h3{font-family:var(--serif);font-weight:500;font-size:19px;letter-spacing:.08em;margin:6px 0 8px}
-.ac p{font-size:13.5px;color:var(--sub);line-height:1.95}
+.ac h4{font-family:var(--serif);font-weight:500;font-size:19px;letter-spacing:.1em;margin:4px 0 8px}
+.ac p{font-size:13.5px;color:var(--on2);line-height:2}
 
-/* plan */
-.plan{background:var(--dark);color:var(--on)}
-.plan .lab{color:var(--gold2)}
-.plan .lead{color:var(--on2)}
-.pg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:46px;border:1px solid rgba(201,168,98,.3)}
-.pg>div{padding:36px 30px 32px;border-left:1px solid rgba(201,168,98,.3);min-width:0}
+.pg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:50px;border:1px solid var(--line)}
+.pg>div{padding:38px 32px 34px;border-left:1px solid var(--line);min-width:0}
 .pg>div:first-child{border-left:none}
-@media(max-width:860px){.pg{grid-template-columns:1fr}.pg>div{border-left:none;border-top:1px solid rgba(201,168,98,.3)}.pg>div:first-child{border-top:none}}
-.pg .nm{font-family:var(--en);font-size:15px;letter-spacing:.3em;color:var(--gold2)}
-.pg .fq{font-family:var(--serif);font-size:19px;letter-spacing:.1em;margin:8px 0 14px}
-.pg .yen{font-family:var(--en);font-size:46px;line-height:1.1}
-.pg .yen small{font-family:var(--sans);font-size:12px;color:var(--on2);margin-left:8px;letter-spacing:.08em}
-.pg ul{list-style:none;margin-top:20px;border-top:1px solid rgba(201,168,98,.22)}
-.pg li{padding:10px 0;border-bottom:1px solid rgba(201,168,98,.22);font-size:13px;color:#D8D0C0}
-.pg .rec{font-size:10.5px;letter-spacing:.2em;color:var(--dark);background:var(--gold2);padding:2px 10px;margin-left:10px;vertical-align:2px}
-.plan .fine{font-size:11.5px;color:var(--on2);margin-top:22px;line-height:1.95;max-width:60em}
+@media(max-width:820px){.pg{grid-template-columns:1fr}.pg>div{border-left:none;border-top:1px solid var(--line)}.pg>div:first-child{border-top:none}}
+.pg .nm{font-family:var(--en);font-size:15px;letter-spacing:.3em;color:var(--on2)}
+.pg .rec{font-family:var(--serif);font-size:10.5px;letter-spacing:.2em;background:var(--green);color:var(--on);padding:3px 10px;margin-left:12px;vertical-align:2px}
+.pg .fq{font-size:19px;letter-spacing:.14em;margin:8px 0 12px}
+.pg .yen{font-family:var(--en);font-size:48px;line-height:1.1;letter-spacing:.02em}
+.pg .yen small{font-family:var(--serif);font-size:12px;color:var(--on2);margin-left:8px;letter-spacing:.1em}
+.pg ul{list-style:none;margin-top:22px}
+.pg li{padding:10px 0;border-top:1px solid var(--line2);font-size:13px;color:#D6CFC1}
 
-/* safety */
-.sf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:40px;border-top:1px solid var(--line)}
-.sf div{padding:28px 24px 8px 0;min-width:0}
-.sf div+div{padding-left:24px;border-left:1px solid var(--line)}
-@media(max-width:860px){.sf{grid-template-columns:1fr 1fr}.sf div:nth-child(3){padding-left:0;border-left:none}.sf div:nth-child(n+3){border-top:1px solid var(--line)}}
-@media(max-width:520px){.sf{grid-template-columns:1fr}.sf div+div{padding-left:0;border-left:none;border-top:1px solid var(--line)}}
-.sf b{display:block;font-family:var(--serif);font-weight:500;font-size:16.5px;letter-spacing:.06em;margin:6px 0 6px}
-.sf p{font-size:13px;color:var(--sub);line-height:1.95}
+.sf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:46px;border-top:1px solid var(--line)}
+.sf>div{padding:28px 26px 4px 0;min-width:0}
+.sf>div+div{padding-left:26px;border-left:1px solid var(--line)}
+@media(max-width:900px){.sf{grid-template-columns:1fr 1fr}.sf>div:nth-child(3){padding-left:0;border-left:none}.sf>div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media(max-width:520px){.sf{grid-template-columns:1fr}.sf>div+div{padding-left:0;border-left:none;border-top:1px solid var(--line)}}
 .sf .lab{font-size:12px}
+.sf b{display:block;font-weight:500;font-size:16.5px;letter-spacing:.1em;margin:4px 0 6px}
+.sf p{font-size:13px;color:var(--on2);line-height:2}
 
-/* process */
-.pc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:40px;border-top:1px solid var(--line)}
-.pc div{padding:26px 22px 0 0;min-width:0}
-@media(max-width:860px){.pc{grid-template-columns:1fr 1fr;row-gap:10px}}
-@media(max-width:520px){.pc{grid-template-columns:1fr}}
-.pc .n{font-family:var(--en);font-size:13px;letter-spacing:.3em;color:var(--gold)}
-.pc b{display:block;font-family:var(--serif);font-weight:500;font-size:16.5px;letter-spacing:.06em;margin:4px 0 4px}
-.pc p{font-size:13px;color:var(--sub);line-height:1.95}
-
-/* invite */
-.inv{position:relative;background:var(--dark);color:var(--on);text-align:center;overflow:hidden}
-.inv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.28;filter:saturate(.6)}
+.inv{position:relative;text-align:center;overflow:hidden}
+.inv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3;filter:saturate(.5)}
 .inv .wrap{position:relative;z-index:2}
-.inv .lab{color:var(--gold2)}
-.inv p{color:#D2CABA;max-width:32em;margin:0 auto 34px;font-size:14.5px}
-.inv .tel{font-family:var(--en);font-size:clamp(26px,5vw,36px);letter-spacing:.14em;margin-top:34px}
-.inv .ts{font-size:11.5px;color:var(--on2);letter-spacing:.14em}
+.inv p{color:#D2CABB;max-width:32em;margin:0 auto 36px;font-size:14px}
+.inv .tel{font-family:var(--en);font-size:clamp(26px,5vw,36px);letter-spacing:.16em;margin-top:36px}
+.inv .ts{font-size:11.5px;color:var(--on2);letter-spacing:.16em}
 
-/* info + faq */
-.info{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:70px}
-@media(max-width:860px){.info{grid-template-columns:1fr;gap:54px}}
+.info{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:76px}
+@media(max-width:860px){.info{grid-template-columns:1fr;gap:60px}}
 dl{border-top:1px solid var(--line);margin-top:26px}
-dl div{display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:13.5px}
-dt{color:var(--sub);letter-spacing:.1em}
+dl div{display:grid;grid-template-columns:8em minmax(0,1fr);gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+dt{color:var(--on2);letter-spacing:.12em}
 details.q{border-bottom:1px solid var(--line)}
 details.q:first-of-type{border-top:1px solid var(--line);margin-top:26px}
-details.q summary{list-style:none;cursor:pointer;padding:17px 34px 17px 0;position:relative;font-size:14px;font-weight:500}
+details.q summary{list-style:none;cursor:pointer;padding:17px 34px 17px 0;position:relative;font-size:14px}
 details.q summary::-webkit-details-marker{display:none}
-details.q summary::after{content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;border-right:1px solid var(--gold);border-bottom:1px solid var(--gold);transform:translateY(-70%) rotate(45deg);transition:transform .25s}
+details.q summary::after{content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;border-right:1px solid var(--on2);border-bottom:1px solid var(--on2);transform:translateY(-70%) rotate(45deg);transition:transform .25s}
 details.q[open] summary::after{transform:translateY(-20%) rotate(-135deg)}
-details.q p{padding:0 0 20px;font-size:13.5px;color:var(--sub)}
+details.q p{padding:0 0 20px;font-size:13.5px;color:var(--on2)}
 
-/* footer */
-footer{background:var(--dark);color:var(--on2);padding:76px 0 calc(44px + env(safe-area-inset-bottom,0px));font-size:12.5px}
+footer{border-top:1px solid var(--line2);padding:76px 0 calc(44px + env(safe-area-inset-bottom,0px));font-size:12.5px;color:var(--on2)}
 .fg{display:grid;grid-template-columns:1.3fr repeat(3,minmax(0,1fr));gap:40px}
 @media(max-width:860px){.fg{grid-template-columns:1fr 1fr;gap:38px 24px}.fg>div:first-child{grid-column:1/-1}}
-footer .brand{color:var(--on)}
-footer h4{font-family:var(--en);font-weight:500;font-size:13.5px;letter-spacing:.28em;color:var(--gold2);margin-bottom:12px}
-footer li{list-style:none;padding:4px 0}
+footer .mark{color:var(--on);padding-left:0}
+footer h5{font-family:var(--en);font-weight:400;font-size:13.5px;letter-spacing:.28em;color:var(--on);margin-bottom:10px;text-transform:uppercase}
+footer li{list-style:none;padding:3px 0}
 footer a:hover{color:var(--on)}
-footer .cp{border-top:1px solid rgba(201,168,98,.2);margin-top:54px;padding-top:24px;font-size:11px;letter-spacing:.08em;line-height:2}
+footer .cp{border-top:1px solid var(--line2);margin-top:54px;padding-top:24px;font-size:11px;line-height:2;color:var(--on3)}
 
-.fade{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
+.fade{opacity:0;transform:translateY(18px);transition:opacity 1s ease,transform 1s ease}
 .fade.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.fade{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){.fade,.sl .tx>*{opacity:1;transform:none;transition:none}html{scroll-behavior:auto;scroll-snap-type:none}.scr::after{animation:none}}
 </style>
 <!-- Google tag (GA4) -->
 <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFVD978D"></script>
@@ -227,146 +221,131 @@ footer .cp{border-top:1px solid rgba(201,168,98,.2);margin-top:54px;padding-top:
 <body>
 
 <header class="hd" id="hd"><div class="in">
-  <a class="brand" href="./"><b>HACHI LIFE</b><span>ハチライフ</span></a>
-  <nav class="nav"><a href="#services">Services</a><a href="#ancillary">Ancillary</a><a href="#plan">Plan</a><a href="#process">Process</a><a href="#about">About</a></nav>
-  <a class="inq" href="request.html">Inquire</a>
-  <details class="mn"><summary aria-label="メニュー"><i></i></summary><div>
-    <a href="#services">Services<small>サービス</small></a><a href="#ancillary">Ancillary<small>付帯サービス</small></a><a href="#plan">Plan<small>料金</small></a><a href="#process">Process<small>ご利用の流れ</small></a><a href="#about">About<small>基本情報</small></a>
-  </div></details>
+  <div><button class="mb" id="mb" aria-label="メニュー" aria-expanded="false"><i></i></button></div>
+  <a class="mark" href="./">HACHI LIFE</a>
+  <div class="hr"><a class="lg" href="en.html">EN</a><a class="inq" href="request.html">Inquire</a></div>
 </div></header>
+
+<div class="menu" id="menu"><nav>
+  <a href="#services">Services<small>四つの柱</small></a>
+  <a href="#ancillary">Ancillary<small>付帯サービス</small></a>
+  <a href="#plan">Plan<small>料金</small></a>
+  <a href="#process">Process<small>ご利用の流れ</small></a>
+  <a href="#about">About<small>基本情報</small></a>
+  <a href="request.html">Inquire<small>ご相談・資料請求</small></a>
+</nav></div>
 
 <!-- HERO -->
 <div class="hero">
-  <video src="film-sink.mp4" poster="poster/film-sink.jpg" autoplay muted loop playsinline></video>
-  <div class="in">
-    <div class="lab">Nagoya, Aichi</div>
-    <h1>HACHI LIFE</h1>
-    <div class="jp">名古屋のプライベートハウスキーピング</div>
-    <p>家事、日々の手配、ご相談ごと。暮らしにかかわることを、専任の担当と一つの窓口でお引き受けします。</p>
-    <a class="btn" href="request.html">ご相談・資料請求</a>
-    <div class="note">2027年1月より ・ 先行受付中</div>
-  </div>
+  <video src="film-glass.mp4" poster="poster/film-glass.jpg" autoplay muted loop playsinline></video>
+  <div class="c"><h1>HACHI LIFE</h1><p>名古屋のプライベートハウスキーピング</p></div>
+  <div class="scr">SCROLL</div>
 </div>
 
-<div class="strip">
-  <div><img src="poster/film-glass.jpg" alt="グラスを磨く手元" loading="lazy"></div>
-  <div><img src="poster/film-bath.jpg" alt="浴室を整えるスタッフ" loading="lazy"></div>
-  <div><img src="poster/hero.jpg" alt="ご家庭に伺うスタッフ" loading="lazy"></div>
-  <div><img src="poster/film-trash.jpg" alt="収納を整えるスタッフ" loading="lazy"></div>
-  <div><img src="poster/eng-kid.jpg" alt="英語の絵本を読む時間" loading="lazy"></div>
-</div>
+<!-- STAGE -->
+<div class="stage" id="stage">
+  <i class="sn" style="top:0"></i><i class="sn" style="top:100vh"></i><i class="sn" style="top:200vh"></i><i class="sn" style="top:300vh"></i><i class="sn" style="top:400vh"></i>
+  <div class="pin">
 
-<!-- INTRO -->
-<section class="intro"><div class="wrap"><div class="g">
-  <div class="fade">
-    <div class="lab">Our Approach</div>
-    <h2>来て、掃除して、帰る。<br>そこで終わらせない。</h2>
-    <p class="lead">一般的な家事代行は、訪問のたびに「点」で関わります。ハチライフは、同じ担当がご家庭のやり方を覚え、家事だけでなく、買い足しや手配、ご相談までを続けてお引き受けします。</p>
-    <p class="lead" style="margin-top:14px">ご自身の時間を、ご自身とご家族のために。そのための仕組みを、名古屋で静かにご用意しています。</p>
+    <div class="sl on" style="--l:100%">
+      <div class="p"><video src="hero.mp4" poster="poster/hero.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="map"><svg viewBox="0 0 400 400" fill="none" stroke="#EEE8DC" stroke-width=".8">
+        <circle cx="200" cy="200" r="46" opacity=".7"/><circle cx="200" cy="200" r="92" opacity=".5"/><circle cx="200" cy="200" r="140" opacity=".35"/><circle cx="200" cy="200" r="190" opacity=".2"/>
+        <g stroke="none" fill="#EEE8DC"><circle cx="200" cy="200" r="3.4"/><circle cx="168" cy="120" r="2.2"/><circle cx="262" cy="150" r="2.2"/><circle cx="330" cy="176" r="2.2"/><circle cx="214" cy="268" r="2.2"/><circle cx="176" cy="330" r="2.2"/></g>
+        <g stroke="none"><text x="188" y="224" style="font-size:15px">NAGOYA</text><text x="112" y="110">HIGASHI</text><text x="272" y="144">CHIKUSA</text><text x="340" y="194">MEITO</text><text x="226" y="286">SHOWA</text><text x="188" y="350">MIZUHO</text></g>
+      </svg></div>
+      <div class="tx"><div class="lab">Nagoya, Aichi</div><h2 class="jp">名古屋の住まいへ、<br>毎週、同じ担当が。</h2><p class="bd">東区、千種区、昭和区、名東区、瑞穂区。家事、日々の手配、ご相談ごとまで、暮らしにかかわることを一つの窓口でお引き受けします。</p></div>
+    </div>
+
+    <div class="sl" style="--l:47%">
+      <div class="p"><video src="film-bath.mp4" poster="poster/film-bath.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="p"><video src="film-sink.mp4" poster="poster/film-sink.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="tx"><div class="ct">担当が、何も言わずに整える</div><h2>Housekeeping</h2><p class="bd">毎週同じ曜日に、同じハウスキーパーが伺います。ご家庭のやり方を一冊にまとめ、毎回の指示も立ち会いもいりません。お留守のあいだに終わり、お帰りのときには整っています。</p><a class="mr" href="#services">詳しく見る</a></div>
+    </div>
+
+    <div class="sl" style="--l:51%">
+      <div class="p"><video src="film-glass.mp4" poster="poster/film-glass.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="p card"><div class="chat">
+        <div class="t">HACHI LIFE<small>24時間</small></div>
+        <div class="bub me">来週の土曜、6人で入れる和食のお店を探して。個室がいい。<small>23:14</small></div>
+        <div class="bub s">かしこまりました。個室があり、19時に6名で入れるお店を3件見つけました。場所とご予算をお送りします。<small>23:14</small></div>
+        <div class="bub me">2件目でお願い。あと、洗剤がそろそろないかも。<small>23:16</small></div>
+        <div class="bub s">2件目を19時、6名でご予約します。洗剤は、木曜の訪問で担当が補充しておきます。<small>23:16</small></div>
+      </div></div>
+      <div class="tx"><div class="ct">頼みごとは、LINEひとつ</div><h2>Secretary</h2><p class="bd">AIの個人秘書が、24時間お受けします。お店や宿のご予約、贈り物選び、調べもの。すぐにお返事し、動く必要があることは担当が引き継ぎます。</p><a class="mr" href="#services">詳しく見る</a></div>
+    </div>
+
+    <div class="sl" style="--l:49%">
+      <div class="p"><video src="film-trash.mp4" poster="poster/film-trash.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="p"><video src="film-toilet.mp4" poster="poster/film-toilet.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="tx"><div class="ct">買い足しも、立ち会いも、任せる</div><h2>Home Care</h2><p class="bd">洗剤、お水、日々の消耗品。担当が残りを見て、切れる前に補充します。宅配や点検など、家にいなければならない用事には、代わりに立ち会います。</p><a class="mr" href="#services">詳しく見る</a></div>
+    </div>
+
+    <div class="sl" style="--l:53%">
+      <div class="p"><video src="eng-kid.mp4" poster="poster/eng-kid.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="p card"><div class="stm">
+        <div class="t">TIME STATEMENT</div>
+        <div class="cap">2027年2月 ・ 今月の時間</div>
+        <div class="big">34<small>時間</small>40<small>分</small></div>
+        <table>
+          <tr><td>訪問</td><td>8回</td><td>32:00</td></tr>
+          <tr><td>秘書へのご依頼</td><td>6件</td><td>1:50</td></tr>
+          <tr><td>日用品の補充</td><td>4品</td><td>0:30</td></tr>
+          <tr><td>立ち会い</td><td>1回</td><td>0:20</td></tr>
+        </table>
+        <div class="val">ご自身の1時間を2万円とすると、<b>約69万円分</b></div>
+      </div></div>
+      <div class="tx"><div class="ct">取り戻した時間を、毎月お届けする</div><h2>Time Statement</h2><p class="bd">訪問、秘書へのご依頼、補充、立ち会い。お引き受けしたことを時間に直し、毎月の明細としてお届けします。</p><a class="mr" href="#services">詳しく見る</a></div>
+    </div>
+
+    <div class="cnt"><span id="cn">01</span><span class="bar"><i id="cb"></i></span><span>05</span></div>
   </div>
-  <div class="area fade">
-    <div>HIGASHI<span>東区</span></div>
-    <div>CHIKUSA<span>千種区</span></div>
-    <div>SHOWA<span>昭和区</span></div>
-    <div>MEITO<span>名東区</span></div>
-    <div>MIZUHO<span>瑞穂区</span></div>
-  </div>
-</div></div></section>
+</div>
 
 <!-- SERVICES -->
-<section class="pil" id="services"><div class="wrap">
+<section class="d" id="services"><div class="wrap">
   <div class="lab">Services</div>
-  <h2>四つの柱</h2>
-
-  <div class="pr fade">
-    <div class="tx">
-      <div class="no"><b>01</b>Housekeeping</div>
-      <h3>担当が、何も言わずに整える。</h3>
-      <p>毎週同じ曜日に、同じハウスキーパーが伺います。ご家庭のやり方は一冊の手順書にまとめ、毎回の指示も、立ち会いもいりません。お留守のあいだに終わり、お帰りのときには整っています。</p>
-      <ul><li>お掃除（水回り、リビング、寝室）</li><li>洗濯物を干す・たたむ・しまう</li><li>お買い物の代行</li></ul>
-    </div>
-    <div class="md"><video src="film-bath.mp4" poster="poster/film-bath.jpg" autoplay muted loop playsinline></video></div>
+  <h3 class="h">来て、掃除して、帰る。<br>そこで終わらせない。</h3>
+  <p class="lead">一般的な家事代行は、訪問のたびに「点」で関わります。ハチライフは、同じ担当がご家庭を知り、家事だけでなく、買い足しや手配、ご相談までを続けてお引き受けします。</p>
+  <div class="sv">
+    <div class="fade"><div class="n">01 ― HOUSEKEEPING</div><h4>担当が、何も言わずに整える</h4><p>毎週同じ曜日、同じ担当。ご家庭ごとの手順書に沿って、1回4時間で整えます。</p><ul><li>お掃除（水回り、リビング、寝室）</li><li>洗濯物を干す・たたむ・しまう</li><li>お買い物の代行</li></ul></div>
+    <div class="fade"><div class="n">02 ― SECRETARY</div><h4>頼みごとは、LINEひとつ</h4><p>AIの個人秘書が24時間お受けし、必要に応じて日本人の担当が引き継ぎます。</p><ul><li>お店や宿の候補探しと、ご予約</li><li>贈り物やお祝いの品選び</li><li>習い事、病院、手続きの下調べ</li></ul></div>
+    <div class="fade"><div class="n">03 ― HOME CARE</div><h4>買い足しも、立ち会いも、任せる</h4><p>「買わなければ」「家にいなければ」を、暮らしからなくします。</p><ul><li>日用品の在庫の確認と補充</li><li>宅配、修理、点検の立ち会い</li></ul></div>
+    <div class="fade"><div class="n">04 ― TIME STATEMENT</div><h4>取り戻した時間を、毎月お届けする</h4><p>お支払いいただいているのは、ご自身とご家族の時間です。</p><ul><li>お引き受けしたことを、時間に直して合計</li><li>お客様専用のアプリで、いつでもご確認</li></ul></div>
   </div>
-
-  <div class="pr rev fade">
-    <div class="tx">
-      <div class="no"><b>02</b>Secretary</div>
-      <h3>頼みごとは、LINEひとつ。</h3>
-      <p>AIの個人秘書が、24時間お受けします。お店や宿のご予約、贈り物選び、調べもの、手続きの下調べ。すぐにお返事し、動く必要があることはスタッフが引き継ぎます。</p>
-      <p class="fine">※ 品物やご予約の代金は、お客様のご負担です。法律・税務・医療など資格が必要なご相談と、危険をともなうご依頼は、お受けしておりません。</p>
-    </div>
-    <div class="md card"><div class="chat">
-      <div class="t">HACHI LIFE<small>24時間</small></div>
-      <div class="bub me">来週の土曜、6人で入れる和食のお店を探して。個室がいい。<small>23:14</small></div>
-      <div class="bub s">かしこまりました。個室があり、19時に6名で入れるお店を3件見つけました。場所とご予算をお送りします。<small>23:14</small></div>
-      <div class="bub me">2件目でお願い。あと、洗剤がそろそろないかも。<small>23:16</small></div>
-      <div class="bub s">2件目を19時、6名でご予約します。洗剤は、木曜の訪問で担当が補充しておきます。<small>23:16</small></div>
-    </div></div>
-  </div>
-
-  <div class="pr fade">
-    <div class="tx">
-      <div class="no"><b>03</b>Home Care</div>
-      <h3>買い足しも、立ち会いも、任せる。</h3>
-      <p>洗剤、お水、トイレットペーパー。担当が残りを見て、切れる前に補充しておきます。宅配や点検など、家にいなければならない用事には、代わりに立ち会います。</p>
-      <ul><li>日用品の在庫の確認と補充</li><li>宅配、修理、点検の立ち会い</li></ul>
-      <p class="fine">※ 立ち会いは、訪問の日時に合わせてお受けします。別の日時はご相談ください。</p>
-    </div>
-    <div class="md"><video src="film-trash.mp4" poster="poster/film-trash.jpg" autoplay muted loop playsinline></video></div>
-  </div>
-
-  <div class="pr rev fade">
-    <div class="tx">
-      <div class="no"><b>04</b>Time Statement</div>
-      <h3>取り戻した時間を、毎月お届けする。</h3>
-      <p>訪問、秘書へのご依頼、補充、立ち会い。お引き受けしたことを時間に直し、毎月の明細としてお届けします。お支払いいただいているのは、ご自身とご家族の時間です。</p>
-      <p class="fine">※ 画面はイメージです。週2回プランの例。</p>
-    </div>
-    <div class="md card"><div class="stm">
-      <div class="t">TIME STATEMENT</div>
-      <div class="cap">2027年2月 ・ 今月の時間</div>
-      <div class="big">34<small>時間</small>40<small>分</small></div>
-      <table>
-        <tr><td>訪問</td><td>8回</td><td>32:00</td></tr>
-        <tr><td>秘書へのご依頼</td><td>6件</td><td>1:50</td></tr>
-        <tr><td>日用品の補充</td><td>4品</td><td>0:30</td></tr>
-        <tr><td>立ち会い</td><td>1回</td><td>0:20</td></tr>
-      </table>
-      <div class="val">ご自身の1時間を2万円とすると、<b>約69万円分</b></div>
-    </div></div>
-  </div>
+  <p class="fine">※ 秘書へのご依頼で生じる品物やご予約の代金は、お客様のご負担です。法律・税務・医療など資格が必要なご相談と、危険をともなうご依頼は、お受けしておりません。立ち会いは訪問の日時に合わせてお受けし、別の日時はご相談ください。アイロンがけ、お料理、お子さまの見守り、介護・医療行為は、お受けしておりません。</p>
 </div></section>
 
 <!-- ANCILLARY -->
-<section id="ancillary"><div class="wrap">
+<section class="d" id="ancillary"><div class="wrap">
   <div class="lab">Ancillary Service</div>
-  <h2>ご利用の方へ、あわせてお約束すること</h2>
+  <h3 class="h">あわせて、お約束すること</h3>
   <p class="lead">四つの柱に加えて、すべてのプランに付きます。</p>
   <div class="anc">
-    <div class="ac fade"><div class="ph"><img src="poster/film-sink.jpg" alt="キッチンを仕上げるスタッフ" loading="lazy"></div><span class="lab">Friday Finish</span><h3>週末を、まるごと空ける</h3><p>ご希望の方には金曜の枠をご案内し、一週間分を仕上げます。土曜の朝は、家事がないところから始まります。</p></div>
-    <div class="ac fade"><div class="ph"><img src="poster/film-glass.jpg" alt="グラスを磨く手元" loading="lazy"></div><span class="lab">Promise</span><h3>時間の保証</h3><p>お約束の時刻に、必ず伺います。伺えなかった回の料金はいただきません。担当がお休みの週は、必ず代わりの者が伺います。</p></div>
-    <div class="ac fade"><div class="ph"><img src="poster/eng-kid.jpg" alt="英語の絵本を読む時間" loading="lazy"></div><span class="lab">English at Home</span><h3>英語のある暮らし</h3><p>ハウスキーパーはフィリピン出身。レッスンではなく、暮らしの中の自然な英語です。お子さまとの関わり方は、ご希望に合わせます。</p></div>
+    <div class="ac fade"><div class="ph"><img src="poster/film-sink.jpg" alt="キッチンを仕上げる担当" loading="lazy"></div><span class="lab">Friday Finish</span><h4>週末を、まるごと空ける</h4><p>ご希望の方には金曜の枠をご案内し、一週間分を仕上げます。土曜の朝は、家事がないところから始まります。</p></div>
+    <div class="ac fade"><div class="ph"><img src="poster/film-glass.jpg" alt="グラスを磨く手元" loading="lazy"></div><span class="lab">Promise</span><h4>時間の保証</h4><p>お約束の時刻に、必ず伺います。伺えなかった回の料金はいただきません。担当がお休みの週は、必ず代わりの者が伺います。</p></div>
+    <div class="ac fade"><div class="ph"><img src="poster/eng-kid.jpg" alt="英語の絵本を読む時間" loading="lazy"></div><span class="lab">English at Home</span><h4>英語のある暮らし</h4><p>担当はフィリピン出身。レッスンではなく、暮らしの中の自然な英語です。お子さまとの関わり方は、ご希望に合わせます。</p></div>
   </div>
-  <p style="font-size:11.5px;color:var(--sub);margin-top:34px;line-height:1.95">※ 金曜の枠には限りがあります。時間の保証は、災害や交通機関の大きな乱れ、お客様のご都合による変更を除きます。</p>
+  <p class="fine">※ 金曜の枠には限りがあります。時間の保証は、災害や交通機関の大きな乱れ、お客様のご都合による変更を除きます。</p>
 </div></section>
 
 <!-- PLAN -->
-<section class="plan" id="plan"><div class="wrap">
+<section class="d" id="plan"><div class="wrap">
   <div class="lab">Plan</div>
-  <h2>料金</h2>
+  <h3 class="h">料金</h3>
   <p class="lead">月額のみ。入会金も、追加の費用もいただきません。1回4時間、1時間あたり約3,140円（交通費込み・税込）。</p>
   <div class="pg">
     <div><div class="nm">ONE</div><div class="fq">週1回</div><div class="yen">54,500<small>円／月</small></div><ul><li>毎週1回 ・ 4時間</li><li>水回りとお部屋の基本の整え</li><li>四つの柱と付帯サービス</li></ul></div>
     <div><div class="nm">TWO<span class="rec">おすすめ</span></div><div class="fq">週2回</div><div class="yen">109,000<small>円／月</small></div><ul><li>毎週2回 ・ 各4時間</li><li>家事の主担当をお任せ</li><li>四つの柱と付帯サービス</li></ul></div>
     <div><div class="nm">THREE</div><div class="fq">週3回</div><div class="yen">163,500<small>円／月</small></div><ul><li>毎週3回 ・ 各4時間</li><li>平日の家事をほぼお引き受け</li><li>四つの柱と付帯サービス</li></ul></div>
   </div>
-  <p class="fine">※ すべて税込。お買い物の代金は実費を翌月にご精算します。アイロンがけ、お料理、お子さまの見守り、介護・医療行為は、お受けしておりません。</p>
+  <p class="fine">※ すべて税込。お買い物の代金は、実費を翌月にご精算します。</p>
 </div></section>
 
 <!-- SAFETY -->
-<section><div class="wrap">
+<section class="d"><div class="wrap">
   <div class="lab">Confidentiality &amp; Safety</div>
-  <h2>ご家庭をお預かりするということ</h2>
+  <h3 class="h">ご家庭をお預かりするということ</h3>
   <p class="lead">安心は、人柄ではなく仕組みでお約束します。</p>
   <div class="sf">
     <div class="fade"><span class="lab">Key</span><b>鍵のお預かり</b><p>鍵には管理番号だけを付け、ご住所やお名前は記しません。退出のたびに、施錠の写真をお届けします。</p></div>
@@ -377,21 +356,21 @@ footer .cp{border-top:1px solid rgba(201,168,98,.2);margin-top:54px;padding-top:
 </div></section>
 
 <!-- PROCESS -->
-<section class="pil" id="process"><div class="wrap">
+<section class="d" id="process"><div class="wrap">
   <div class="lab">Process</div>
-  <h2>ご利用までの流れ</h2>
-  <div class="pc">
-    <div class="fade"><span class="n">STEP 01</span><b>ご相談・資料請求</b><p>フォームまたはお電話で。1営業日以内に担当よりご連絡します。</p></div>
-    <div class="fade"><span class="n">STEP 02</span><b>ご自宅でのお打ち合わせ</b><p>お住まいとご要望を伺い、プランと曜日を決めます。</p></div>
-    <div class="fade"><span class="n">STEP 03</span><b>手順書の作成</b><p>ご家庭のやり方を一冊にまとめます。すべての作業は、ここから始まります。</p></div>
-    <div class="fade"><span class="n">STEP 04</span><b>ご利用開始</b><p>初回と2回目は、責任者が同行します。2027年1月より。</p></div>
+  <h3 class="h">ご利用までの流れ</h3>
+  <div class="sf">
+    <div class="fade"><span class="lab">Step 01</span><b>ご相談・資料請求</b><p>フォームまたはお電話で。1営業日以内に担当よりご連絡します。</p></div>
+    <div class="fade"><span class="lab">Step 02</span><b>ご自宅でのお打ち合わせ</b><p>お住まいとご要望を伺い、プランと曜日を決めます。</p></div>
+    <div class="fade"><span class="lab">Step 03</span><b>手順書の作成</b><p>ご家庭のやり方を一冊にまとめます。すべての作業は、ここから始まります。</p></div>
+    <div class="fade"><span class="lab">Step 04</span><b>ご利用開始</b><p>初回と2回目は、責任者が同行します。2027年1月より。</p></div>
   </div>
 </div></section>
 
 <!-- INVITE -->
-<section class="inv"><video src="film-glass.mp4" poster="poster/film-glass.jpg" autoplay muted loop playsinline></video><div class="wrap">
+<section class="d inv"><video src="film-glass.mp4" poster="poster/film-glass.jpg" muted loop playsinline preload="none"></video><div class="wrap">
   <div class="lab">Inquire</div>
-  <h2>ご利用をお考えの方へ</h2>
+  <h3 class="h">ご利用をお考えの方へ</h3>
   <p>2027年1月の開始に向けて、先行でお受けしています。お伺いできる曜日と時間には限りがあります。まずはご相談ください。</p>
   <a class="btn" href="request.html">ご相談・資料請求</a>
   <div class="tel">070-3350-0313</div>
@@ -399,21 +378,21 @@ footer .cp{border-top:1px solid rgba(201,168,98,.2);margin-top:54px;padding-top:
 </div></section>
 
 <!-- ABOUT / FAQ -->
-<section id="about"><div class="wrap"><div class="info">
+<section class="d" id="about"><div class="wrap"><div class="info">
   <div>
     <div class="lab">About</div>
-    <h2>基本情報</h2>
+    <h3 class="h">基本情報</h3>
     <dl>
       <div><dt>運営会社</dt><dd>サンエスサービス株式会社（外国人雇用30年）</dd></div>
       <div><dt>対応エリア</dt><dd>名古屋市 東区・千種区・昭和区・名東区・瑞穂区とその近郊</dd></div>
       <div><dt>受付時間</dt><dd>平日 9:00 – 18:00</dd></div>
       <div><dt>お電話</dt><dd>070-3350-0313</dd></div>
-      <div><dt>スタッフ</dt><dd>当社が直接雇用し、研修と同行訪問を経て伺います</dd></div>
+      <div><dt>担当</dt><dd>当社が直接雇用し、研修と同行訪問を経て伺います</dd></div>
     </dl>
   </div>
   <div>
     <div class="lab">FAQ</div>
-    <h2>よくあるご質問</h2>
+    <h3 class="h">よくあるご質問</h3>
     <details class="q"><summary>留守中もお願いできますか。</summary><p>はい。鍵をお預かりし、お留守のあいだに作業を終えます。退出時には施錠の写真をアプリでお届けします。</p></details>
     <details class="q"><summary>秘書には、何を頼めますか。</summary><p>お店や宿のご予約、贈り物選び、調べもの、手続きの下調べなど、暮らしにかかわることをお送りください。資格が必要なご相談と、危険をともなうご依頼はお受けしておりません。</p></details>
     <details class="q"><summary>時間の保証とは、どのような内容ですか。</summary><p>お約束の開始時刻に伺えなかった回は、その回の料金をいただきません。担当がお休みの週は、代わりの者が伺います。災害や交通機関の大きな乱れ、お客様のご都合による変更は対象外です。</p></details>
@@ -424,25 +403,41 @@ footer .cp{border-top:1px solid rgba(201,168,98,.2);margin-top:54px;padding-top:
 
 <footer><div class="wrap">
   <div class="fg">
-    <div><a class="brand" href="./"><b>HACHI LIFE</b><span>ハチライフ</span></a><p style="margin-top:18px;line-height:2">名古屋のプライベートハウスキーピング<br>運営：サンエスサービス株式会社</p></div>
-    <div><h4>Services</h4><ul><li><a href="#services">四つの柱</a></li><li><a href="#ancillary">付帯サービス</a></li><li><a href="#plan">料金</a></li></ul></div>
-    <div><h4>Guide</h4><ul><li><a href="#process">ご利用までの流れ</a></li><li><a href="request.html">ご相談・資料請求</a></li><li><a href="area/">対応エリア</a></li><li><a href="column/">コラム</a></li></ul></div>
-    <div><h4>Company</h4><ul><li><a href="#about">基本情報</a></li><li><a href="privacy.html">プライバシーポリシー</a></li><li><a href="en.html">English</a></li><li><a href="https://www.instagram.com/hachilife_nagoya/" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+    <div><a class="mark" href="./">HACHI LIFE</a><p style="margin-top:16px;line-height:2.1">名古屋のプライベートハウスキーピング<br>運営：サンエスサービス株式会社</p></div>
+    <div><h5>Services</h5><ul><li><a href="#services">四つの柱</a></li><li><a href="#ancillary">付帯サービス</a></li><li><a href="#plan">料金</a></li></ul></div>
+    <div><h5>Guide</h5><ul><li><a href="#process">ご利用までの流れ</a></li><li><a href="request.html">ご相談・資料請求</a></li><li><a href="area/">対応エリア</a></li><li><a href="column/">コラム</a></li></ul></div>
+    <div><h5>Company</h5><ul><li><a href="#about">基本情報</a></li><li><a href="privacy.html">プライバシーポリシー</a></li><li><a href="en.html">English</a></li><li><a href="https://www.instagram.com/hachilife_nagoya/" target="_blank" rel="noopener">Instagram</a></li></ul></div>
   </div>
   <div class="cp">当サービスは、介護・医療行為、お子さまのお預かりを行いません。写真と動画はイメージを含みます。<br>© 2026 HACHI LIFE（ハチライフ）</div>
 </div></footer>
 
 <script>
-const hd=document.getElementById('hd');
-const onS=()=>hd.classList.toggle('s',scrollY>60);onS();addEventListener('scroll',onS,{passive:true});
-document.querySelectorAll('.mn a').forEach(a=>a.addEventListener('click',()=>a.closest('details').removeAttribute('open')));
+const hd=document.getElementById('hd'),mb=document.getElementById('mb'),menu=document.getElementById('menu');
+const tog=o=>{menu.classList.toggle('on',o);mb.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';};
+mb.addEventListener('click',()=>tog(!menu.classList.contains('on')));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>tog(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape')tog(false);});
+
+const stage=document.getElementById('stage'),sls=[...stage.querySelectorAll('.sl')],cn=document.getElementById('cn'),cb=document.getElementById('cb');
+let cur=-1;
+function setSlide(i,play){
+  if(i!==cur){cur=i;sls.forEach((s,k)=>s.classList.toggle('on',k===i));cn.textContent=String(i+1).padStart(2,'0');cb.style.width=((i+1)/sls.length*100)+'%';}
+  sls.forEach((s,k)=>s.querySelectorAll('video').forEach(v=>{if(k===i&&play){if(v.paused)v.play().catch(()=>{});}else if(!v.paused){v.pause();}}));
+}
+function onScroll(){
+  const r=stage.getBoundingClientRect(),vh=innerHeight;
+  hd.classList.toggle('s',r.bottom<vh*.5);
+  const inView=r.top<vh&&r.bottom>0;
+  const i=Math.max(0,Math.min(sls.length-1,Math.floor((-r.top+vh*.5)/vh)));
+  setSlide(i,inView);
+}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+
 const fo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');fo.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.fade').forEach(el=>fo.observe(el));
-// 画面に入った動画だけ再生
-const vids=document.querySelectorAll('video');
+const others=document.querySelectorAll('.hero video,.inv video');
 const io=new IntersectionObserver(es=>{es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{});}else{v.pause();}})},{threshold:.15});
-vids.forEach(v=>io.observe(v));
-document.addEventListener('touchstart',()=>{vids.forEach(v=>{const r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)v.play().catch(()=>{});})},{once:true,passive:true});
+others.forEach(v=>io.observe(v));
 </script>
 </body>
 </html>
