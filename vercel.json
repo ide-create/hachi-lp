@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/senzoku.html", "destination": "/", "permanent": true },
+    { "source": "/senzoku", "destination": "/", "permanent": true }
+  ]
+}
