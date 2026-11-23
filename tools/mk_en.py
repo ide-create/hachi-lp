@@ -3,11 +3,14 @@ src,dst=sys.argv[1],sys.argv[2]
 s=open(src,encoding='utf-8').read()
 T=[
 ('<html lang="ja">','<html lang="en">'),
-('【確認用】HACHI LIFE（ハチライフ）｜名古屋のプライベートハウスキーピング','[Draft] HACHI LIFE | Private Housekeeping in Nagoya'),
-('HACHI LIFE（ハチライフ）は、名古屋のプライベートハウスキーピング。担当固定のハウスキーパーが、毎週同じ曜日に伺います。日用品の補充と立ち会い、毎月の時間の明細書まで、一つの窓口でお引き受けします。','HACHI LIFE is a private housekeeping service in Nagoya. The same English-speaking housekeeper visits on the same day every week. Restocking, waiting in for deliveries and a monthly time statement, all through one contact.'),
-('https://hachi-lp-eta.vercel.app/new.html','https://hachi-lp-eta.vercel.app/new-en.html'),
+('<title>名古屋の家事代行・家政婦サービス｜HACHI LIFE（ハチライフ）プライベートハウスキーピング 月54,500円〜</title>','<title>Housekeeper in Nagoya for Expats &amp; Families | HACHI LIFE – from ¥54,500/month</title>'),
+('<link rel="canonical" href="https://hachi-lp-eta.vercel.app/">','<link rel="canonical" href="https://hachi-lp-eta.vercel.app/en.html">'),
+('<meta property="og:url" content="https://hachi-lp-eta.vercel.app/">','<meta property="og:url" content="https://hachi-lp-eta.vercel.app/en.html">'),
+('<meta property="og:title" content="名古屋の家事代行・家政婦｜HACHI LIFE（ハチライフ）月54,500円〜">','<meta property="og:title" content="Housekeeper in Nagoya | HACHI LIFE">'),
+('<meta property="og:description" content="担当固定のフィリピン人ハウスキーパーによる、名古屋のプライベートハウスキーピング。週1〜3回・1回4時間・入会金0円。">','<meta property="og:description" content="One dedicated English-speaking housekeeper, same day every week. From ¥54,500/month, no joining fee. Nagoya, starting January 2027.">'),
+('<meta property="og:site_name" content="Hachi Life（ハチライフ）">','<meta property="og:site_name" content="Hachi Life">'),
 ('aria-label="メニュー"','aria-label="Menu"'),
-('<a class="lg" href="new-en.html">EN</a>','<a class="lg" href="new.html">JP</a>'),
+('<a class="lg" href="en.html">EN</a>','<a class="lg" href="./">JP</a>'),
 ('<small>サービス内容</small>','<small>What we do</small>'),('<small>付帯サービス</small>','<small>Included with every plan</small>'),
 ('<small>料金</small>','<small>Monthly fees</small>'),('<small>ご利用の流れ</small>','<small>How to start</small>'),
 ('<small>基本情報</small>','<small>Company</small>'),('<small>ご相談・資料請求</small>','<small>Contact us</small>'),
@@ -92,13 +95,20 @@ T=[
 ('<a href="#process">ご利用までの流れ</a>','<a href="#process">How to start</a>'),('<a href="request.html">ご相談・資料請求</a>','<a href="request.html">Contact us</a>'),
 ('<a href="area/">対応エリア</a>','<a href="area/">Service area (Japanese)</a>'),('<a href="column/">コラム</a>','<a href="column/">Journal (Japanese)</a>'),
 ('<a href="#about">基本情報</a>','<a href="#about">Company</a>'),('<a href="privacy.html">プライバシーポリシー</a>','<a href="privacy.html">Privacy policy (Japanese)</a>'),
-('<a href="new-en.html">English</a>','<a href="new.html">日本語</a>'),
+('<a href="en.html">English</a>','<a href="./">日本語</a>'),
 ('当サービスは、介護・医療行為、お子さまのお預かりを行いません。写真と動画はイメージを含みます。<br>© 2026 HACHI LIFE（ハチライフ）','We do not provide nursing care, medical care or childminding. Photos and videos include illustrative images.<br>© 2026 HACHI LIFE'),
-('<a class="mark" href="./">','<a class="mark" href="new-en.html">'),
+('<a class="mark" href="./">','<a class="mark" href="en.html">'),
 ]
 for a,b in T:
     if a not in s: print('MISSING:',a[:50])
     s=s.replace(a,b)
+import json as _j
+_d='Housekeeping service in Nagoya with one dedicated English-speaking Filipino housekeeper. Same person, same day, every week: laundry, kitchen and bath, bedrooms, restocking and waiting in. 4 hours a visit, from ¥54,500 per month, no joining fee. Starting January 2027.'
+_m=re.search(r'<meta name="description" content="[^"]*">',s); s=s[:_m.start()]+'<meta name="description" content="'+_d+'">'+s[_m.end():]
+s=re.sub(r'<script type="application/ld\+json">.*?</script>\n?','',s,flags=re.S)
+_f=re.findall(r'<details class="q"><summary>(.*?)</summary><p>(.*?)</p></details>',s)
+_ld={"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":a}} for q,a in _f]}
+s=s.replace('<meta name="twitter:card" content="summary_large_image">','<meta name="twitter:card" content="summary_large_image">\n<script type="application/ld+json">'+_j.dumps(_ld,ensure_ascii=False)+'</script>',1)
 body=s[s.index('<body'):]
 left=sorted(set(re.findall(r'[぀-ヿ一-鿿][^<>"]*',body)))
 print('LEFT:',[x for x in left if x!='日本語</a></li><li><a href="https://www.instagram.com/hachilife_nagoya/' and x!='日本語'])
