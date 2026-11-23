@@ -210,6 +210,20 @@ footer li{list-style:none;padding:3px 0}
 footer a:hover{color:var(--on)}
 footer .cp{border-top:1px solid var(--line2);margin-top:54px;padding-top:24px;font-size:11px;line-height:2;color:var(--on3)}
 
+/* light detail sections */
+section.d{--bg:#FDFCF8;--bg2:#F1EBD8;--on:#1F1C17;--on2:#6A6356;--on3:#8E8676;--line:rgba(31,28,23,.16);--line2:rgba(31,28,23,.08);background:var(--bg);color:var(--on);color-scheme:light}
+section.d:nth-of-type(even){--bg:#F6F0DC;--bg2:#EDE5CC}
+section.d.inv{--bg:#0E0D0B;--on:#EEE8DC;--on2:#A8A091;--on3:#746D61;--line:rgba(238,232,220,.16);background:#0E0D0B;color:var(--on);color-scheme:dark}
+section.d:not(.inv) .sv li,section.d:not(.inv) .pg li{color:#3A352D}
+section.d .btn,section.d .pg .rec{color:#F4EFE3}
+section.d:not(.inv) .ac .ph img,section.d:not(.inv) .ac .ph video{filter:none}
+section.d:not(.inv) .ac:hover .ph img{filter:none}
+footer{background:#172E28;color:#B9C6C0;--on:#F1ECE0;--on2:#B9C6C0;--on3:#8FA39B;--line2:rgba(241,236,224,.14)}
+.menu{background:rgba(23,46,40,.97)}
+.hd.l{background:rgba(253,252,248,.94);color:#1F1C17;box-shadow:0 1px 0 rgba(31,28,23,.08)}
+.hd.l .inq{color:#F4EFE3}
+.hd.m{background:none!important;color:#EEE8DC!important;box-shadow:none!important}
+
 .fade{opacity:0;transform:translateY(18px);transition:opacity 1s ease,transform 1s ease}
 .fade.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.fade,.sl .tx>*{opacity:1;transform:none;transition:none}html{scroll-behavior:auto;scroll-snap-type:none}.scr::after{animation:none}}
@@ -397,7 +411,7 @@ footer .cp{border-top:1px solid var(--line2);margin-top:54px;padding-top:24px;fo
 
 <script>
 const hd=document.getElementById('hd'),mb=document.getElementById('mb'),menu=document.getElementById('menu');
-const tog=o=>{menu.classList.toggle('on',o);mb.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';};
+const tog=o=>{menu.classList.toggle('on',o);hd.classList.toggle('m',o);mb.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';};
 mb.addEventListener('click',()=>tog(!menu.classList.contains('on')));
 menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>tog(false)));
 addEventListener('keydown',e=>{if(e.key==='Escape')tog(false);});
@@ -410,7 +424,7 @@ function setSlide(i,play){
 }
 function onScroll(){
   const r=stage.getBoundingClientRect(),vh=innerHeight;
-  hd.classList.toggle('s',r.bottom<vh*.5);
+  const iv=document.querySelector('section.inv').getBoundingClientRect();hd.classList.toggle('l',r.bottom<40&&!(iv.top<40&&iv.bottom>40));
   const inView=r.top<vh&&r.bottom>0;
   const i=Math.max(0,Math.min(sls.length-1,Math.floor((-r.top+vh*.5)/vh)));
   setSlide(i,inView);
