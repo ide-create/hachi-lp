@@ -262,12 +262,12 @@ footer .cp{border-top:1px solid var(--line2);margin-top:54px;padding-top:24px;fo
 
     <div class="sl" style="--l:47%">
       <div class="p"><video src="film/s-living.mp4" poster="film/s-living.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="p"><video src="film/s-linen.mp4" poster="film/s-linen.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="p"><video src="film/s-sheet.mp4" poster="film/s-sheet.jpg" muted loop playsinline preload="none"></video></div>
       <div class="tx"><div class="ct">担当が、何も言わずに整える</div><h2>Housekeeping</h2><p class="bd">毎週同じ曜日に、同じハウスキーパーが伺います。ご家庭のやり方を一冊にまとめ、毎回の指示も立ち会いもいりません。お留守のあいだに終わり、お帰りのときには整っています。</p><a class="mr" href="#services">詳しく見る</a></div>
     </div>
 
     <div class="sl" style="--l:51%">
-      <div class="p"><video src="film/s-glass.mp4" poster="film/s-glass.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="p"><video src="film/s-entrance.mp4" poster="film/s-entrance.jpg" muted loop playsinline preload="none"></video></div>
       <div class="p card"><div class="chat">
         <div class="t">HACHI LIFE<small>24時間</small></div>
         <div class="bub me">来週の土曜、6人で入れる和食のお店を探して。個室がいい。<small>23:14</small></div>
@@ -278,8 +278,9 @@ footer .cp{border-top:1px solid var(--line2);margin-top:54px;padding-top:24px;fo
       <div class="tx"><div class="ct">頼みごとは、LINEひとつ</div><h2>Secretary</h2><p class="bd">AIの個人秘書が、24時間お受けします。お店や宿のご予約、贈り物選び、調べもの。すぐにお返事し、動く必要があることは担当が引き継ぎます。</p><a class="mr" href="#services">詳しく見る</a></div>
     </div>
 
-    <div class="sl one" style="--l:100%">
-      <div class="p"><video src="film/s-entrance.mp4" poster="film/s-entrance.jpg" muted loop playsinline preload="none"></video></div>
+    <div class="sl" style="--l:52%">
+      <div class="p"><video src="film/s-pantry.mp4" poster="film/s-pantry.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="p"><video src="film/s-towel.mp4" poster="film/s-towel.jpg" muted loop playsinline preload="none"></video></div>
       <div class="tx"><div class="ct">買い足しも、立ち会いも、任せる</div><h2>Home Care</h2><p class="bd">洗剤、お水、日々の消耗品。担当が残りを見て、切れる前に補充します。宅配や点検など、家にいなければならない用事には、代わりに立ち会います。</p><a class="mr" href="#services">詳しく見る</a></div>
     </div>
 
@@ -325,7 +326,7 @@ footer .cp{border-top:1px solid var(--line2);margin-top:54px;padding-top:24px;fo
   <p class="lead">四つの柱に加えて、すべてのプランに付きます。</p>
   <div class="anc">
     <div class="ac fade"><div class="ph"><img src="film/s-living.jpg" alt="夕方の光が入る、整ったリビング" loading="lazy"></div><span class="lab">Friday Finish</span><h4>週末を、まるごと空ける</h4><p>ご希望の方には金曜の枠をご案内し、一週間分を仕上げます。土曜の朝は、家事がないところから始まります。</p></div>
-    <div class="ac fade"><div class="ph"><img src="film/s-linen.jpg" alt="リネンを整える手元" loading="lazy"></div><span class="lab">Promise</span><h4>時間の保証</h4><p>お約束の時刻に、必ず伺います。伺えなかった回の料金はいただきません。担当がお休みの週は、必ず代わりの者が伺います。</p></div>
+    <div class="ac fade"><div class="ph"><img src="film/s-sheet.jpg" alt="ベッドにシーツをかける担当" loading="lazy"></div><span class="lab">Promise</span><h4>時間の保証</h4><p>お約束の時刻に、必ず伺います。伺えなかった回の料金はいただきません。担当がお休みの週は、必ず代わりの者が伺います。</p></div>
     <div class="ac fade"><div class="ph"><img src="poster/eng-kid.jpg" alt="英語の絵本を読む時間" loading="lazy"></div><span class="lab">English at Home</span><h4>英語のある暮らし</h4><p>担当はフィリピン出身。レッスンではなく、暮らしの中の自然な英語です。お子さまとの関わり方は、ご希望に合わせます。</p></div>
   </div>
   <p class="fine">※ 金曜の枠には限りがあります。時間の保証は、災害や交通機関の大きな乱れ、お客様のご都合による変更を除きます。</p>
@@ -440,7 +441,7 @@ document.querySelectorAll('.fade').forEach(el=>fo.observe(el));
 const hv=document.getElementById('hv'),hc=document.getElementById('hc');
 const pt=matchMedia('(max-aspect-ratio: 4/5)').matches;
 hv.poster=pt?'film/hero-film-m.jpg':'film/hero-film.jpg';hv.src=pt?'film/hero-film-m.mp4':'film/hero-film.mp4';
-hv.addEventListener('timeupdate',()=>hc.classList.toggle('off',hv.currentTime>3.6&&hv.currentTime<19.2));
+hv.addEventListener('timeupdate',()=>hc.classList.toggle('off',hv.currentTime>2.9&&hv.currentTime<19.3));
 const others=document.querySelectorAll('.hero video,.inv video');
 const io=new IntersectionObserver(es=>{es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{});}else{v.pause();}})},{threshold:.15});
 others.forEach(v=>io.observe(v));
