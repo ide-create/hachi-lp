@@ -114,6 +114,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:820px){
   .sl{grid-template-columns:1fr;grid-template-rows:54% 46%}
   .sl.one{grid-template-rows:100%}
+  .sl .p video{object-position:var(--ox,50%) 50%}
   .sl.vv{grid-template-columns:1fr 1fr;grid-template-rows:100%}
   .sl.vv .p+.p::after{background:linear-gradient(180deg,rgba(14,13,11,.82) 0%,rgba(14,13,11,.5) 60%,rgba(14,13,11,.2) 100%)}
   .sl .tx{left:22px;right:22px;top:84px;max-width:none}
@@ -142,7 +143,7 @@ h3.h{font-family:var(--serif);font-weight:400;font-size:clamp(22px,3.3vw,32px);l
 .btn::after{content:"";width:28px;height:1px;background:currentColor}
 
 .sv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:50px;border-top:1px solid var(--line)}
-.sv>div{padding:38px 40px 40px 0;border-bottom:1px solid var(--line);min-width:0}
+.sv>div{scroll-margin-top:96px;padding:38px 40px 40px 0;border-bottom:1px solid var(--line);min-width:0}
 .sv>div:nth-child(even){padding-left:40px;padding-right:0;border-left:1px solid var(--line)}
 @media(max-width:820px){.sv{grid-template-columns:1fr}.sv>div,.sv>div:nth-child(even){padding:32px 0;border-left:none}}
 .sv .n{font-family:var(--en);font-size:14px;letter-spacing:.28em;color:var(--on2)}
@@ -251,7 +252,7 @@ footer{background:#172E28;color:#B9C6C0;--on:#F1ECE0;--on2:#B9C6C0;--on3:#8FA39B
 </div></header>
 
 <div class="menu" id="menu"><nav>
-  <a href="#services">Services<small>四つの柱</small></a>
+  <a href="#services">Services<small>サービス内容</small></a>
   <a href="#ancillary">Ancillary<small>付帯サービス</small></a>
   <a href="#plan">Plan<small>料金</small></a>
   <a href="#process">Process<small>ご利用の流れ</small></a>
@@ -282,23 +283,23 @@ footer{background:#172E28;color:#B9C6C0;--on:#F1ECE0;--on2:#B9C6C0;--on3:#8FA39B
     </div>
 
     <div class="sl one" style="--l:100%">
-      <div class="p"><video src="film/s-laundry.mp4" poster="film/s-laundry.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="tx"><div class="ct">干して、たたんで、しまうまで</div><h2>Laundry</h2><p class="bd">洗濯物を干し、たたみ、ご家庭の決まった場所へしまいます。たたみ方もしまう場所も、一度うかがえば、次からは何も言わなくて大丈夫です。</p><a class="mr" href="#services">詳しく見る</a></div>
+      <div class="p"><video style="--ox:38%" src="film/s-laundry.mp4" poster="film/s-laundry.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="tx"><div class="ct">干して、たたんで、しまうまで</div><h2>Laundry</h2><p class="bd">洗濯物を干し、たたみ、ご家庭の決まった場所へしまいます。たたみ方もしまう場所も、一度うかがえば、次からは何も言わなくて大丈夫です。</p><a class="mr" href="#sv1">詳しく見る</a></div>
     </div>
 
     <div class="sl one" style="--l:100%">
-      <div class="p"><video src="film/s-sink.mp4" poster="film/s-sink.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="tx"><div class="ct">水回りを、毎回きちんと</div><h2>Kitchen</h2><p class="bd">シンク、蛇口、天板、コンロまわり。毎週同じ担当が、ご家庭ごとの手順書に沿って整えます。毎回の指示も、立ち会いもいりません。</p><a class="mr" href="#services">詳しく見る</a></div>
+      <div class="p"><video style="--ox:30%" src="film/s-sink.mp4" poster="film/s-sink.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="tx"><div class="ct">水回りを、毎回きちんと</div><h2>Kitchen</h2><p class="bd">シンク、蛇口、天板、コンロまわり。毎週同じ担当が、ご家庭ごとの手順書に沿って整えます。毎回の指示も、立ち会いもいりません。</p><a class="mr" href="#sv2">詳しく見る</a></div>
     </div>
 
     <div class="sl one" style="--l:100%">
-      <div class="p"><video src="film/s-sheet.mp4" poster="film/s-sheet.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="tx"><div class="ct">寝室を、整えておく</div><h2>Bedroom</h2><p class="bd">シーツをかけ直し、寝室を整えます。お留守のあいだに終わり、お帰りのときには、すべてが済んでいます。</p><a class="mr" href="#services">詳しく見る</a></div>
+      <div class="p"><video style="--ox:22%" src="film/s-sheet.mp4" poster="film/s-sheet.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="tx"><div class="ct">寝室を、整えておく</div><h2>Bedroom</h2><p class="bd">シーツをかけ直し、寝室を整えます。お留守のあいだに終わり、お帰りのときには、すべてが済んでいます。</p><a class="mr" href="#sv3">詳しく見る</a></div>
     </div>
 
     <div class="sl one" style="--l:100%">
-      <div class="p"><video src="film/s-time.mp4" poster="film/s-time.jpg" muted loop playsinline preload="none"></video></div>
-      <div class="tx"><div class="ct">空いた時間は、ご自身とご家族のために</div><h2>Your Time</h2><p class="bd">家事にかけていた時間が、ご家族と囲む食卓や、週末の朝に変わります。お引き受けした時間は、毎月アプリでお知らせします。</p><a class="mr" href="#services">詳しく見る</a></div>
+      <div class="p"><video style="--ox:62%" src="film/s-time.mp4" poster="film/s-time.jpg" muted loop playsinline preload="none"></video></div>
+      <div class="tx"><div class="ct">空いた時間は、ご自身とご家族のために</div><h2>Your Time</h2><p class="bd">家事にかけていた時間が、ご家族と囲む食卓や、週末の朝に変わります。お引き受けした時間は、毎月アプリでお知らせします。</p><a class="mr" href="#sv6">詳しく見る</a></div>
     </div>
 
     <div class="cnt"><span id="cn">01</span><span class="bar"><i id="cb"></i></span><span>05</span></div>
@@ -311,10 +312,12 @@ footer{background:#172E28;color:#B9C6C0;--on:#F1ECE0;--on2:#B9C6C0;--on3:#8FA39B
   <h3 class="h">来て、掃除して、帰る。<br>そこで終わらせない。</h3>
   <p class="lead">一般的な家事代行は、訪問のたびに「点」で関わります。ハチライフは、同じ担当がご家庭を知り、家事だけでなく、買い足しや立ち会いまでを続けてお引き受けします。</p>
   <div class="sv">
-    <div class="fade"><div class="n">01 ― HOUSEKEEPING</div><h4>担当が、何も言わずに整える</h4><p>毎週同じ曜日、同じ担当。ご家庭ごとの手順書に沿って、1回4時間で整えます。</p><ul><li>お掃除（水回り、リビング、寝室）</li><li>洗濯物を干す・たたむ・しまう</li><li>お買い物の代行</li></ul></div>
-    <div class="fade"><div class="n">02 ― REQUEST</div><h4>ご要望は、アプリでひとこと</h4><p>お客様専用のアプリから、担当と日本人の責任者に直接届きます。</p><ul><li>「洗剤がそろそろない」「来週は立ち会いを」</li><li>毎回の作業のご報告と、施錠の写真</li><li>日本語でも、英語でも</li></ul></div>
-    <div class="fade"><div class="n">03 ― HOME CARE</div><h4>買い足しも、立ち会いも、任せる</h4><p>「買わなければ」「家にいなければ」を、暮らしからなくします。</p><ul><li>日用品の在庫の確認と補充</li><li>宅配、修理、点検の立ち会い</li></ul></div>
-    <div class="fade"><div class="n">04 ― TIME STATEMENT</div><h4>取り戻した時間を、毎月お届けする</h4><p>お支払いいただいているのは、ご自身とご家族の時間です。</p><ul><li>お引き受けしたことを、時間に直して合計</li><li>お客様専用のアプリで、いつでもご確認</li></ul></div>
+    <div class="fade" id="sv1"><div class="n">01 ― LAUNDRY</div><h4>干して、たたんで、しまうまで</h4><p>たたみ方もしまう場所も、一度うかがえば手順書に残します。</p><ul><li>洗濯物を干す・取り込む</li><li>たたむ</li><li>ご家庭の決まった場所へしまう</li></ul></div>
+    <div class="fade" id="sv2"><div class="n">02 ― KITCHEN &amp; BATH</div><h4>水回りを、毎回きちんと</h4><p>毎週同じ担当が、同じ手順で。汚れをためません。</p><ul><li>キッチン（シンク、天板、コンロまわり）</li><li>浴室と洗面</li><li>トイレ</li></ul></div>
+    <div class="fade" id="sv3"><div class="n">03 ― BEDROOM &amp; LIVING</div><h4>寝室とお部屋を、整えておく</h4><p>お帰りのときには、すべてが済んでいます。</p><ul><li>ベッドメイキング、シーツのかけ直し</li><li>リビングと寝室のお掃除</li><li>1回4時間、ご家庭ごとの手順書に沿って</li></ul></div>
+    <div class="fade" id="sv4"><div class="n">04 ― HOME CARE</div><h4>買い足しも、立ち会いも、任せる</h4><p>「買わなければ」「家にいなければ」を、暮らしからなくします。</p><ul><li>日用品の在庫の確認と補充</li><li>お買い物の代行</li><li>宅配、修理、点検の立ち会い</li></ul></div>
+    <div class="fade" id="sv5"><div class="n">05 ― REQUEST</div><h4>ご要望は、アプリでひとこと</h4><p>お客様専用のアプリから、担当と日本人の責任者に直接届きます。</p><ul><li>「洗剤がそろそろない」「来週は立ち会いを」</li><li>毎回の作業のご報告と、施錠の写真</li><li>日本語でも、英語でも</li></ul></div>
+    <div class="fade" id="sv6"><div class="n">06 ― YOUR TIME</div><h4>取り戻した時間を、毎月お届けする</h4><p>お支払いいただいているのは、ご自身とご家族の時間です。</p><ul><li>お引き受けしたことを、時間に直して合計</li><li>お客様専用のアプリで、いつでもご確認</li></ul></div>
   </div>
   <p class="fine">※ 日用品の補充で生じる品物の代金は、お客様のご負担です。立ち会いは訪問の日時に合わせてお受けし、別の日時はご相談ください。アイロンがけ、お料理、お子さまの見守り、介護・医療行為は、お受けしておりません。</p>
 </div></section>
@@ -323,7 +326,7 @@ footer{background:#172E28;color:#B9C6C0;--on:#F1ECE0;--on2:#B9C6C0;--on3:#8FA39B
 <section class="d" id="ancillary"><div class="wrap">
   <div class="lab">Ancillary Service</div>
   <h3 class="h">あわせて、お約束すること</h3>
-  <p class="lead">四つの柱に加えて、すべてのプランに付きます。</p>
+  <p class="lead">すべてのプランに付きます。</p>
   <div class="anc">
     <div class="ac fade"><div class="ph"><img src="film/s-living.jpg" alt="夕方の光が入る、整ったリビング" loading="lazy"></div><span class="lab">Friday Finish</span><h4>週末を、まるごと空ける</h4><p>ご希望の方には金曜の枠をご案内し、一週間分を仕上げます。土曜の朝は、家事がないところから始まります。</p></div>
     <div class="ac fade"><div class="ph"><img src="film/s-sheet.jpg" alt="ベッドにシーツをかける担当" loading="lazy"></div><span class="lab">Promise</span><h4>時間の保証</h4><p>お約束の時刻に、必ず伺います。伺えなかった回の料金はいただきません。担当がお休みの週は、必ず代わりの者が伺います。</p></div>
@@ -338,9 +341,9 @@ footer{background:#172E28;color:#B9C6C0;--on:#F1ECE0;--on2:#B9C6C0;--on3:#8FA39B
   <h3 class="h">料金</h3>
   <p class="lead">月額のみ。入会金も、追加の費用もいただきません。1回4時間、1時間あたり約3,140円（交通費込み・税込）。</p>
   <div class="pg">
-    <div><div class="nm">ONE</div><div class="fq">週1回</div><div class="yen">54,500<small>円／月</small></div><ul><li>毎週1回 ・ 4時間</li><li>水回りとお部屋の基本の整え</li><li>四つの柱と付帯サービス</li></ul></div>
-    <div><div class="nm">TWO<span class="rec">おすすめ</span></div><div class="fq">週2回</div><div class="yen">109,000<small>円／月</small></div><ul><li>毎週2回 ・ 各4時間</li><li>家事の主担当をお任せ</li><li>四つの柱と付帯サービス</li></ul></div>
-    <div><div class="nm">THREE</div><div class="fq">週3回</div><div class="yen">163,500<small>円／月</small></div><ul><li>毎週3回 ・ 各4時間</li><li>平日の家事をほぼお引き受け</li><li>四つの柱と付帯サービス</li></ul></div>
+    <div><div class="nm">ONE</div><div class="fq">週1回</div><div class="yen">54,500<small>円／月</small></div><ul><li>毎週1回 ・ 4時間</li><li>水回りとお部屋の基本の整え</li><li>すべてのサービスと付帯サービス</li></ul></div>
+    <div><div class="nm">TWO<span class="rec">おすすめ</span></div><div class="fq">週2回</div><div class="yen">109,000<small>円／月</small></div><ul><li>毎週2回 ・ 各4時間</li><li>家事の主担当をお任せ</li><li>すべてのサービスと付帯サービス</li></ul></div>
+    <div><div class="nm">THREE</div><div class="fq">週3回</div><div class="yen">163,500<small>円／月</small></div><ul><li>毎週3回 ・ 各4時間</li><li>平日の家事をほぼお引き受け</li><li>すべてのサービスと付帯サービス</li></ul></div>
   </div>
   <p class="fine">※ すべて税込。お買い物の代金は、実費を翌月にご精算します。</p>
 </div></section>
@@ -406,7 +409,7 @@ footer{background:#172E28;color:#B9C6C0;--on:#F1ECE0;--on2:#B9C6C0;--on3:#8FA39B
 <footer><div class="wrap">
   <div class="fg">
     <div><a class="mark" href="./">HACHI LIFE</a><p style="margin-top:16px;line-height:2.1">名古屋のプライベートハウスキーピング<br>運営：サンエスサービス株式会社</p></div>
-    <div><h5>Services</h5><ul><li><a href="#services">四つの柱</a></li><li><a href="#ancillary">付帯サービス</a></li><li><a href="#plan">料金</a></li></ul></div>
+    <div><h5>Services</h5><ul><li><a href="#services">サービス内容</a></li><li><a href="#ancillary">付帯サービス</a></li><li><a href="#plan">料金</a></li></ul></div>
     <div><h5>Guide</h5><ul><li><a href="#process">ご利用までの流れ</a></li><li><a href="request.html">ご相談・資料請求</a></li><li><a href="area/">対応エリア</a></li><li><a href="column/">コラム</a></li></ul></div>
     <div><h5>Company</h5><ul><li><a href="#about">基本情報</a></li><li><a href="privacy.html">プライバシーポリシー</a></li><li><a href="en.html">English</a></li><li><a href="https://www.instagram.com/hachilife_nagoya/" target="_blank" rel="noopener">Instagram</a></li></ul></div>
   </div>
