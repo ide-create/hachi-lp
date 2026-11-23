@@ -10,6 +10,7 @@ T=[
 ('<meta property="og:description" content="担当固定のフィリピン人ハウスキーパーによる、名古屋のプライベートハウスキーピング。週1〜3回・1回4時間・入会金0円。">','<meta property="og:description" content="One dedicated English-speaking housekeeper, same day every week. From ¥54,500/month, no joining fee. Nagoya, starting January 2027.">'),
 ('<meta property="og:site_name" content="Hachi Life（ハチライフ）">','<meta property="og:site_name" content="Hachi Life">'),
 ('aria-label="メニュー"','aria-label="Menu"'),
+('<a class="inq" href="request.html"><span class="w">お問い合わせ・</span>資料請求</a>','<a class="inq" href="request.html">Inquire</a>'),
 ('<a class="lg" href="en.html">EN</a>','<a class="lg" href="./">JP</a>'),
 ('<small>サービス内容</small>','<small>What we do</small>'),('<small>付帯サービス</small>','<small>Included with every plan</small>'),
 ('<small>料金</small>','<small>Monthly fees</small>'),('<small>ご利用の流れ</small>','<small>How to start</small>'),
