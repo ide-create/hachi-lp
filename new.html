@@ -327,7 +327,7 @@ footer .cp{border-top:1px solid var(--line2);margin-top:54px;padding-top:24px;fo
   <div class="anc">
     <div class="ac fade"><div class="ph"><img src="film/s-living.jpg" alt="夕方の光が入る、整ったリビング" loading="lazy"></div><span class="lab">Friday Finish</span><h4>週末を、まるごと空ける</h4><p>ご希望の方には金曜の枠をご案内し、一週間分を仕上げます。土曜の朝は、家事がないところから始まります。</p></div>
     <div class="ac fade"><div class="ph"><img src="film/s-sheet.jpg" alt="ベッドにシーツをかける担当" loading="lazy"></div><span class="lab">Promise</span><h4>時間の保証</h4><p>お約束の時刻に、必ず伺います。伺えなかった回の料金はいただきません。担当がお休みの週は、必ず代わりの者が伺います。</p></div>
-    <div class="ac fade"><div class="ph"><img src="poster/eng-kid.jpg" alt="英語の絵本を読む時間" loading="lazy"></div><span class="lab">English at Home</span><h4>英語のある暮らし</h4><p>担当はフィリピン出身。レッスンではなく、暮らしの中の自然な英語です。お子さまとの関わり方は、ご希望に合わせます。</p></div>
+    <div class="ac fade"><div class="ph"><img src="film/s-book.jpg" alt="お子さまを抱いて絵本を読む時間" loading="lazy"></div><span class="lab">English at Home</span><h4>英語のある暮らし</h4><p>担当はフィリピン出身。レッスンではなく、暮らしの中の自然な英語です。お子さまとの関わり方は、ご希望に合わせます。</p></div>
   </div>
   <p class="fine">※ 金曜の枠には限りがあります。時間の保証は、災害や交通機関の大きな乱れ、お客様のご都合による変更を除きます。</p>
 </div></section>
@@ -441,7 +441,7 @@ document.querySelectorAll('.fade').forEach(el=>fo.observe(el));
 const hv=document.getElementById('hv'),hc=document.getElementById('hc');
 const pt=matchMedia('(max-aspect-ratio: 4/5)').matches;
 hv.poster=pt?'film/hero-film-m.jpg':'film/hero-film.jpg';hv.src=pt?'film/hero-film-m.mp4':'film/hero-film.mp4';
-hv.addEventListener('timeupdate',()=>hc.classList.toggle('off',hv.currentTime>2.9&&hv.currentTime<19.3));
+hv.addEventListener('timeupdate',()=>hc.classList.toggle('off',hv.currentTime>2.5&&hv.currentTime<19.3));
 const others=document.querySelectorAll('.hero video,.inv video');
 const io=new IntersectionObserver(es=>{es.forEach(e=>{const v=e.target;if(e.isIntersecting){v.play().catch(()=>{});}else{v.pause();}})},{threshold:.15});
 others.forEach(v=>io.observe(v));
