@@ -7,55 +7,50 @@
 <title>資料請求・ご相談 | Hachi Life（ハチライフ）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600&display=swap">
 <style>
-:root{
-  --ivory:#FBF6EA; --paper:#FFFDF8; --cream:#F3EAD3; --line:#E3D5B8;
-  --ink:#2A2118; --mut:#7A6A52; --dark:#241A0D; --dark2:#171006;
-  --gold:#B98A2F; --honey:#E9A13B; --honey2:#F2C14E;
-  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
-  --sans:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
-  --disp:"Cormorant Garamond",serif;
-}
+:root{--bg:#FDFCF8;--cream:#F6F0DC;--line:rgba(31,28,23,.16);--ink:#1F1C17;--mut:#6A6356;--mut2:#8E8676;--green:#1F3B34;--green2:#172E28;--gold:#CDBA8C;--gold2:#A08A55;
+  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;--en:"Cormorant Garamond","Shippori Mincho",serif;color-scheme:light}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);line-height:1.9;font-size:15px;
-  padding:0 max(16px,env(safe-area-inset-left)) 60px max(16px,env(safe-area-inset-right))}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:2;font-size:15px;letter-spacing:.04em;-webkit-font-smoothing:antialiased;
+  padding:0 max(18px,env(safe-area-inset-right,0px)) 70px max(18px,env(safe-area-inset-left,0px))}
 .wrap{max-width:640px;margin:0 auto}
-header{padding:26px 0 0;display:flex;align-items:center;justify-content:space-between}
-header a{color:var(--mut);text-decoration:none;font-size:12.5px;font-weight:700}
-.brand{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:.5px}
-.brand small{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:3px;color:var(--mut)}
-.hero{text-align:center;padding:44px 0 8px}
-.en{font-family:var(--disp);font-size:13px;letter-spacing:5px;color:var(--gold)}
-h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,5.6vw,32px);margin:14px 0 0;letter-spacing:.04em}
-.lead{color:var(--mut);font-size:13.5px;margin-top:14px}
-.lead b{color:var(--ink)}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px 26px;margin-top:30px;box-shadow:0 10px 30px rgba(42,33,24,.06)}
-label{display:block;font-weight:700;font-size:13.5px;margin:22px 0 8px}
+header{padding:24px 0 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+header a{color:var(--mut);text-decoration:none;font-size:12px;letter-spacing:.12em}
+.brand{font-family:var(--en);font-weight:400;font-size:17px;letter-spacing:.3em;color:var(--ink)}
+.brand small{display:none}
+.hero{text-align:center;padding:56px 0 8px}
+.en{font-family:var(--en);font-size:13px;letter-spacing:.34em;color:var(--gold2)}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(23px,5.4vw,30px);margin:14px 0 0;letter-spacing:.14em}
+.lead{color:var(--mut);font-size:13.5px;margin-top:16px}
+.lead b{color:var(--ink);font-weight:500}
+.card{border-left:1px solid var(--gold);border-right:1px solid var(--gold);padding:34px 30px 38px;margin-top:38px}
+@media(max-width:520px){.card{border:none;border-top:1px solid var(--gold);padding:30px 0}}
+label{display:block;font-weight:500;font-size:13.5px;letter-spacing:.1em;margin:26px 0 9px}
 label:first-of-type{margin-top:0}
-label .req{color:var(--honey);font-size:10.5px;border:1px solid var(--honey);border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:2px}
-label .opt{color:var(--mut);font-size:10.5px;border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-left:8px;vertical-align:2px}
+label .req{color:var(--green);font-size:10.5px;border:1px solid var(--green);padding:1px 8px;margin-left:10px;vertical-align:2px;letter-spacing:.1em}
+label .opt{color:var(--mut2);font-size:10.5px;border:1px solid var(--line);padding:1px 8px;margin-left:10px;vertical-align:2px;letter-spacing:.1em}
 input[type=text],input[type=email],input[type=tel],select{
-  width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;background:#fff;
-  font-family:var(--sans);font-size:15px;color:var(--ink)}
-input:focus,select:focus{outline:none;border-color:var(--honey)}
+  width:100%;padding:14px 14px;border:1px solid var(--line);border-radius:0;background:#fff;
+  font-family:var(--serif);font-size:16px;color:var(--ink);letter-spacing:.04em}
+input:focus,select:focus{outline:none;border-color:var(--green)}
 .radios{display:flex;flex-wrap:wrap;gap:10px}
-.radios label{margin:0;font-weight:500;font-size:13.5px;display:inline-flex;align-items:center;gap:7px;
-  border:1.5px solid var(--line);border-radius:999px;padding:10px 16px;background:#fff;cursor:pointer}
-.radios input{accent-color:var(--gold)}
-.radios label:has(input:checked){border-color:var(--gold);background:#FCF4E3;font-weight:700}
-button{width:100%;margin-top:30px;padding:18px;border:none;border-radius:999px;cursor:pointer;
-  background:linear-gradient(135deg,var(--honey2),var(--honey));color:var(--dark2);
-  font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:1px;box-shadow:0 10px 24px rgba(233,161,59,.35)}
+.radios label{margin:0;font-weight:400;font-size:13.5px;display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line);padding:10px 16px;background:#fff;cursor:pointer;letter-spacing:.06em}
+.radios input{accent-color:var(--green)}
+.radios label:has(input:checked){border-color:var(--green);background:var(--cream)}
+button{width:100%;margin-top:36px;padding:18px;border:none;border-radius:0;cursor:pointer;
+  background:var(--green);color:#F4EFE3;font-family:var(--serif);font-weight:500;font-size:14.5px;letter-spacing:.24em;transition:background .3s}
+button:hover{background:#2B5248}
 button:disabled{opacity:.55;cursor:default}
-.note{font-size:11.5px;color:var(--mut);margin-top:16px;text-align:center}
-.done{display:none;text-align:center;padding:48px 10px}
-.done .mark{width:72px;height:72px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,var(--honey2),var(--honey));
-  display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--dark2)}
-.done h2{font-family:var(--serif);font-size:22px;margin:22px 0 0}
+.note{font-size:11.5px;color:var(--mut2);margin-top:18px;text-align:center}
+.done{display:none;text-align:center;padding:52px 10px}
+.done .mark{width:64px;height:64px;margin:0 auto;border-radius:50%;border:1px solid var(--gold2);
+  display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--green)}
+.done h2{font-family:var(--serif);font-weight:400;font-size:21px;letter-spacing:.14em;margin:24px 0 0}
 .done p{color:var(--mut);font-size:13.5px;margin-top:12px}
-.tel{text-align:center;margin-top:34px;color:var(--mut);font-size:12.5px}
-.tel b{display:block;font-family:var(--disp);font-size:26px;letter-spacing:1px;color:var(--ink)}
+.tel{text-align:center;margin-top:44px;color:var(--mut2);font-size:12px;line-height:2.1}
+.tel b{display:block;font-family:var(--en);font-weight:400;font-size:28px;letter-spacing:.14em;color:var(--ink)}
 </style>
 <!-- Google tag (GA4) -->
 <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TFVD978D"></script>
@@ -74,14 +69,14 @@ button:disabled{opacity:.55;cursor:default}
 <body>
 <div class="wrap">
   <header>
-    <div class="brand">Hachi Life<small>NAGOYA ・ HOUSEKEEPING</small></div>
-    <a href="index.html">← LPに戻る</a>
+    <a class="brand" href="./">HACHI LIFE</a>
+    <a href="./">← トップへ戻る</a>
   </header>
 
   <div class="hero">
     <div class="en">REQUEST &amp; CONSULTATION</div>
     <h1>資料請求・ご相談</h1>
-    <p class="lead">ご入力は<b>1分</b>で完了します。<b>1営業日以内</b>に資料をお送りします。<br>ご案内できるのは年間3世帯のみ・先行予約の順です。</p>
+    <p class="lead">ご入力は<b>1分</b>で完了します。<b>1営業日以内</b>に資料をお送りします。<br>2027年1月の開始に向けて、先行でお受けしています。</p>
   </div>
 
   <form class="card" id="f">
@@ -104,9 +99,9 @@ button:disabled{opacity:.55;cursor:default}
 
     <label>ご興味のあるプラン<span class="req">必須</span></label>
     <div class="radios">
-      <label><input type="radio" name="plan" value="プライベート専属" required>プライベート専属</label>
-      <label><input type="radio" name="plan" value="定期ハーフ">定期ハーフ</label>
-      <label><input type="radio" name="plan" value="すぐ始めたい（在日スタッフ）">すぐ始めたい</label>
+      <label><input type="radio" name="plan" value="SELECT（週1回）" required>SELECT（週1回）</label>
+      <label><input type="radio" name="plan" value="EXECUTIVE（週2回）">EXECUTIVE（週2回）</label>
+      <label><input type="radio" name="plan" value="PLATINUM（週3回）">PLATINUM（週3回）</label>
       <label><input type="radio" name="plan" value="未定">まだ決めていない</label>
     </div>
 
@@ -125,7 +120,7 @@ button:disabled{opacity:.55;cursor:default}
       <label><input type="radio" name="source" value="その他">その他</label>
     </div>
 
-    <button type="submit" id="btn">送信する →</button>
+    <button type="submit" id="btn">送信する</button>
     <p class="note">いただいた情報は資料送付とご連絡のみに使用します。<a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">プライバシーポリシー</a></p>
   </form>
 
@@ -157,7 +152,7 @@ f.addEventListener('submit', async (e) => {
     document.getElementById('done').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
-    btn.disabled = false; btn.textContent = '送信する →';
+    btn.disabled = false; btn.textContent = '送信する';
     alert('送信に失敗しました。お手数ですがお電話（070-3350-0313）でご連絡ください。');
   }
 });

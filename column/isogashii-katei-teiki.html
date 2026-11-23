@@ -14,36 +14,40 @@
 <meta property="og:image" content="https://hachi-lp-eta.vercel.app/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ivory:#FBF6EA;--paper:#FFFDF8;--cream:#F3EAD3;--line:#E3D5B8;--ink:#2A2118;--mut:#7A6A52;--dark2:#171006;--gold:#B98A2F;--honey:#E9A13B;--honey2:#F2C14E;--serif:"Shippori Mincho",serif;--sans:"Zen Kaku Gothic New",sans-serif;--disp:"Cormorant Garamond",serif}
+:root{--bg:#FDFCF8;--cream:#F6F0DC;--line:rgba(31,28,23,.14);--ink:#1F1C17;--mut:#6A6356;--mut2:#8E8676;--green:#1F3B34;--green2:#172E28;--gold:#CDBA8C;--gold2:#A08A55;--serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;--en:"Cormorant Garamond","Shippori Mincho",serif;color-scheme:light}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--ivory);color:var(--ink);font-size:16px;line-height:2;-webkit-font-smoothing:antialiased}
+body{font-family:var(--serif);background:var(--bg);color:var(--ink);font-size:15.5px;line-height:2.1;letter-spacing:.04em;-webkit-font-smoothing:antialiased}
 a{color:inherit}img{max-width:100%;display:block}
-.top{background:var(--dark2);color:#F2E7CB}
-.top .in{max-width:860px;margin:0 auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.top a{text-decoration:none}.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:600;letter-spacing:.18em;font-size:18px;color:var(--honey2)}
-.brand img{width:30px;height:30px}
-.btn{background:var(--honey2);color:#2A2008;font-weight:700;font-size:13px;padding:9px 18px;border-radius:30px;white-space:nowrap}
-.wrap{max-width:760px;margin:0 auto;padding:0 22px}
-.crumb{font-size:12px;color:var(--mut);padding:22px 0 0}.crumb a{text-decoration:underline}
-.eyeb{font-family:var(--disp);font-weight:600;letter-spacing:.3em;font-size:12px;color:var(--gold);margin-top:26px}
-h1{font-family:var(--serif);font-weight:800;font-size:clamp(25px,5vw,34px);line-height:1.5;margin:8px 0 14px}
-.meta{font-size:12px;color:var(--mut);padding-bottom:22px;border-bottom:1px solid var(--line)}
-.lead{font-size:16.5px;margin:26px 0;padding:18px 22px;background:var(--paper);border-left:3px solid var(--honey);border-radius:0 8px 8px 0}
-h2{font-family:var(--serif);font-weight:800;font-size:clamp(20px,4vw,24px);line-height:1.55;margin:46px 0 12px;padding-top:6px}
-h2::before{content:"";display:block;width:34px;height:3px;background:var(--honey);margin-bottom:12px}
-h3{font-family:var(--serif);font-size:18px;margin:26px 0 6px}
-p{margin:0 0 16px}ul{margin:0 0 18px 1.3em}li{margin-bottom:6px}
-table{width:100%;border-collapse:collapse;margin:8px 0 22px;font-size:14.5px;background:var(--paper)}
-th,td{border:1px solid var(--line);padding:11px 12px;text-align:left;vertical-align:top;line-height:1.7}th{background:var(--cream);font-weight:700}
-.note{font-size:13px;color:var(--mut)}
-.cta{margin:54px 0 20px;background:var(--dark2);color:#F2E7CB;border-radius:14px;padding:30px 26px;text-align:center}
-.cta b{display:block;font-family:var(--serif);font-size:20px;color:var(--honey2);margin-bottom:8px;line-height:1.5}
-.cta p{font-size:14px;margin-bottom:18px}.cta a.btn{display:inline-block;font-size:15px;padding:13px 30px;text-decoration:none}
-.cta .tel{display:block;margin-top:14px;font-size:13px;color:#C9B98C}
-.rel{margin:40px 0}.rel h3{margin-top:0}.rel a{display:block;padding:14px 16px;border:1px solid var(--line);background:var(--paper);border-radius:8px;margin-bottom:10px;text-decoration:none;font-weight:700}
-footer{background:var(--dark2);color:#C9B98C;font-size:12px;text-align:center;padding:30px 22px;line-height:1.9;margin-top:50px}footer a{text-decoration:underline}
+.top{background:rgba(253,252,248,.96);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top .in{max-width:1180px;margin:0 auto;padding:14px max(22px,env(safe-area-inset-right,0px)) 14px max(22px,env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top a{text-decoration:none}.brand{font-family:var(--en);font-weight:400;letter-spacing:.3em;font-size:17px;color:var(--ink);white-space:nowrap}
+.brand img{display:none}
+.btn{background:var(--green);color:#F4EFE3;font-family:var(--serif);font-weight:500;font-size:12.5px;letter-spacing:.16em;padding:10px 18px;white-space:nowrap;transition:background .3s}
+.btn:hover{background:#2B5248}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+.crumb{font-size:11.5px;color:var(--mut2);padding:26px 0 0;letter-spacing:.08em}.crumb a{text-decoration:none;border-bottom:1px solid var(--line)}
+.eyeb{font-family:var(--en);font-weight:400;letter-spacing:.34em;font-size:13px;color:var(--gold2);margin-top:34px;text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(23px,4.6vw,32px);line-height:1.8;letter-spacing:.1em;margin:10px 0 16px;text-wrap:balance}
+.meta{font-size:11.5px;color:var(--mut2);padding-bottom:24px;border-bottom:1px solid var(--line);letter-spacing:.08em}
+.lead{font-size:15px;margin:30px 0;padding:22px 26px;background:var(--cream);border-left:1px solid var(--gold2);color:#3A352D}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(19px,3.6vw,23px);line-height:1.8;letter-spacing:.1em;margin:58px 0 14px}
+h2::before{content:"";display:block;width:40px;height:1px;background:var(--gold2);margin-bottom:18px}
+h3{font-family:var(--serif);font-weight:500;font-size:17px;letter-spacing:.08em;margin:30px 0 6px}
+p{margin:0 0 18px;color:#3A352D}ul,ol{margin:0 0 20px 1.3em;color:#3A352D}li{margin-bottom:6px}
+b,strong{font-weight:600;color:var(--ink)}
+table{width:100%;border-collapse:collapse;margin:10px 0 24px;font-size:14px;border-top:1px solid var(--gold)}
+th,td{border-bottom:1px solid var(--line);padding:13px 12px;text-align:left;vertical-align:top;line-height:1.8}th{font-weight:500;color:var(--gold2);letter-spacing:.1em;font-size:12.5px;white-space:nowrap}
+.note{font-size:12px;color:var(--mut2);line-height:1.9}
+.cta{margin:64px 0 20px;background:var(--green2);color:#D9E0DB;padding:44px 28px;text-align:center}
+.cta b{display:block;font-family:var(--serif);font-weight:400;font-size:21px;letter-spacing:.12em;color:#F1ECE0;margin-bottom:10px;line-height:1.7}
+.cta p{font-size:13.5px;margin-bottom:22px;color:#B9C6C0}.cta a.btn{display:inline-block;background:transparent;border:1px solid #F1ECE0;color:#F1ECE0;font-size:13px;letter-spacing:.2em;padding:15px 34px;text-decoration:none}
+.cta a.btn:hover{background:#F1ECE0;color:var(--green2)}
+.cta .tel{display:block;margin-top:18px;font-family:var(--en);font-size:15px;letter-spacing:.12em;color:#B9C6C0}
+.rel{margin:46px 0}.rel h3{margin-top:0}.rel a{display:block;padding:16px 4px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:500;transition:padding .3s}.rel a:first-of-type{border-top:1px solid var(--gold)}.rel a:hover{padding-left:12px}
+footer{background:var(--green2);color:#B9C6C0;font-size:11.5px;text-align:center;padding:38px 22px;line-height:2.1;letter-spacing:.08em;margin-top:60px}footer a{text-decoration:none;border-bottom:1px solid rgba(241,236,224,.3)}
+html[lang=en] body{font-family:var(--en);font-size:18.5px;line-height:1.8;letter-spacing:.01em;font-weight:500}html[lang=en] h1,html[lang=en] h2,html[lang=en] h3{font-family:var(--en);letter-spacing:.03em;line-height:1.4}html[lang=en] table{font-size:16.5px}html[lang=en] th{font-size:14px}html[lang=en] .lead{font-size:18px}html[lang=en] .cta p{font-size:16px}html[lang=en] .note,html[lang=en] footer,html[lang=en] .crumb,html[lang=en] .meta{font-size:14px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "忙しいご家庭の家事代行 定期で上手に任せるコツ", "description": "仕事が忙しく、家事に手が回らないご家庭へ。医師・経営者・共働き世帯が、家事代行を定期で上手に任せるコツを、名古屋のHachi Lifeが解説します。任せる範囲の決め方、回数の選び方まで。", "datePublished": "2026-11-13", "dateModified": "2026-11-13", "mainEntityOfPage": "https://hachi-lp-eta.vercel.app/column/isogashii-katei-teiki.html", "image": "https://hachi-lp-eta.vercel.app/og.jpg", "author": {"@type": "Organization", "name": "Hachi Life（サンエスサービス株式会社）"}, "publisher": {"@type": "Organization", "name": "Hachi Life"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Hachi Life", "item": "https://hachi-lp-eta.vercel.app/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://hachi-lp-eta.vercel.app/column/"}, {"@type": "ListItem", "position": 3, "name": "忙しいご家庭の家事代行 定期で上手に任せるコツ", "item": "https://hachi-lp-eta.vercel.app/column/isogashii-katei-teiki.html"}]}</script>
@@ -92,9 +96,9 @@ footer{background:var(--dark2);color:#C9B98C;font-size:12px;text-align:center;pa
 <h2>回数の選び方</h2>
 <table>
 <tr><th>回数</th><th>こんなご家庭に</th><th>月額（税込）</th></tr>
-<tr><td>週1回</td><td>水回りと掃除を、まず任せたい</td><td>54,500円</td></tr>
-<tr><td>週2回</td><td>家事の主な部分を、任せたい</td><td>109,000円</td></tr>
-<tr><td>週3回</td><td>平日の家事を、ほぼ任せたい</td><td>163,500円</td></tr>
+<tr><td>SELECT（週1回）</td><td>水回りと掃除を、まず任せたい</td><td>54,500円</td></tr>
+<tr><td>EXECUTIVE（週2回）</td><td>家事の主な部分を、任せたい</td><td>109,000円</td></tr>
+<tr><td>PLATINUM（週3回）</td><td>平日の家事を、ほぼ任せたい</td><td>166,000円</td></tr>
 </table>
 <p>いずれも、1回4時間です。入会金は0円で、月額のほかに追加の費用はかかりません。</p>
 
