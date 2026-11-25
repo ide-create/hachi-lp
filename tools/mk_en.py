@@ -7,7 +7,7 @@ T=[
 ('<link rel="canonical" href="https://hachi-lp-eta.vercel.app/">','<link rel="canonical" href="https://hachi-lp-eta.vercel.app/en.html">'),
 ('<meta property="og:url" content="https://hachi-lp-eta.vercel.app/">','<meta property="og:url" content="https://hachi-lp-eta.vercel.app/en.html">'),
 ('<meta property="og:title" content="名古屋の家事代行・家政婦｜HACHI LIFE（ハチライフ）月54,500円〜">','<meta property="og:title" content="Housekeeper in Nagoya | HACHI LIFE">'),
-('<meta property="og:description" content="担当固定のフィリピン人ハウスキーパーによる、名古屋のプライベートハウスキーピング。週1〜3回・1回4時間・入会金0円。">','<meta property="og:description" content="One dedicated English-speaking housekeeper, same day every week. From ¥54,500/month, no joining fee. Nagoya, starting January 2027.">'),
+('<meta property="og:description" content="担当固定のフィリピン人ハウスキーパーによる、名古屋のプライベートハウスキーピング。週1〜3回・1回4時間・入会金0円。">','<meta property="og:description" content="One dedicated English-speaking housekeeper, same day every week. From ¥54,500/month, no joining fee. Nagoya, starting February 2027.">'),
 ('<meta property="og:site_name" content="Hachi Life（ハチライフ）">','<meta property="og:site_name" content="Hachi Life">'),
 ('aria-label="メニュー"','aria-label="Menu"'),
 ('<a class="inq" href="request.html"><span class="w">お問い合わせ・</span>資料請求</a>','<a class="inq" href="request.html">Inquire</a>'),
@@ -77,9 +77,9 @@ T=[
 ('<b>ご相談・資料請求</b>','<b>Get in touch</b>'),('フォームまたはお電話で。1営業日以内に担当よりご連絡します。','By form or phone. We reply within one business day.'),
 ('<b>ご自宅でのお打ち合わせ</b>','<b>A visit to your home</b>'),('お住まいとご要望を伺い、プランと曜日を決めます。','We see your home, hear what you need, and agree a plan and a day.'),
 ('<b>手順書の作成</b>','<b>Your home handbook</b>'),('ご家庭のやり方を一冊にまとめます。すべての作業は、ここから始まります。','We write down how your household does things. All our work starts from this.'),
-('<b>ご利用開始</b>','<b>Service begins</b>'),('初回と2回目は、責任者が同行します。2027年1月より。','Our manager accompanies the first two visits. From January 2027.'),
+('<b>ご利用開始</b>','<b>Service begins</b>'),('初回と2回目は、責任者が同行します。2027年2月より。','Our manager accompanies the first two visits. From February 2027.'),
 ('<h3 class="h">ご利用をお考えの方へ</h3>','<h3 class="h">Thinking of joining us?</h3>'),
-('2027年1月の開始に向けて、先行でお受けしています。お伺いできる曜日と時間には限りがあります。まずはご相談ください。','We are taking early enquiries ahead of our January 2027 start. Available days and times are limited, so please get in touch first.'),
+('2027年2月の開始に向けて、先行でお受けしています。お伺いできる曜日と時間には限りがあります。まずはご相談ください。','We are taking early enquiries ahead of our February 2027 start. Available days and times are limited, so please get in touch first.'),
 ('>ご相談・資料請求</a>','>Contact us</a>'),
 ('平日 9:00 – 18:00','Weekdays 9:00 – 18:00'),
 ('<h3 class="h">基本情報</h3>','<h3 class="h">Company</h3>'),
@@ -104,7 +104,7 @@ for a,b in T:
     if a not in s: print('MISSING:',a[:50])
     s=s.replace(a,b)
 import json as _j
-_d='Housekeeping service in Nagoya with one dedicated English-speaking Filipino housekeeper. Same person, same day, every week: laundry, kitchen and bath, bedrooms, restocking and waiting in. 4 hours a visit, from ¥54,500 per month, no joining fee. Starting January 2027.'
+_d='Housekeeping service in Nagoya with one dedicated English-speaking Filipino housekeeper. Same person, same day, every week: laundry, kitchen and bath, bedrooms, restocking and waiting in. 4 hours a visit, from ¥54,500 per month, no joining fee. Starting February 2027.'
 _m=re.search(r'<meta name="description" content="[^"]*">',s); s=s[:_m.start()]+'<meta name="description" content="'+_d+'">'+s[_m.end():]
 s=re.sub(r'<script type="application/ld\+json">.*?</script>\n?','',s,flags=re.S)
 _f=re.findall(r'<details class="q"><summary>(.*?)</summary><p>(.*?)</p></details>',s)
